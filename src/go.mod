@@ -1,6 +1,6 @@
-module master
+module github.com/indianaMitko62/orchestrator/src/orchestrator
 
-go 1.21
+go 1.21.3
 
 require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect

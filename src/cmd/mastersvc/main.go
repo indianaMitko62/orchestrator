@@ -21,7 +21,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = msvc.HelloWorld()
+	err = msvc.CreateCont()
 	if err != nil {
 		slog.Error("could not say hello to world", "err", err)
 		os.Exit(1)

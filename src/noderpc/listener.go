@@ -7,6 +7,7 @@ import (
 )
 
 func Listen() error {
+
 	svc, err := NewNodeServiceRPC()
 	if err != nil {
 		return fmt.Errorf("could not initialise node service RPC: %w", err)
