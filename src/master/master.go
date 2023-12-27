@@ -8,8 +8,8 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 
-	"github.com/indianaMitko62/orchestrator/src/orchestrator/node"
-	"github.com/indianaMitko62/orchestrator/src/orchestrator/noderpc"
+	"github.com/indianaMitko62/orchestrator/src/node"
+	"github.com/indianaMitko62/orchestrator/src/noderpc"
 )
 
 type MasterService struct {

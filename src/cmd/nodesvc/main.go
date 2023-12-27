@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/indianaMitko62/orchestrator/src/orchestrator/noderpc"
+	"github.com/indianaMitko62/orchestrator/src/noderpc"
 )
 
 func main() {
