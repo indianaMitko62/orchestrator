@@ -12,24 +12,24 @@ type NodeServiceRPC struct {
 	service *node.NodeService
 }
 
+// type ContInfo struct {
+// }
+
 type CreateContArgs struct {
-	// Cont     *node.Container
-	Settings *node.ContainerSettings
-	Delay    int
+	Cont  *node.Container
+	Delay int // example value for context settings later on
 }
 
 type StartContArgs struct {
-	// Cont     *node.Container
-	Settings *node.ContainerSettings
-	Delay    int
-	Opts     types.ContainerStartOptions
+	Cont  *node.Container
+	Delay int // example value for context settings later on
+	Opts  types.ContainerStartOptions
 }
 
 type StopContArgs struct {
-	// Cont     *node.Container
-	Settings *node.ContainerSettings
-	Delay    int
-	Opts     container.StopOptions
+	Cont  *node.Container
+	Delay int // example value for context settings later on
+	Opts  container.StopOptions
 }
 
 type CreateContReply struct {
@@ -52,7 +52,7 @@ func (n *NodeServiceRPC) SimpleHello(args *string, reply *string) error {
 }
 
 func (n *NodeServiceRPC) CreateCont(args *CreateContArgs, reply *CreateContReply) error {
-	replyID, err := n.service.CreateCont(args.Settings)
+	replyID, err := n.service.CreateCont(args.Cont)
 	if err != nil {
 		return err
 	}
@@ -64,7 +64,7 @@ func (n *NodeServiceRPC) CreateCont(args *CreateContArgs, reply *CreateContReply
 }
 
 func (n *NodeServiceRPC) StartCont(args *StartContArgs, reply *CreateContReply) error {
-	err := n.service.StartCont(args.Settings, args.Opts)
+	err := n.service.StartCont(args.Cont, args.Opts)
 	if err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func (n *NodeServiceRPC) StartCont(args *StartContArgs, reply *CreateContReply) 
 }
 
 func (n *NodeServiceRPC) StopCont(args *StopContArgs, reply *CreateContReply) error {
-	err := n.service.StopCont(args.Settings, args.Opts)
+	err := n.service.StopCont(args.Cont, args.Opts)
 	if err != nil {
 		return err
 	}

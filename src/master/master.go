@@ -13,7 +13,7 @@ import (
 )
 
 type MasterService struct {
-	nodes map[string]*NodeManager
+	Nodes map[string]*NodeManager
 }
 
 type NodeSettings struct {
@@ -28,9 +28,9 @@ type NodeManager struct {
 
 func NewMasterService(nodes []*NodeSettings) *MasterService {
 	m := &MasterService{}
-	m.nodes = make(map[string]*NodeManager)
+	m.Nodes = make(map[string]*NodeManager)
 	for _, ns := range nodes {
-		m.nodes[ns.Name] = &NodeManager{
+		m.Nodes[ns.Name] = &NodeManager{
 			NodeSettings: *ns,
 			client:       nil,
 		}
@@ -40,7 +40,7 @@ func NewMasterService(nodes []*NodeSettings) *MasterService {
 }
 
 func (m *MasterService) ConnectToNodes() error {
-	for _, node := range m.nodes {
+	for _, node := range m.Nodes {
 		err := node.Connect()
 		if err != nil {
 			return err
@@ -49,9 +49,33 @@ func (m *MasterService) ConnectToNodes() error {
 	return nil
 }
 
-func (m *MasterService) CreateCont() error {
-	for _, node := range m.nodes {
-		err := node.CreateCont()
+func (m *MasterService) CreateContOn(node *NodeManager, cont *node.Container) error {
+	err := node.CreateCont(cont)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MasterService) StartContOn(node *NodeManager, cont *node.Container) error {
+	err := node.StartCont(cont)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MasterService) StopContOn(node *NodeManager, cont *node.Container) error {
+	err := node.StopCont(cont)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MasterService) CreateContOnAll(cont *node.Container) error {
+	for _, node := range m.Nodes {
+		err := node.CreateCont(cont)
 		if err != nil {
 			return err
 		}
@@ -68,49 +92,48 @@ func (n *NodeManager) Connect() error {
 	return nil
 }
 
-func (n *NodeManager) CreateCont() error {
+func (n *NodeManager) CreateCont(cont *node.Container) error {
 	// var reply string
 	// arg := "Mitko"
 	// err := n.client.Call("NodeServiceRPC.SimpleHello", &arg, &reply)
 
-	contID := ""
-
-	cont := node.Container{
-		ContainerConfig: &container.Config{
-			Image: "alpine:latest",
-			Cmd:   []string{"ping", "localhost"},
-		},
-		Image_name: "alpine", HostConfig: nil, NetworkingConfig: nil, ContainerName: "cont1", ContID: &contID}
-
-	settings := node.ContainerSettings{Cont: &cont}
-	args := noderpc.CreateContArgs{Settings: &settings, Delay: 5}
+	args := noderpc.CreateContArgs{Cont: cont, Delay: 5}
 	var reply noderpc.CreateContReply
 
 	err := n.client.Call("NodeServiceRPC.CreateCont", &args, &reply)
-
 	if err != nil {
 		return fmt.Errorf("could not call CreateCont: %w", err)
 	}
+
 	slog.Info("Container created", "node_name", n.Name, "ID", reply.ReplyID)
 	cont.ContID = &reply.ReplyID
-	//gob.Register(types.ContainerStartOptions{})
-	settings1 := node.ContainerSettings{Cont: &cont}
-	args1 := noderpc.StartContArgs{Settings: &settings1, Delay: 1, Opts: types.ContainerStartOptions{}}
-	var reply1 noderpc.CreateContReply
-	err = n.client.Call("NodeServiceRPC.StartCont", &args1, &reply1)
+	return nil
+}
+
+func (n *NodeManager) StartCont(cont *node.Container) error {
+
+	args := noderpc.StartContArgs{Cont: cont, Delay: 1, Opts: types.ContainerStartOptions{}}
+	var reply noderpc.CreateContReply
+
+	err := n.client.Call("NodeServiceRPC.StartCont", &args, &reply)
 	if err != nil {
 		return fmt.Errorf("could not call StartCont: %w", err)
 	}
-	slog.Info("Container started", "node_name", n.Name, "ID", reply1.ReplyID)
 
-	settings = node.ContainerSettings{Cont: &cont}
-	args2 := noderpc.StopContArgs{Settings: &settings, Delay: 1, Opts: container.StopOptions{}}
-	var reply2 noderpc.CreateContReply
-	err = n.client.Call("NodeServiceRPC.StopCont", &args2, &reply2)
+	slog.Info("Container started", "node_name", n.Name, "ID", *cont.ContID)
+	return nil
+}
 
+func (n *NodeManager) StopCont(cont *node.Container) error {
+
+	args := noderpc.StopContArgs{Cont: cont, Delay: 1, Opts: container.StopOptions{}}
+	var reply noderpc.CreateContReply
+
+	err := n.client.Call("NodeServiceRPC.StopCont", &args, &reply)
 	if err != nil {
 		return fmt.Errorf("could not call StopCont: %w", err)
 	}
-	slog.Info("Container stopped", "node_name", n.Name, "ID", reply1.ReplyID)
+
+	slog.Info("Container stopped", "node_name", n.Name, "ID", *cont.ContID)
 	return nil
 }
