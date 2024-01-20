@@ -27,7 +27,7 @@ func main() {
 	}
 
 	//var cont = new(node.Container)
-	cont := node.Container{
+	cont := node.OrchContainer{
 		ContainerConfig: &container.Config{
 			Image: "alpine:latest",
 			Cmd:   []string{"ping", "8.8.8.8"},
@@ -35,7 +35,7 @@ func main() {
 		Image_name:       "alpine",
 		HostConfig:       nil,
 		NetworkingConfig: nil,
-		ContainerName:    "cont1", ContID: new(string), ContStatus: new(string)}
+		Name:             "cont1", ContID: new(string), ContStatus: new(string)}
 	// cont.ContainerConfig = &container.Config{
 	// 	Image: "alpine:latest",
 	// 	Cmd:   []string{"ping", "8.8.8.8"},
@@ -49,13 +49,13 @@ func main() {
 
 	err = msvc.CreateContOn(msvc.Nodes[name], &cont)
 	if err != nil {
-		slog.Error("could not create container on node", "name", cont.ContainerName, "node", name)
+		slog.Error("could not create container on node", "name", cont.Name, "node", name)
 		os.Exit(1)
 	}
 
 	err = msvc.StartContOn(msvc.Nodes[name], &cont)
 	if err != nil {
-		slog.Error("could not start container on node", "name", cont.ContainerName, "node", name)
+		slog.Error("could not start container on node", "name", cont.Name, "node", name)
 		os.Exit(1)
 	}
 
@@ -65,7 +65,7 @@ func main() {
 
 	err = msvc.StopContOn(msvc.Nodes[name], &cont)
 	if err != nil {
-		slog.Error("could not stop container on node", "name", cont.ContainerName, "node", name)
+		slog.Error("could not stop container on node", "name", cont.Name, "node", name)
 		os.Exit(1)
 	}
 }

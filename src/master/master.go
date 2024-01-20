@@ -49,7 +49,7 @@ func (m *MasterService) ConnectToNodes() error {
 	return nil
 }
 
-func (m *MasterService) CreateContOn(node *NodeManager, cont *node.Container) error {
+func (m *MasterService) CreateContOn(node *NodeManager, cont *node.OrchContainer) error {
 	err := node.CreateCont(cont)
 	if err != nil {
 		return err
@@ -57,7 +57,7 @@ func (m *MasterService) CreateContOn(node *NodeManager, cont *node.Container) er
 	return nil
 }
 
-func (m *MasterService) StartContOn(node *NodeManager, cont *node.Container) error {
+func (m *MasterService) StartContOn(node *NodeManager, cont *node.OrchContainer) error {
 	err := node.StartCont(cont)
 	if err != nil {
 		return err
@@ -65,7 +65,7 @@ func (m *MasterService) StartContOn(node *NodeManager, cont *node.Container) err
 	return nil
 }
 
-func (m *MasterService) StopContOn(node *NodeManager, cont *node.Container) error {
+func (m *MasterService) StopContOn(node *NodeManager, cont *node.OrchContainer) error {
 	err := node.StopCont(cont)
 	if err != nil {
 		return err
@@ -73,7 +73,7 @@ func (m *MasterService) StopContOn(node *NodeManager, cont *node.Container) erro
 	return nil
 }
 
-func (m *MasterService) CreateContOnAll(cont *node.Container) error {
+func (m *MasterService) CreateContOnAll(cont *node.OrchContainer) error {
 	for _, node := range m.Nodes {
 		err := node.CreateCont(cont)
 		if err != nil {
@@ -92,7 +92,7 @@ func (n *NodeManager) Connect() error {
 	return nil
 }
 
-func (n *NodeManager) CreateCont(cont *node.Container) error {
+func (n *NodeManager) CreateCont(cont *node.OrchContainer) error {
 	// var reply string
 	// arg := "Mitko"
 	// err := n.client.Call("NodeServiceRPC.SimpleHello", &arg, &reply)
@@ -110,7 +110,7 @@ func (n *NodeManager) CreateCont(cont *node.Container) error {
 	return nil
 }
 
-func (n *NodeManager) StartCont(cont *node.Container) error {
+func (n *NodeManager) StartCont(cont *node.OrchContainer) error {
 
 	args := noderpc.StartContArgs{Cont: cont, Delay: 1, Opts: types.ContainerStartOptions{}}
 	var reply noderpc.CreateContReply
@@ -124,7 +124,7 @@ func (n *NodeManager) StartCont(cont *node.Container) error {
 	return nil
 }
 
-func (n *NodeManager) StopCont(cont *node.Container) error {
+func (n *NodeManager) StopCont(cont *node.OrchContainer) error {
 
 	args := noderpc.StopContArgs{Cont: cont, Delay: 1, Opts: container.StopOptions{}}
 	var reply noderpc.CreateContReply
