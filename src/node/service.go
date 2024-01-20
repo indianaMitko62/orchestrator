@@ -15,3 +15,7 @@ func NewNodeService() (*NodeService, error) {
 	}
 	return &NodeService{cli: cli}, nil
 }
+
+/*
+TODO: volumes, network and container setup and maintenance
+*/
