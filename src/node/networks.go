@@ -27,7 +27,7 @@ func (n *NodeService) NetwCreate(network *OrchNetwork, opts types.NetworkCreate)
 }
 
 func (n *NodeService) NetwConnect(network *OrchNetwork, container OrchContainer, config *network.EndpointSettings) error {
-	err := n.cli.NetworkConnect(context.Background(), network.Name, *container.ContID, config)
+	err := n.cli.NetworkConnect(context.Background(), network.Name, container.ContID, config)
 	if err != nil {
 		slog.Error("Could not connect container to network", "container", container.Name, "network", network.Name)
 		return err
@@ -37,7 +37,7 @@ func (n *NodeService) NetwConnect(network *OrchNetwork, container OrchContainer,
 }
 
 func (n *NodeService) NetwDisconnect(network *OrchNetwork, container *OrchContainer, force bool) error {
-	err := n.cli.NetworkDisconnect(context.Background(), *network.ID, *container.ContID, force)
+	err := n.cli.NetworkDisconnect(context.Background(), *network.ID, container.ContID, force)
 	if err != nil {
 		slog.Error("Could not disconnect container from network", "container", container.Name, "network", network.Name)
 		return err
