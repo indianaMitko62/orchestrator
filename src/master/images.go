@@ -11,10 +11,10 @@ import (
 )
 
 type OrchImage struct {
-	Name       *string
-	Tag        *string
+	Name       string
+	Tag        string
 	Version    float32
-	Status     *string
+	Status     string
 	Dockerfile string
 }
 
@@ -24,8 +24,8 @@ func (m *MasterService) ImgBuild(image *OrchImage, buildContext io.Reader, opts 
 		slog.Error("could not build image", "name", image.Name)
 		return res, err
 	}
-	*image.Status = "built"
-	*image.Name = opts.Tags[0]
+	image.Status = "built"
+	image.Name = opts.Tags[0]
 	return res, nil
 } // ImageCreate???
 
@@ -39,7 +39,7 @@ func (m *MasterService) ImgPull(name string, opts types.ImagePullOptions) (io.Re
 }
 
 func (m *MasterService) ImgPush(image *OrchImage, opts types.ImagePushOptions) (io.ReadCloser, error) {
-	res, err := m.cli.ImagePush(context.Background(), *image.Name, opts)
+	res, err := m.cli.ImagePush(context.Background(), image.Name, opts)
 	if err != nil {
 		slog.Error("could not push image", "name", image.Name)
 		return res, err
@@ -66,7 +66,7 @@ func (m *MasterService) ImgTag(image *OrchImage, src string, target string) erro
 }
 
 func (m *MasterService) ImgHist(image *OrchImage) ([]image.HistoryResponseItem, error) {
-	res, err := m.cli.ImageHistory(context.Background(), *image.Name)
+	res, err := m.cli.ImageHistory(context.Background(), image.Name)
 	if err != nil {
 		slog.Error("could not get history for image", "name", image.Name)
 		return res, err
@@ -75,7 +75,7 @@ func (m *MasterService) ImgHist(image *OrchImage) ([]image.HistoryResponseItem, 
 }
 
 func (m *MasterService) ImgSave(image *OrchImage) (io.ReadCloser, error) {
-	ids := []string{*image.Name}
+	ids := []string{image.Name}
 	res, err := m.cli.ImageSave(context.Background(), ids)
 	if err != nil {
 		slog.Error("could not save image", "name", image.Name)
@@ -94,17 +94,17 @@ func (m *MasterService) ImgLoad(image *OrchImage, input io.ReadCloser, quiet boo
 }
 
 func (m *MasterService) ImgRemove(image *OrchImage, opts types.ImageRemoveOptions) ([]types.ImageDeleteResponseItem, error) {
-	res, err := m.cli.ImageRemove(context.Background(), *image.Name, opts)
+	res, err := m.cli.ImageRemove(context.Background(), image.Name, opts)
 	if err != nil {
 		slog.Error("could not remove image", "name", image.Name)
 		return res, err
 	}
-	*image.Status = "removed"
+	image.Status = "removed"
 	return res, nil
 }
 
 func (m *MasterService) ImgInspect(image OrchImage) (types.ImageInspect, []byte, error) {
-	res, raw, err := m.cli.ImageInspectWithRaw(context.Background(), *image.Name)
+	res, raw, err := m.cli.ImageInspectWithRaw(context.Background(), image.Name)
 	if err != nil {
 		slog.Error("could not inspect image", "name", image.Name)
 		return res, raw, err

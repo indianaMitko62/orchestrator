@@ -1,59 +1,33 @@
 package master
 
 import (
+	"fmt"
+	"net/http"
 	"net/rpc"
-
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/api/types/strslice"
-	"github.com/docker/go-connections/nat"
 )
 
-type ContainerNetworkConfig struct {
-	NetworkID   *string
-	IPv4Address *string
-	IPv6Address *string
-	MACAddress  *string
-	Gateway     *string
-
-	DNS          []*string
-	PortBindings nat.PortMap
+func (m *MasterService) ConnectToNodes() error {
+	for _, node := range m.CS.Nodes {
+		err := node.Connect()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
-type ContainerConfig struct {
-	Name            *string
-	Image           *string
-	Volume          *string
-	NetworkConfig   *ContainerNetworkConfig
-	Cmd             *strslice.StrSlice
-	Domainname      *string
-	WorkingDir      *string
-	ExposedPorts    *nat.PortSet
-	Healthcheck     *container.HealthConfig
-	NetworkDisabled *bool
-	MacAddress      *string
-	Privileged      *bool
-	ReadOnlyFS      *bool
+func (n *NodeManager) Connect() error {
+	client, err := rpc.DialHTTP("tcp", n.Address)
+	if err != nil {
+		return fmt.Errorf("could not connect to node's %s RPC service at %s: %w", n.Name, n.Address, err)
+	}
+	n.Client = client
+	return nil
 }
 
-type NetworkConfig struct {
-}
+func (m *MasterService) Master() {
+	http.HandleFunc("/clusterState", m.CS.HandleClusterState)
+	http.ListenAndServe(":1986", nil)
 
-type VolumeConfig struct {
-}
-
-type NodeSettings struct {
-	Name         *string
-	Address      *string
-	Containers   []*ContainerConfig
-	Networks     []*NetworkConfig
-	VolumeConfig []*VolumeConfig
-}
-
-type NodeManager struct {
-	NodeSettings
-	client *rpc.Client
-}
-
-type ClusterState struct {
-	Nodes map[string]*NodeManager
+	// More Master logic
 }
