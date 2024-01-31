@@ -10,8 +10,9 @@ import (
 )
 
 type OrchVolume struct {
-	Name   string
-	Status *string
+	Name       string
+	Status     string
+	MountPoint string
 }
 
 func (n *NodeService) VolCreate(volume *OrchVolume, opts volume.CreateOptions) (volume.Volume, error) {
@@ -20,7 +21,7 @@ func (n *NodeService) VolCreate(volume *OrchVolume, opts volume.CreateOptions) (
 		slog.Error("could not create volume", "name", volume.Name)
 		return vol, err
 	}
-	*volume.Status = "created"
+	volume.Status = "created"
 
 	return vol, err
 }
@@ -31,7 +32,7 @@ func (n *NodeService) VolInspect(volume *OrchVolume) (volume.Volume, error) {
 		slog.Error("could not inspect volume", "name", volume.Name)
 		return vol, err
 	}
-	*volume.Status = "created"
+	volume.Status = "created"
 	return vol, err
 }
 
@@ -50,7 +51,7 @@ func (n *NodeService) VolRemove(volume *OrchVolume, force bool) error {
 		slog.Error("could not list volumes")
 		return err
 	}
-	*volume.Status = "removed"
+	volume.Status = "removed"
 	return err
 }
 
