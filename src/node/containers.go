@@ -71,6 +71,17 @@ func (n *NodeService) StopCont(Cont *OrchContainer, Opts container.StopOptions) 
 	return nil
 }
 
+func (n *NodeService) InspectCont(Cont *OrchContainer, getSize bool) (types.ContainerJSON, []byte, error) {
+	slog.Info("Received inspect request", "name", Cont.Name)
+	json, byte, err := n.cli.ContainerInspectWithRaw(context.Background(), Cont.ContID, getSize)
+	if err != nil {
+		slog.Error("could not start container", "name", Cont.ContID)
+		return json, byte, err
+	}
+	slog.Info("Container inspected", "name", Cont.Name, "ID", Cont.ContID)
+	return json, byte, nil
+}
+
 func (n *NodeService) LogCont(Cont *OrchContainer, Opts types.ContainerLogsOptions) (io.ReadCloser, error) {
 	slog.Info("Received log request", "name", Cont.Name)
 	out, err := n.cli.ContainerLogs(context.Background(), Cont.ContID, Opts)
