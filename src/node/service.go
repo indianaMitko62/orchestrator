@@ -2,10 +2,14 @@ package node
 
 import (
 	"github.com/docker/docker/client"
+	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
 type NodeService struct {
-	cli *client.Client
+	cluster.NodeSettings
+	cli              *client.Client
+	DesiredNodeState *NodeState
+	CurrentNodeState *NodeState
 }
 
 func NewNodeService() (*NodeService, error) {
@@ -13,9 +17,14 @@ func NewNodeService() (*NodeService, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &NodeService{cli: cli}, nil
-}
 
-/*
-TODO: volumes, network and container setup and maintenance
-*/
+	return &NodeService{
+		cli: cli,
+		NodeSettings: cluster.NodeSettings{
+			Name:    "Node1",
+			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes
+		},
+		DesiredNodeState: NewNodeState(),
+		CurrentNodeState: NewNodeState(),
+	}, nil
+}

@@ -11,13 +11,11 @@ import (
 )
 
 type OrchContainer struct {
-	ContainerConfig  *container.Config
-	Image_name       string
-	HostConfig       *container.HostConfig
-	NetworkingConfig *network.NetworkingConfig
-	Name             string
 	ContID           string
 	ContStatus       string
+	ContainerConfig  *container.Config
+	HostConfig       *container.HostConfig
+	NetworkingConfig *network.NetworkingConfig
 }
 
 /*
@@ -29,169 +27,169 @@ NOTES: Most of these functionalities do not need to be accessable remotely.
 // }
 
 func (n *NodeService) CreateCont(cont *OrchContainer) (string, error) {
-	slog.Info("Received create request", "name", cont.Name)
+	slog.Info("Received create request", "name", cont.ContainerConfig.Hostname)
 	reply, err := n.cli.ContainerCreate(context.Background(),
 		cont.ContainerConfig,
 		cont.HostConfig,
 		cont.NetworkingConfig,
 		nil,
-		cont.Name)
+		cont.ContainerConfig.Hostname)
 	if err != nil {
-		slog.Error("could not create container", "name", cont.Name)
+		slog.Error("could not create container", "name", cont.ContainerConfig.Hostname)
 		return "", err
 	}
 
 	cont.ContID = reply.ID
 	cont.ContStatus = "created"
-	slog.Info("Container created", "name", &cont.Name)
+	slog.Info("Container created", "name", &cont.ContainerConfig.Hostname)
 	return reply.ID, nil
 }
 
-func (n *NodeService) StartCont(Cont *OrchContainer, Opts types.ContainerStartOptions) error {
-	slog.Info("Received start request", "name", Cont.Name)
-	err := n.cli.ContainerStart(context.Background(), Cont.ContID, Opts)
+func (n *NodeService) StartCont(cont *OrchContainer, Opts types.ContainerStartOptions) error {
+	slog.Info("Received start request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.ContainerStart(context.Background(), cont.ContID, Opts)
 	if err != nil {
-		slog.Error("could not start container", "name", Cont.ContID)
+		slog.Error("could not start container", "name", cont.ContID)
 		return err
 	}
-	Cont.ContStatus = "running"
-	slog.Info("Container started", "name", Cont.Name, "ID", Cont.ContID)
+	cont.ContStatus = "running"
+	slog.Info("Container started", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) StopCont(Cont *OrchContainer, Opts container.StopOptions) error {
-	slog.Info("Received stop request", "name", Cont.Name)
-	err := n.cli.ContainerStop(context.Background(), Cont.ContID, Opts)
+func (n *NodeService) StopCont(cont *OrchContainer, Opts container.StopOptions) error {
+	slog.Info("Received stop request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.ContainerStop(context.Background(), cont.ContID, Opts)
 	if err != nil {
-		slog.Error("could not stop container", "name", Cont.Name)
+		slog.Error("could not stop container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	Cont.ContStatus = "stopped"
-	slog.Info("Container stopped", "name", Cont.Name, "ID", Cont.ContID)
+	cont.ContStatus = "stopped"
+	slog.Info("Container stopped", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) InspectCont(Cont *OrchContainer, getSize bool) (types.ContainerJSON, []byte, error) {
-	slog.Info("Received inspect request", "name", Cont.Name)
-	json, byte, err := n.cli.ContainerInspectWithRaw(context.Background(), Cont.ContID, getSize)
+func (n *NodeService) InspectCont(cont *OrchContainer, getSize bool) (types.ContainerJSON, []byte, error) {
+	slog.Info("Received inspect request", "name", cont.ContainerConfig.Hostname)
+	json, byte, err := n.cli.ContainerInspectWithRaw(context.Background(), cont.ContID, getSize)
 	if err != nil {
-		slog.Error("could not start container", "name", Cont.ContID)
+		slog.Error("could not start container", "name", cont.ContID)
 		return json, byte, err
 	}
-	slog.Info("Container inspected", "name", Cont.Name, "ID", Cont.ContID)
+	slog.Info("Container inspected", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return json, byte, nil
 }
 
-func (n *NodeService) LogCont(Cont *OrchContainer, Opts types.ContainerLogsOptions) (io.ReadCloser, error) {
-	slog.Info("Received log request", "name", Cont.Name)
-	out, err := n.cli.ContainerLogs(context.Background(), Cont.ContID, Opts)
+func (n *NodeService) LogCont(cont *OrchContainer, Opts types.ContainerLogsOptions) (io.ReadCloser, error) {
+	slog.Info("Received log request", "name", cont.ContainerConfig.Hostname)
+	out, err := n.cli.ContainerLogs(context.Background(), cont.ContID, Opts)
 	if err != nil {
-		slog.Error("could not log container", "name", Cont.Name)
+		slog.Error("could not log container", "name", cont.ContainerConfig.Hostname)
 		return nil, err
 	}
-	slog.Info("Containers Logs returned", "name", Cont.Name, "ID", Cont.ContID)
+	slog.Info("Containers Logs returned", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return out, nil
 }
 
-func (n *NodeService) KillCont(Cont *OrchContainer, signal string) error {
-	slog.Info("Received kill request", "name", Cont.Name)
-	err := n.cli.ContainerKill(context.Background(), Cont.ContID, signal)
+func (n *NodeService) KillCont(cont *OrchContainer, signal string) error {
+	slog.Info("Received kill request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.ContainerKill(context.Background(), cont.ContID, signal)
 	if err != nil {
-		slog.Error("could not kill container", "name", Cont.Name)
+		slog.Error("could not kill container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	Cont.ContStatus = "killed"
-	slog.Info("Container killed", "name", Cont.Name, "ID", Cont.ContID)
+	cont.ContStatus = "killed"
+	slog.Info("Container killed", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) RemoveCont(Cont *OrchContainer, Opts types.ContainerRemoveOptions) error {
-	slog.Info("Received remove request", "name", Cont.Name)
-	err := n.cli.ContainerRemove(context.Background(), Cont.ContID, Opts)
+func (n *NodeService) RemoveCont(cont *OrchContainer, Opts types.ContainerRemoveOptions) error {
+	slog.Info("Received remove request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.ContainerRemove(context.Background(), cont.ContID, Opts)
 	if err != nil {
-		slog.Error("could not remove container", "name", Cont.Name)
+		slog.Error("could not remove container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	Cont.ContStatus = "removed"
-	slog.Info("Container removed", "name", Cont.Name, "ID", Cont.ContID)
+	cont.ContStatus = "removed"
+	slog.Info("Container removed", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) ListContainers(Cont *OrchContainer, Opts types.ContainerListOptions) ([]types.Container, error) {
-	slog.Info("Received list container request", "name", Cont.Name)
+func (n *NodeService) ListContainers(cont *OrchContainer, Opts types.ContainerListOptions) ([]types.Container, error) {
+	slog.Info("Received list container request", "name", cont.ContainerConfig.Hostname)
 	var containerList []types.Container
 	containerList, err := n.cli.ContainerList(context.Background(), Opts)
 	if err != nil {
-		slog.Error("could not list containers", "name", Cont.Name)
+		slog.Error("could not list containers", "name", cont.ContainerConfig.Hostname)
 		return nil, err
 	}
 	return containerList, nil
 }
 
-func (n *NodeService) PauseCont(Cont *OrchContainer) error {
-	slog.Info("Received pause request", "name", Cont.Name)
-	err := n.cli.ContainerPause(context.Background(), Cont.ContID)
+func (n *NodeService) PauseCont(cont *OrchContainer) error {
+	slog.Info("Received pause request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.ContainerPause(context.Background(), cont.ContID)
 	if err != nil {
-		slog.Error("could not pause container", "name", Cont.Name)
+		slog.Error("could not pause container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	Cont.ContStatus = "paused"
-	slog.Info("Container paused", "name", Cont.Name, "ID", Cont.ContID)
+	cont.ContStatus = "paused"
+	slog.Info("Container paused", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) UnpauseCont(Cont *OrchContainer) error {
-	slog.Info("Received unpause request", "name", Cont.Name)
-	err := n.cli.ContainerUnpause(context.Background(), Cont.ContID)
+func (n *NodeService) UnpauseCont(cont *OrchContainer) error {
+	slog.Info("Received unpause request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.ContainerUnpause(context.Background(), cont.ContID)
 	if err != nil {
-		slog.Error("could not unpause container", "name", Cont.Name)
+		slog.Error("could not unpause container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	Cont.ContStatus = "running"
-	slog.Info("Container unpaused", "name", Cont.Name, "ID", Cont.ContID)
+	cont.ContStatus = "running"
+	slog.Info("Container unpaused", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) CopyToCont(Cont *OrchContainer, dest string, src io.Reader, Opts types.CopyToContainerOptions) error {
-	slog.Info("Received copyTo request", "name", Cont.Name)
-	err := n.cli.CopyToContainer(context.Background(), Cont.ContID, dest, src, Opts)
+func (n *NodeService) CopyToCont(cont *OrchContainer, dest string, src io.Reader, Opts types.CopyToContainerOptions) error {
+	slog.Info("Received copyTo request", "name", cont.ContainerConfig.Hostname)
+	err := n.cli.CopyToContainer(context.Background(), cont.ContID, dest, src, Opts)
 	if err != nil {
-		slog.Error("could not copyTo container", "name", Cont.Name)
+		slog.Error("could not copyTo container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	slog.Info("copyTo Container", "name", Cont.Name, "ID", Cont.ContID)
+	slog.Info("copyTo Container", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return nil
 }
 
-func (n *NodeService) CopyFromCont(Cont *OrchContainer, src string) (io.ReadCloser, error) {
-	slog.Info("Received copyFrom request", "name", Cont.Name)
-	res, _, err := n.cli.CopyFromContainer(context.Background(), Cont.ContID, src)
+func (n *NodeService) CopyFromCont(cont *OrchContainer, src string) (io.ReadCloser, error) {
+	slog.Info("Received copyFrom request", "name", cont.ContainerConfig.Hostname)
+	res, _, err := n.cli.CopyFromContainer(context.Background(), cont.ContID, src)
 	if err != nil {
-		slog.Error("could not copyFrom container", "name", Cont.Name)
+		slog.Error("could not copyFrom container", "name", cont.ContainerConfig.Hostname)
 		return nil, err
 	}
-	slog.Info("copyFrom Container", "name", Cont.Name, "ID", Cont.ContID)
+	slog.Info("copyFrom Container", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return res, nil
 }
 
-func (n *NodeService) TopCont(Cont *OrchContainer, args []string) (container.ContainerTopOKBody, error) {
-	slog.Info("Received Top request", "name", Cont.Name)
-	res, err := n.cli.ContainerTop(context.Background(), Cont.ContID, args)
+func (n *NodeService) TopCont(cont *OrchContainer, args []string) (container.ContainerTopOKBody, error) {
+	slog.Info("Received Top request", "name", cont.ContainerConfig.Hostname)
+	res, err := n.cli.ContainerTop(context.Background(), cont.ContID, args)
 	if err != nil {
-		slog.Error("could not top container", "name", Cont.Name)
+		slog.Error("could not top container", "name", cont.ContainerConfig.Hostname)
 		return res, err
 	}
-	slog.Info("container top returned", "name", Cont.Name, "ID", Cont.ContID)
+	slog.Info("container top returned", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return res, nil
 }
 
-func (n *NodeService) StatCont(Cont *OrchContainer, stream bool) (types.ContainerStats, error) {
-	slog.Info("Received stat request", "name", Cont.Name)
-	res, err := n.cli.ContainerStats(context.Background(), Cont.ContID, stream)
+func (n *NodeService) StatCont(cont *OrchContainer, stream bool) (types.ContainerStats, error) {
+	slog.Info("Received stat request", "name", cont.ContainerConfig.Hostname)
+	res, err := n.cli.ContainerStats(context.Background(), cont.ContID, stream)
 	if err != nil {
-		slog.Error("could not stat container", "name", Cont.Name)
+		slog.Error("could not stat container", "name", cont.ContainerConfig.Hostname)
 		return res, err
 	}
-	slog.Info("container stat returned", "name", Cont.Name, "ID", Cont.ContID)
+	slog.Info("container stat returned", "name", cont.ContainerConfig.Hostname, "ID", cont.ContID)
 	return res, nil
 }

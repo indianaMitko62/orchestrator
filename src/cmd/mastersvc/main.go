@@ -20,27 +20,30 @@ func main() {
 			Name:    "Node1",
 			Address: "127.0.0.1",
 		},
-		Containers: []*cluster.ContainerConfig{
-			{
-				Name:  "Container1",
-				Image: "hello-world",
-				NetworkConfig: cluster.ContainerNetworkConfig{
-					NetworkID:   "net1",
-					IPv4Address: "172.16.0.2",
-					DNS:         []string{"8.8.8.8", "8.8.4.4"},
+		Containers: map[string]*cluster.ContainerConfig{
+			"Container1": {
+				Name:       "Container1",
+				Image:      "hello-world",
+				Privileged: true,
+				NetworkConfig: map[string]*cluster.ContainerNetworkConfig{
+					"bridge": {
+						NetworkID:   "bridge",
+						IPv4Address: "172.16.0.2",
+					},
 				},
 			},
 		},
-		Networks: []*cluster.NetworkConfig{
-			{
-				NetworkID: "net1",
+		Networks: map[string]*cluster.NetworkConfig{
+			"net1": {
+				NetworkID: "net ID 1",
 			},
 		},
-		Volumes: []*cluster.VolumeConfig{
-			{
-				VolumeID: "vol1",
+		Volumes: map[string]*cluster.VolumeConfig{
+			"vol1": {
+				VolumeID: "vol ID 1",
 			},
 		},
+		Images: map[string]*cluster.ImageConfig{},
 		Client: nil,
 	}
 	nodeManager1 := &cluster.NodeManager{
@@ -48,27 +51,29 @@ func main() {
 			Name:    "Node2",
 			Address: "127.0.0.1",
 		},
-		Containers: []*cluster.ContainerConfig{
-			{
+		Containers: map[string]*cluster.ContainerConfig{
+			"Container2": {
 				Name:  "Container2",
-				Image: "nginx:latest",
-				NetworkConfig: cluster.ContainerNetworkConfig{
-					NetworkID:   "net2",
-					IPv4Address: "172.16.0.2",
-					DNS:         []string{"8.8.8.8", "8.8.4.4"},
+				Image: "nginx:lastest",
+				NetworkConfig: map[string]*cluster.ContainerNetworkConfig{
+					"bridge": {
+						NetworkID:   "bridge",
+						IPv4Address: "172.16.0.2",
+					},
 				},
 			},
 		},
-		Networks: []*cluster.NetworkConfig{
-			{
-				NetworkID: "net2",
+		Networks: map[string]*cluster.NetworkConfig{
+			"net2": {
+				NetworkID: "vol ID 2",
 			},
 		},
-		Volumes: []*cluster.VolumeConfig{
-			{
-				VolumeID: "vol2",
+		Volumes: map[string]*cluster.VolumeConfig{
+			"vol2": {
+				VolumeID: "vol ID 2",
 			},
 		},
+		Images: map[string]*cluster.ImageConfig{},
 		Client: nil,
 	}
 	clusterState.Nodes[nodeManager.Name] = nodeManager

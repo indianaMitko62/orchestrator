@@ -10,14 +10,13 @@ import (
 )
 
 type OrchImage struct {
-	Name    *string
-	Tag     *string
+	Name    string
+	Tag     string
 	Version float32
-	Status  *string
+	Status  string
 }
 
 /*
-TODO: All of the image functionalities are to be moved to Master, except ImgPull, ImgList, ImgTag(probably), ImgRemove, ImgInspect.
 NOTES: For I do not believe they have to be accessable remotely.
 */
 
@@ -49,17 +48,17 @@ func (n *NodeService) ImgTag(image *OrchImage, src string, target string) error 
 }
 
 func (n *NodeService) ImgRemove(image *OrchImage, opts types.ImageRemoveOptions) ([]types.ImageDeleteResponseItem, error) {
-	res, err := n.cli.ImageRemove(context.Background(), *image.Name, opts)
+	res, err := n.cli.ImageRemove(context.Background(), image.Name, opts)
 	if err != nil {
 		slog.Error("could not remove image", "name", image.Name)
 		return res, err
 	}
-	*image.Status = "removed"
+	image.Status = "removed"
 	return res, nil
 }
 
 func (n *NodeService) ImgInspect(image OrchImage) (types.ImageInspect, []byte, error) {
-	res, raw, err := n.cli.ImageInspectWithRaw(context.Background(), *image.Name)
+	res, raw, err := n.cli.ImageInspectWithRaw(context.Background(), image.Name)
 	if err != nil {
 		slog.Error("could not inspect image", "name", image.Name)
 		return res, raw, err
