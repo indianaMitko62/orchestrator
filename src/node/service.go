@@ -8,8 +8,8 @@ import (
 type NodeService struct {
 	cluster.NodeSettings
 	cli              *client.Client
-	DesiredNodeState *NodeState
-	CurrentNodeState *NodeState
+	DesiredNodeState *cluster.NodeState
+	CurrentNodeState *cluster.NodeState
 }
 
 func NewNodeService() (*NodeService, error) {
@@ -24,7 +24,7 @@ func NewNodeService() (*NodeService, error) {
 			Name:    "Node1",
 			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes
 		},
-		DesiredNodeState: NewNodeState(),
-		CurrentNodeState: NewNodeState(),
+		DesiredNodeState: cluster.NewNodeState(),
+		CurrentNodeState: cluster.NewNodeState(),
 	}, nil
 }
