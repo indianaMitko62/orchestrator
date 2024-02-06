@@ -2,59 +2,14 @@ package cluster
 
 import (
 	"fmt"
+	"io"
+	"log/slog"
+	"net/http"
 	"net/rpc"
 	"strings"
 
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/api/types/strslice"
-	"github.com/docker/go-connections/nat"
+	"gopkg.in/yaml.v3"
 )
-
-type ContainerNetworkConfig struct {
-	NetworkID   string `yaml:"network_id,omitempty"`
-	IPv4Address string `yaml:"ipv4_address,omitempty"`
-	IPv6Address string `yaml:"ipv6_address,omitempty"`
-	MACAddress  string `yaml:"mac_address,omitempty"`
-	Gateway     string `yaml:"gateway,omitempty"`
-	IPPrefixLen int    `yaml:"ip_prefix_len,omitempty"`
-}
-
-type ContainerConfig struct {
-	Name            string                             `yaml:"name"`
-	Image           string                             `yaml:"image"`
-	Status          string                             `yaml:"status"`
-	Volume          string                             `yaml:"volume,omitempty"`
-	NetworkConfig   map[string]*ContainerNetworkConfig `yaml:"network_config"`
-	Cmd             strslice.StrSlice                  `yaml:"cmd,omitempty"`
-	Domainname      string                             `yaml:"domainname,omitempty"`
-	WorkingDir      string                             `yaml:"working_dir,omitempty"`
-	ExposedPorts    nat.PortSet                        `yaml:"exposed_ports,omitempty"`
-	Healthcheck     container.HealthConfig             `yaml:"healthcheck,omitempty"`
-	NetworkDisabled bool                               `yaml:"network_disabled,omitempty"`
-	MacAddress      string                             `yaml:"mac_address,omitempty"`
-	Privileged      bool                               `yaml:"privileged,omitempty"`
-	ReadOnlyFS      bool                               `yaml:"read_only_fs,omitempty"`
-	DNS             []string                           `yaml:"dns,omitempty"`
-
-	PortBindings nat.PortMap `yaml:"port_bindings,omitempty"`
-}
-
-type NetworkConfig struct {
-	NetworkID string `yaml:"network_id,omitempty"`
-	Name      string `yaml:"name,omitempty"`
-	Driver    string `yaml:"driver,omitempty"`
-}
-
-type ImageConfig struct {
-	ImageID string `yaml:"id,omitempty"`
-	Tag     string `yaml:"tag,omitempty"`
-	Name    string `yaml:"name,omitempty"`
-}
-
-type VolumeConfig struct {
-	VolumeID string `yaml:"volume_id,omitempty"`
-	Driver   string `yaml:"driver,omitempty"`
-}
 
 type NodeSettings struct {
 	Name    string `yaml:"name"`
@@ -63,11 +18,8 @@ type NodeSettings struct {
 
 type NodeManager struct {
 	NodeSettings
-	Client     *rpc.Client
-	Containers map[string]*ContainerConfig `yaml:"containers"`
-	Networks   map[string]*NetworkConfig   `yaml:"networks"`
-	Volumes    map[string]*VolumeConfig    `yaml:"volumes"`
-	Images     map[string]*ImageConfig     `yaml:"images"`
+	Client *rpc.Client
+	NodeState
 }
 
 type ClusterState struct {
@@ -83,16 +35,15 @@ func NewClusterState() *ClusterState {
 func (cs *ClusterState) CollectImages() { // probably won't be used in final version. Created for setup for node logic testing
 	for _, node := range cs.Nodes {
 		for _, cont := range node.Containers {
-			parts := strings.Split(cont.Image, ":")
+			parts := strings.Split(cont.ContainerConfig.Image, ":")
 			var tag string
 			name := parts[0]
 			if len(parts) > 1 {
 				tag = parts[1]
 			}
-			node.Images[cont.Image] = &ImageConfig{
-				Name:    name,
-				Tag:     tag,
-				ImageID: "to be added via image inspection or by image creation in struct",
+			node.Images[cont.ContainerConfig.Image] = &OrchImage{ //////////////////////////// to be checked again
+				Name: name,
+				Tag:  tag,
 			}
 		}
 	}
@@ -105,4 +56,31 @@ func (n *NodeManager) Connect() error {
 	}
 	n.Client = client
 	return nil
+}
+
+func GetClusterState(URL string) (*ClusterState, error) {
+	var cs ClusterState
+	resp, err := http.Get(URL)
+	if err != nil {
+		slog.Error("Could not send cluster state request to master", "error", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusOK {
+		yamlData, err := io.ReadAll(resp.Body)
+		if err != nil {
+			slog.Error("Error reading YAML data:", err)
+			return &ClusterState{}, err
+		}
+		fmt.Println(string(yamlData)) // for testing
+
+		err = yaml.Unmarshal(yamlData, &cs)
+		if err != nil {
+			slog.Error("could not unmarshal cluster state yaml", "error", err)
+			return &ClusterState{}, err
+		}
+	} else {
+		slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
+	}
+	return &cs, nil
 }
