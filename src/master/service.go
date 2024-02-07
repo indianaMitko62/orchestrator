@@ -1,13 +1,10 @@
 package master
 
 import (
-	"github.com/docker/docker/client"
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
 type MasterService struct {
-	cli *client.Client
-
 	CS *cluster.ClusterState
 }
 

@@ -74,9 +74,9 @@ func (cont *OrchContainer) StopCont(Opts container.StopOptions) error {
 
 func (cont *OrchContainer) InspectCont(getSize bool) (types.ContainerJSON, []byte, error) {
 	slog.Info("Inspecting container", "name", cont.ContainerConfig.Hostname)
-	json, byte, err := cont.Cli.ContainerInspectWithRaw(context.Background(), cont.ID, getSize)
+	json, byte, err := cont.Cli.ContainerInspectWithRaw(context.Background(), cont.ContainerConfig.Hostname, getSize)
 	if err != nil {
-		slog.Error("could not start container", "name", cont.ID)
+		slog.Error("could not start container", "name", cont.ContainerConfig.Hostname)
 		return json, byte, err
 	}
 	slog.Info("Container inspected", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
@@ -85,7 +85,7 @@ func (cont *OrchContainer) InspectCont(getSize bool) (types.ContainerJSON, []byt
 
 func (cont *OrchContainer) LogCont(Opts types.ContainerLogsOptions) (io.ReadCloser, error) {
 	slog.Info("Logging container", "name", cont.ContainerConfig.Hostname)
-	out, err := cont.Cli.ContainerLogs(context.Background(), cont.ID, Opts)
+	out, err := cont.Cli.ContainerLogs(context.Background(), cont.ContainerConfig.Hostname, Opts)
 	if err != nil {
 		slog.Error("could not log container", "name", cont.ContainerConfig.Hostname)
 		return nil, err
@@ -132,7 +132,7 @@ func (cont *OrchContainer) ListContainers(Opts types.ContainerListOptions) ([]ty
 
 func (cont *OrchContainer) PauseCont() error {
 	slog.Info("Pausing containers", "name", cont.ContainerConfig.Hostname)
-	err := cont.Cli.ContainerPause(context.Background(), cont.ID)
+	err := cont.Cli.ContainerPause(context.Background(), cont.ContainerConfig.Hostname)
 	if err != nil {
 		slog.Error("could not pause container", "name", cont.ContainerConfig.Hostname)
 		return err
@@ -144,7 +144,7 @@ func (cont *OrchContainer) PauseCont() error {
 
 func (cont *OrchContainer) UnpauseCont() error {
 	slog.Info("Unpausing containers", "name", cont.ContainerConfig.Hostname)
-	err := cont.Cli.ContainerUnpause(context.Background(), cont.ID)
+	err := cont.Cli.ContainerUnpause(context.Background(), cont.ContainerConfig.Hostname)
 	if err != nil {
 		slog.Error("could not unpause container", "name", cont.ContainerConfig.Hostname)
 		return err
@@ -156,7 +156,7 @@ func (cont *OrchContainer) UnpauseCont() error {
 
 func (cont *OrchContainer) CopyToCont(dest string, src io.Reader, Opts types.CopyToContainerOptions) error {
 	slog.Info("Copying to container", "name", cont.ContainerConfig.Hostname)
-	err := cont.Cli.CopyToContainer(context.Background(), cont.ID, dest, src, Opts)
+	err := cont.Cli.CopyToContainer(context.Background(), cont.ContainerConfig.Hostname, dest, src, Opts)
 	if err != nil {
 		slog.Error("could not copyTo container", "name", cont.ContainerConfig.Hostname)
 		return err
@@ -167,7 +167,7 @@ func (cont *OrchContainer) CopyToCont(dest string, src io.Reader, Opts types.Cop
 
 func (cont *OrchContainer) CopyFromCont(src string) (io.ReadCloser, error) {
 	slog.Info("Copying from container", "name", cont.ContainerConfig.Hostname)
-	res, _, err := cont.Cli.CopyFromContainer(context.Background(), cont.ID, src)
+	res, _, err := cont.Cli.CopyFromContainer(context.Background(), cont.ContainerConfig.Hostname, src)
 	if err != nil {
 		slog.Error("could not copyFrom container", "name", cont.ContainerConfig.Hostname)
 		return nil, err
@@ -178,7 +178,7 @@ func (cont *OrchContainer) CopyFromCont(src string) (io.ReadCloser, error) {
 
 func (cont *OrchContainer) TopCont(args []string) (container.ContainerTopOKBody, error) {
 	slog.Info("Top in container", "name", cont.ContainerConfig.Hostname)
-	res, err := cont.Cli.ContainerTop(context.Background(), cont.ID, args)
+	res, err := cont.Cli.ContainerTop(context.Background(), cont.ContainerConfig.Hostname, args)
 	if err != nil {
 		slog.Error("could not top container", "name", cont.ContainerConfig.Hostname)
 		return res, err
@@ -189,7 +189,7 @@ func (cont *OrchContainer) TopCont(args []string) (container.ContainerTopOKBody,
 
 func (cont *OrchContainer) StatCont(stream bool) (types.ContainerStats, error) {
 	slog.Info("Container stat", "name", cont.ContainerConfig.Hostname)
-	res, err := cont.Cli.ContainerStats(context.Background(), cont.ID, stream)
+	res, err := cont.Cli.ContainerStats(context.Background(), cont.ContainerConfig.Hostname, stream)
 	if err != nil {
 		slog.Error("could not stat container", "name", cont.ContainerConfig.Hostname)
 		return res, err

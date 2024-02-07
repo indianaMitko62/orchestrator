@@ -20,7 +20,7 @@ type OrchNetwork struct {
 }
 
 /*
-TODO:mv List and Prune
+TODO: mv List and Prune
 */
 
 func (network *OrchNetwork) CreateNet(opts types.NetworkCreate) (string, error) {
@@ -38,7 +38,7 @@ func (network *OrchNetwork) CreateNet(opts types.NetworkCreate) (string, error) 
 
 func (network *OrchNetwork) ConnectToNet(container OrchContainer, config *network.EndpointSettings) error {
 	slog.Info("Connecting to network", "name", network.Name)
-	err := network.Cli.NetworkConnect(context.Background(), network.Name, container.ID, config)
+	err := network.Cli.NetworkConnect(context.Background(), network.Name, container.ContainerConfig.Hostname, config)
 	if err != nil {
 		slog.Error("Could not connect container to network", "container", container.ContainerConfig.Hostname, "network", network.Name)
 		return err
@@ -50,7 +50,7 @@ func (network *OrchNetwork) ConnectToNet(container OrchContainer, config *networ
 
 func (network *OrchNetwork) DisconnectFromNet(container *OrchContainer, force bool) error {
 	slog.Info("Disconnecting from network", "name", network.Name)
-	err := network.Cli.NetworkDisconnect(context.Background(), network.ID, container.ID, force)
+	err := network.Cli.NetworkDisconnect(context.Background(), network.Name, container.ContainerConfig.Hostname, force)
 	if err != nil {
 		slog.Error("Could not disconnect container from network", "container", container.ContainerConfig.Hostname, "network", network.Name)
 		return err
@@ -62,7 +62,7 @@ func (network *OrchNetwork) DisconnectFromNet(container *OrchContainer, force bo
 
 func (network *OrchNetwork) InspectNet(opts types.NetworkInspectOptions) (types.NetworkResource, error) {
 	slog.Info("Inspecting networks", "name", network.Name)
-	res, err := network.Cli.NetworkInspect(context.Background(), network.ID, opts)
+	res, err := network.Cli.NetworkInspect(context.Background(), network.Name, opts)
 	if err != nil {
 		slog.Error("Could not inspect network", "network", network.Name)
 		return res, err
@@ -84,7 +84,7 @@ func (network *OrchNetwork) ListNets(opts types.NetworkListOptions) ([]types.Net
 
 func (network *OrchNetwork) RemoveNet() error {
 	slog.Info("Removing network", "name", network.Name)
-	err := network.Cli.NetworkRemove(context.Background(), network.ID)
+	err := network.Cli.NetworkRemove(context.Background(), network.Name)
 	if err != nil {
 		slog.Error("Could not remove network", "network", network.Name)
 		return err
