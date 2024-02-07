@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"os"
 
+	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/go-connections/nat"
@@ -26,6 +27,7 @@ func main() {
 		NodeState: cluster.NodeState{
 			Containers: map[string]*cluster.OrchContainer{
 				"Container1": {
+					Status: "running",
 					ContainerConfig: &container.Config{
 						Hostname:     "Container1",
 						Image:        "nginx:latest",
@@ -41,15 +43,17 @@ func main() {
 			},
 			Networks: map[string]*cluster.OrchNetwork{
 				"net1": {
-					ID: "net ID 1",
+					ID:     "net ID 1",
+					Name:   "indiana net",
+					Status: "",
+					NetworkConfig: types.NetworkCreate{
+						Driver:         "bridge",
+						CheckDuplicate: true,
+					},
 				},
 			},
-			Volumes: map[string]*cluster.OrchVolume{
-				"vol1": {
-					Name: "vol1",
-				},
-			},
-			Images: map[string]*cluster.OrchImage{},
+			Volumes: map[string]*cluster.OrchVolume{},
+			Images:  map[string]*cluster.OrchImage{},
 		},
 		Client: nil,
 	}
