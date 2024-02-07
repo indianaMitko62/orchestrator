@@ -44,7 +44,7 @@ func (cont *OrchContainer) CreateCont() (string, error) {
 
 	cont.ID = reply.ID
 	cont.Status = "created"
-	slog.Info("Container created", "name", &cont.ContainerConfig.Hostname)
+	slog.Info("Container created", "name", cont.ContainerConfig.Hostname)
 	return reply.ID, nil
 }
 
