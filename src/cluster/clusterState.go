@@ -42,8 +42,9 @@ func (cs *ClusterState) CollectImages() { // probably won't be used in final ver
 			}
 			//cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 			node.Images[cont.ContainerConfig.Image] = &OrchImage{ //////////////////////////// to be checked again
-				Name: name,
-				Tag:  tag,
+				Name:   name,
+				Tag:    tag,
+				Status: "pulled",
 			}
 
 		}
@@ -75,4 +76,13 @@ func GetClusterState(URL string) (*ClusterState, error) {
 		slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
 	}
 	return &cs, nil
+}
+
+func (CS *ClusterState) ToYaml() ([]byte, error) {
+	copyCS := *CS
+	yamlData, err := yaml.Marshal(copyCS)
+	if err != nil {
+		slog.Error("could create yaml representation")
+	}
+	return yamlData, nil
 }
