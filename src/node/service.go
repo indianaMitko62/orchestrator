@@ -7,9 +7,10 @@ import (
 
 type NodeService struct {
 	cluster.NodeSettings
-	cli              *client.Client
-	DesiredNodeState *cluster.NodeState
-	CurrentNodeState *cluster.NodeState
+	cli                  *client.Client
+	DesiredNodeState     *cluster.NodeState
+	CurrentNodeState     *cluster.NodeState
+	ClusterChangeOutcome *ClusterChangeOutcome
 }
 
 func NewNodeService() (*NodeService, error) {

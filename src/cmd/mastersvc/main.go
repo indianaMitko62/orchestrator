@@ -45,7 +45,7 @@ func main() {
 				"net1": {
 					ID:     "net ID 1",
 					Name:   "indiana net",
-					Status: "",
+					Status: "created",
 					NetworkConfig: types.NetworkCreate{
 						Driver:         "bridge",
 						CheckDuplicate: true,
