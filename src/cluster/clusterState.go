@@ -5,7 +5,6 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	"net/rpc"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -19,7 +18,6 @@ type NodeSettings struct {
 
 type NodeManager struct {
 	NodeSettings
-	Client *rpc.Client
 	NodeState
 }
 
@@ -50,15 +48,6 @@ func (cs *ClusterState) CollectImages() { // probably won't be used in final ver
 
 		}
 	}
-}
-
-func (n *NodeManager) Connect() error {
-	client, err := rpc.DialHTTP("tcp", n.Address)
-	if err != nil {
-		return fmt.Errorf("could not connect to node's %s RPC service at %s: %w", n.Name, n.Address, err)
-	}
-	n.Client = client
-	return nil
 }
 
 func GetClusterState(URL string) (*ClusterState, error) {

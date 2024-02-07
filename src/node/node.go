@@ -17,12 +17,24 @@ func (nsvc *NodeService) CompareStates() bool { // true for same, false for diff
 	return true
 }
 
+func (nsvc *NodeService) HandleDuplicateContainers(contNode cluster.OrchContainer, cont cluster.OrchContainer, name string) {
+	slog.Info("Trying to stop and remove duplicate container if exists", "name", cont.ContainerConfig.Hostname)
+	cont.StopCont(container.StopOptions{})
+	cont.RemoveCont(types.ContainerRemoveOptions{})
+	slog.Info("Trying to create container again", "name", cont.ContainerConfig.Hostname)
+	_, err := contNode.CreateCont()
+	if err != nil {
+		slog.Error("Second attempt for container creation failed. Aborting...", "name", contNode.ContainerConfig.Hostname)
+		return
+	}
+}
+
 func (nsvc *NodeService) InitCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
 	for name, img := range nsvc.DesiredNodeState.Images {
 		img.Cli = nsvc.cli
 		imgNode := *img
-		imgNode.PullImg(&types.ImagePullOptions{ // to work you must read pullImg return value and init cli somehow. line 23 may not be the best way. Cli to be moved ?
+		imgNode.PullImg(&types.ImagePullOptions{
 			All:           imgNode.All,
 			RegistryAuth:  imgNode.RegistryAuth,
 			Platform:      imgNode.Platform,
@@ -45,36 +57,20 @@ func (nsvc *NodeService) InitCluster() error {
 	for name, cont := range nsvc.DesiredNodeState.Containers {
 		cont.Cli = nsvc.cli
 		contNode := *cont
-		defer func() {
-			if r := recover(); r != nil {
-				slog.Info("Trying to remove and stop duplicate container if exists", "name", contNode.ContainerConfig.Hostname)
-				contNode.StopCont(container.StopOptions{})
-				contNode.RemoveCont(types.ContainerRemoveOptions{})
-				slog.Info("Trying to create container again", "name", contNode.ContainerConfig.Hostname)
-				_, err := contNode.CreateCont()
-				if err != nil {
-					slog.Error("Second attempt for container creation failed. Aborting...", "name", contNode.ContainerConfig.Hostname)
-					return
-				}
-				if strings.ToLower(cont.Status) == "running" {
-					contNode.StartCont(types.ContainerStartOptions{})
-				}
-				nsvc.CurrentNodeState.Containers[name] = &contNode
-			}
-		}()
+		//defer nsvc.HandleDuplicateContainers(contNode, *cont, name)
 		_, err := contNode.CreateCont()
 		if err != nil {
-			panic(err)
+			nsvc.HandleDuplicateContainers(contNode, *cont, name)
 		}
 		if strings.ToLower(cont.Status) == "running" {
 			contNode.StartCont(types.ContainerStartOptions{})
 		}
+		nsvc.CurrentNodeState.Containers[name] = &contNode
 	}
 	return nil
 }
 
 func (nsvc *NodeService) Node() error {
-	slog.Info("Entered")
 	nsvc.MasterAddress = "localhost" //harcoded for now
 	clusterStateURL := "http://" + nsvc.MasterAddress + ":1986/clusterState"
 

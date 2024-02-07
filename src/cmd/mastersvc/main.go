@@ -55,7 +55,6 @@ func main() {
 			Volumes: map[string]*cluster.OrchVolume{},
 			Images:  map[string]*cluster.OrchImage{},
 		},
-		Client: nil,
 	}
 	nodeManager1 := &cluster.NodeManager{
 		NodeSettings: cluster.NodeSettings{
@@ -90,7 +89,6 @@ func main() {
 			},
 			Images: map[string]*cluster.OrchImage{},
 		},
-		Client: nil,
 	}
 
 	clusterState.Nodes[nodeManager.Name] = nodeManager

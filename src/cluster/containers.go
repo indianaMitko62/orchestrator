@@ -50,9 +50,9 @@ func (cont *OrchContainer) CreateCont() (string, error) {
 
 func (cont *OrchContainer) StartCont(Opts types.ContainerStartOptions) error {
 	slog.Info("Starting container", "name", cont.ContainerConfig.Hostname)
-	err := cont.Cli.ContainerStart(context.Background(), cont.ID, Opts)
+	err := cont.Cli.ContainerStart(context.Background(), cont.ContainerConfig.Hostname, Opts)
 	if err != nil {
-		slog.Error("could not start container", "name", cont.ID)
+		slog.Error("could not start container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
 	cont.Status = "running"
