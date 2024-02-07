@@ -25,6 +25,5 @@ func NewNodeService() (*NodeService, error) {
 			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes
 		},
 		DesiredNodeState: cluster.NewNodeState(),
-		CurrentNodeState: cluster.NewNodeState(),
 	}, nil
 }
