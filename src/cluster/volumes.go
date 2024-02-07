@@ -11,7 +11,7 @@ import (
 )
 
 type OrchVolume struct {
-	cli    *client.Client
+	Cli    *client.Client
 	Name   string
 	Status string
 	Config volume.CreateOptions
@@ -23,7 +23,7 @@ TODO: mv List and Prune
 
 func (volume *OrchVolume) CreateVol(opts volume.CreateOptions) (volume.Volume, error) {
 	slog.Info("Creating volume", "name", volume.Name)
-	vol, err := volume.cli.VolumeCreate(context.Background(), opts)
+	vol, err := volume.Cli.VolumeCreate(context.Background(), opts)
 	if err != nil {
 		slog.Error("could not create volume", "name", volume.Name)
 		return vol, err
@@ -35,7 +35,7 @@ func (volume *OrchVolume) CreateVol(opts volume.CreateOptions) (volume.Volume, e
 
 func (volume *OrchVolume) InspectVol() (volume.Volume, error) {
 	slog.Info("Inspecting volume", "name", volume.Name)
-	vol, err := volume.cli.VolumeInspect(context.Background(), volume.Name)
+	vol, err := volume.Cli.VolumeInspect(context.Background(), volume.Name)
 	if err != nil {
 		slog.Error("could not inspect volume", "name", volume.Name)
 		return vol, err
@@ -46,7 +46,7 @@ func (volume *OrchVolume) InspectVol() (volume.Volume, error) {
 
 func (volume *OrchVolume) ListVols(opts volume.ListOptions) (volume.ListResponse, error) {
 	slog.Info("Listing volumes")
-	res, err := volume.cli.VolumeList(context.Background(), opts)
+	res, err := volume.Cli.VolumeList(context.Background(), opts)
 	if err != nil {
 		slog.Error("could not list volumes")
 		return res, err
@@ -57,7 +57,7 @@ func (volume *OrchVolume) ListVols(opts volume.ListOptions) (volume.ListResponse
 
 func (volume *OrchVolume) RemoveVol(force bool) error {
 	slog.Info("Removing volume", "name", volume.Name)
-	err := volume.cli.VolumeRemove(context.Background(), volume.Name, force)
+	err := volume.Cli.VolumeRemove(context.Background(), volume.Name, force)
 	if err != nil {
 		slog.Error("could not list volumes")
 		return err
@@ -69,7 +69,7 @@ func (volume *OrchVolume) RemoveVol(force bool) error {
 
 func (volume *OrchVolume) PruneVols(pruneFilters filters.Args) (types.VolumesPruneReport, error) {
 	slog.Info("Pruning volume")
-	report, err := volume.cli.VolumesPrune(context.Background(), pruneFilters)
+	report, err := volume.Cli.VolumesPrune(context.Background(), pruneFilters)
 	if err != nil {
 		slog.Error("could not list volumes")
 		return report, err

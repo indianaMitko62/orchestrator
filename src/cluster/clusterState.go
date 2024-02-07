@@ -12,8 +12,9 @@ import (
 )
 
 type NodeSettings struct {
-	Name    string `yaml:"name"`
-	Address string `yaml:"address"`
+	Name          string `yaml:"name"`
+	Address       string `yaml:"address"`
+	MasterAddress string `yaml:"master_address"`
 }
 
 type NodeManager struct {
@@ -41,10 +42,12 @@ func (cs *ClusterState) CollectImages() { // probably won't be used in final ver
 			if len(parts) > 1 {
 				tag = parts[1]
 			}
+			//cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 			node.Images[cont.ContainerConfig.Image] = &OrchImage{ //////////////////////////// to be checked again
 				Name: name,
 				Tag:  tag,
 			}
+
 		}
 	}
 }
