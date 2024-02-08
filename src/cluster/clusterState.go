@@ -25,6 +25,11 @@ type ClusterState struct {
 	Nodes map[string]*NodeManager `yaml:"nodes"`
 }
 
+type ClusterChangeOutcome struct {
+	Successful bool
+	Logs       map[string]string
+}
+
 func NewClusterState() *ClusterState {
 	return &ClusterState{
 		Nodes: make(map[string]*NodeManager),

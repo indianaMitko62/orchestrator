@@ -10,7 +10,7 @@ type NodeService struct {
 	cli                  *client.Client
 	DesiredNodeState     *cluster.NodeState
 	CurrentNodeState     *cluster.NodeState
-	ClusterChangeOutcome *ClusterChangeOutcome
+	ClusterChangeOutcome *cluster.ClusterChangeOutcome
 }
 
 func NewNodeService() (*NodeService, error) {
@@ -21,10 +21,14 @@ func NewNodeService() (*NodeService, error) {
 
 	return &NodeService{
 		cli: cli,
-		NodeSettings: cluster.NodeSettings{
+		NodeSettings: cluster.NodeSettings{ // Can have separate init function for visability
 			Name:    "Node1",
-			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes
+			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes.
 		},
 		DesiredNodeState: cluster.NewNodeState(),
+		ClusterChangeOutcome: &cluster.ClusterChangeOutcome{ // Can have separate init function for visability
+			Logs:       make(map[string]string),
+			Successful: true,
+		},
 	}, nil
 }

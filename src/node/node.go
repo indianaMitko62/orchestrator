@@ -1,23 +1,21 @@
 package node
 
 import (
+	"bytes"
 	"fmt"
 	"log/slog"
+	"net/http"
 	"strings"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/indianaMitko62/orchestrator/src/cluster"
+	"gopkg.in/yaml.v3"
 )
 
 /*
 TODO: functions managing overall node performance and loading(cpu, memory, disk) and overall node logic
 */
-
-type ClusterChangeOutcome struct {
-	Successful bool
-	Logs       map[string]string
-}
 
 func (nsvc *NodeService) CompareStates() bool { // true for same, false for different, possibly to identify changes
 	return true
@@ -62,10 +60,6 @@ func (nsvc *NodeService) HandleDuplicateVolumes(volNode cluster.OrchVolume, vol 
 
 func (nsvc *NodeService) InitCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
-	nsvc.ClusterChangeOutcome = &ClusterChangeOutcome{
-		Logs:       make(map[string]string),
-		Successful: true,
-	}
 	fmt.Println()
 
 	for name, img := range nsvc.DesiredNodeState.Images {
@@ -124,7 +118,7 @@ func (nsvc *NodeService) InitCluster() error {
 	for name, cont := range nsvc.DesiredNodeState.Containers {
 		cont.Cli = nsvc.cli
 		contNode := *cont
-		//defer nsvc.HandleDuplicateContainers(contNode, *cont, name)
+
 		_, err := contNode.CreateCont()
 		if err != nil {
 			nsvc.HandleDuplicateContainers(contNode, *cont, name)
@@ -144,23 +138,45 @@ func (nsvc *NodeService) InitCluster() error {
 	for name, log := range nsvc.ClusterChangeOutcome.Logs { // for result
 		fmt.Println(name, log)
 	}
+	nsvc.postClusterChangeOutcome(nsvc.MasterAddress + "/clusterState")
 	return nil
 }
 
+func (nsvc *NodeService) postClusterChangeOutcome(URL string) {
+
+	yamlData, err := yaml.Marshal(nsvc.ClusterChangeOutcome)
+	if err != nil {
+		slog.Error("Could not marshall Cluster Change Outcome logs to yaml")
+	}
+	bodyReader := bytes.NewReader(yamlData)
+	req, err := http.NewRequest(http.MethodPost, URL, bodyReader)
+	if err != nil {
+		slog.Error("Could not create POST request", "URL", URL)
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		slog.Error("Could not send POST request")
+	}
+
+	if resp.StatusCode == http.StatusOK {
+		slog.Info("Cluster Change Outcome logs send successfully")
+	}
+
+}
+
 func (nsvc *NodeService) Node() error {
-	nsvc.MasterAddress = "localhost" //harcoded for now
-	clusterStateURL := "http://" + nsvc.MasterAddress + ":1986/clusterState"
+	nsvc.MasterAddress = "http://localhost:1986" //harcoded for now
+	clusterStateURL := nsvc.MasterAddress + "/clusterState"
 
 	recievedClusterState, err := cluster.GetClusterState(clusterStateURL)
 	if err != nil {
 		slog.Error("could not get cluster data", "error", err)
 	} else {
 		nsvc.DesiredNodeState = &recievedClusterState.Nodes[nsvc.Name].NodeState
-		//nsvc.DesiredNodeState.Cli, _ = client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
-		slog.Info("alo da", "DS", nsvc.DesiredNodeState, "CS", nsvc.CurrentNodeState)
 		if nsvc.CurrentNodeState == nil {
 			slog.Info("No current node state")
 			err := nsvc.InitCluster()
+
 			if err != nil {
 				slog.Error("Could not init cluster")
 			}
