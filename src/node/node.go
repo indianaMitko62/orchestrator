@@ -176,7 +176,6 @@ func (nsvc *NodeService) Node() error {
 		if nsvc.CurrentNodeState == nil {
 			slog.Info("No current node state")
 			err := nsvc.InitCluster()
-
 			if err != nil {
 				slog.Error("Could not init cluster")
 			}
