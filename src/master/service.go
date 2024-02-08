@@ -5,7 +5,8 @@ import (
 )
 
 type MasterService struct {
-	CS *cluster.ClusterState
+	CS                   *cluster.ClusterState
+	ClusterChangeOutcome *cluster.ClusterChangeOutcome
 }
 
 func NewMasterService(cs *cluster.ClusterState) *MasterService {
