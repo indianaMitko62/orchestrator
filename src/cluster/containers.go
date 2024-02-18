@@ -14,7 +14,8 @@ import (
 type OrchContainer struct {
 	Cli              *client.Client
 	ID               string
-	Status           string
+	CurrentStatus    string
+	DesiredStatus    string
 	ContainerConfig  *container.Config
 	HostConfig       *container.HostConfig
 	NetworkingConfig *network.NetworkingConfig
@@ -43,7 +44,7 @@ func (cont *OrchContainer) CreateCont() (string, error) {
 	}
 
 	cont.ID = reply.ID
-	cont.Status = "created"
+	cont.CurrentStatus = "created"
 	slog.Info("Container created", "name", cont.ContainerConfig.Hostname)
 	return reply.ID, nil
 }
@@ -55,7 +56,7 @@ func (cont *OrchContainer) StartCont(Opts types.ContainerStartOptions) error {
 		slog.Error("could not start container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	cont.Status = "running"
+	cont.CurrentStatus = "running"
 	slog.Info("Container started", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 	return nil
 }
@@ -67,7 +68,7 @@ func (cont *OrchContainer) StopCont(Opts container.StopOptions) error {
 		slog.Error("could not stop container", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 		return err
 	}
-	cont.Status = "stopped"
+	cont.CurrentStatus = "stopped"
 	slog.Info("Container stopped", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 	return nil
 }
@@ -101,7 +102,7 @@ func (cont *OrchContainer) KillCont(signal string) error {
 		slog.Error("could not kill container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	cont.Status = "killed"
+	cont.CurrentStatus = "killed"
 	slog.Info("Container killed", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 	return nil
 }
@@ -113,7 +114,7 @@ func (cont *OrchContainer) RemoveCont(Opts types.ContainerRemoveOptions) error {
 		slog.Error("could not remove container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	cont.Status = "removed"
+	cont.CurrentStatus = "removed"
 	slog.Info("Container removed", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 	return nil
 }
@@ -137,7 +138,7 @@ func (cont *OrchContainer) PauseCont() error {
 		slog.Error("could not pause container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	cont.Status = "paused"
+	cont.CurrentStatus = "paused"
 	slog.Info("Container paused", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 	return nil
 }
@@ -149,7 +150,7 @@ func (cont *OrchContainer) UnpauseCont() error {
 		slog.Error("could not unpause container", "name", cont.ContainerConfig.Hostname)
 		return err
 	}
-	cont.Status = "running"
+	cont.CurrentStatus = "running"
 	slog.Info("Container unpaused", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
 	return nil
 }

@@ -11,10 +11,11 @@ import (
 )
 
 type OrchVolume struct {
-	Cli    *client.Client
-	Name   string
-	Status string
-	Config volume.CreateOptions
+	Cli           *client.Client
+	Name          string
+	CurrentStatus string
+	DesiredStatus string
+	Config        volume.CreateOptions
 }
 
 /*
@@ -28,7 +29,7 @@ func (volume *OrchVolume) CreateVol(opts volume.CreateOptions) (volume.Volume, e
 		slog.Error("could not create volume", "name", volume.Name)
 		return vol, err
 	}
-	volume.Status = "created"
+	volume.CurrentStatus = "created"
 	slog.Info("Volume created", "name", &volume.Name)
 	return vol, err
 }
@@ -62,7 +63,7 @@ func (volume *OrchVolume) RemoveVol(force bool) error {
 		slog.Error("could not list volumes")
 		return err
 	}
-	volume.Status = "removed"
+	volume.CurrentStatus = "removed"
 	slog.Info("Volume removed", "name", &volume.Name)
 	return err
 }

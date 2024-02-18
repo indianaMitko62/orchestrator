@@ -14,7 +14,8 @@ type OrchNetwork struct {
 	Cli               *client.Client
 	Name              string
 	ID                string
-	Status            string
+	CurrentStatus     string
+	DesiredStatus     string
 	ActiveConnections int
 	NetworkConfig     types.NetworkCreate
 }
@@ -30,7 +31,7 @@ func (network *OrchNetwork) CreateNet(opts types.NetworkCreate) (string, error) 
 		slog.Error("Could not create network", "name", network.Name, "error", err)
 		return "", err
 	}
-	network.Status = "created"
+	network.CurrentStatus = "created"
 	network.ID = res.ID
 	slog.Info("Network Created", "name", network.Name, "ID", network.ID)
 	return res.ID, err
@@ -89,7 +90,7 @@ func (network *OrchNetwork) RemoveNet() error {
 		slog.Error("Could not remove network", "network", network.Name)
 		return err
 	}
-	network.Status = "removed"
+	network.CurrentStatus = "removed"
 	slog.Info("Network removed", "name", network.Name, "ID", network.ID)
 	return err
 }

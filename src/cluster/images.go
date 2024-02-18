@@ -14,12 +14,13 @@ import (
 )
 
 type OrchImage struct {
-	Cli          *client.Client
-	Name         string
-	Tag          string
-	ID           string
-	Status       string
-	BuildOptions types.ImageBuildOptions
+	Cli           *client.Client
+	Name          string
+	Tag           string
+	ID            string
+	CurrentStatus string
+	DesiredStatus string
+	BuildOptions  types.ImageBuildOptions
 	// ImagePull options. Cannot marshall RequestPrivilegeFunc in ImagePull
 	All          bool
 	RegistryAuth string
@@ -38,7 +39,7 @@ func (img *OrchImage) BuildImg(buildContext io.Reader, opts types.ImageBuildOpti
 		slog.Error("could not build image", "name", img.Name)
 		return res, err
 	}
-	img.Status = "built"
+	img.CurrentStatus = "built"
 	img.Name = opts.Tags[0]
 	slog.Info("Image built", "name", img.Name, "ID", img.ID)
 	return res, nil
@@ -54,6 +55,7 @@ func (img *OrchImage) PullImg(opts *types.ImagePullOptions) (io.ReadCloser, erro
 		slog.Error("could not pull image", "name", img.Name)
 		return res, err
 	}
+	img.CurrentStatus = "pulled"
 	io.Copy(os.Stdout, res) /////// to be removed or changed
 	slog.Info("Image pulled", "name", img.Name, "ID", img.ID)
 	return res, nil
@@ -133,7 +135,7 @@ func (img *OrchImage) RemoveImg(opts types.ImageRemoveOptions) ([]types.ImageDel
 		slog.Error("could not remove image", "name", img.Name)
 		return res, err
 	}
-	img.Status = "removed"
+	img.CurrentStatus = "removed"
 	slog.Info("Image removed", "name", img.Name, "ID", img.ID)
 	return res, nil
 }

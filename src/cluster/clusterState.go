@@ -1,7 +1,6 @@
 package cluster
 
 import (
-	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -47,9 +46,9 @@ func (cs *ClusterState) CollectImages() { // probably won't be used in final ver
 			}
 			//cli, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 			node.Images[cont.ContainerConfig.Image] = &OrchImage{ //////////////////////////// to be checked again
-				Name:   name,
-				Tag:    tag,
-				Status: "pulled",
+				Name:          name,
+				Tag:           tag,
+				DesiredStatus: "pulled",
 			}
 
 		}
@@ -70,7 +69,7 @@ func GetClusterState(URL string) (*ClusterState, error) {
 			slog.Error("Error reading YAML data:", err)
 			return &ClusterState{}, err
 		}
-		fmt.Println(string(yamlData)) // for testing
+		//fmt.Println(string(yamlData)) // for testing
 
 		err = yaml.Unmarshal(yamlData, &cs)
 		if err != nil {
