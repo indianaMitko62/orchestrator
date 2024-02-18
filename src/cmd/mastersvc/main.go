@@ -54,20 +54,20 @@ func main() {
 					},
 					NetworkingConfig: &network.NetworkingConfig{},
 				},
-				// "Container3": {
-				// 	Status: "running",
-				// 	ContainerConfig: &container.Config{
-				// 		Hostname:     "Container3",
-				// 		Image:        "nginx:latest",
-				// 		ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
-				// 	},
-				// 	HostConfig: &container.HostConfig{
-				// 		PortBindings: nat.PortMap{
-				// 			"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
-				// 		},
-				// 	},
-				// 	NetworkingConfig: &network.NetworkingConfig{},
-				// },
+				"Container3": {
+					DesiredStatus: "running",
+					ContainerConfig: &container.Config{
+						Hostname:     "Container3",
+						Image:        "nginx:latest",
+						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+					},
+					HostConfig: &container.HostConfig{
+						PortBindings: nat.PortMap{
+							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
+						},
+					},
+					NetworkingConfig: &network.NetworkingConfig{},
+				},
 			},
 			Networks: map[string]*cluster.OrchNetwork{
 				"net1": {

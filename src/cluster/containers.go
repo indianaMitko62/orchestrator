@@ -11,6 +11,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
+// add logger, from nsvc
 type OrchContainer struct {
 	Cli              *client.Client
 	ID               string
