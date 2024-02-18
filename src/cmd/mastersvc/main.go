@@ -27,7 +27,7 @@ func main() {
 		NodeState: cluster.NodeState{
 			Containers: map[string]*cluster.OrchContainer{
 				"Container1": {
-					Status: "running",
+					DesiredStatus: "running",
 					ContainerConfig: &container.Config{
 						Hostname:     "Container1",
 						Image:        "nginx:latest",
@@ -40,12 +40,40 @@ func main() {
 					},
 					NetworkingConfig: &network.NetworkingConfig{},
 				},
+				"Container2": {
+					DesiredStatus: "running",
+					ContainerConfig: &container.Config{
+						Image:        "nginx:latest",
+						Hostname:     "Container2",
+						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+					},
+					HostConfig: &container.HostConfig{
+						PortBindings: nat.PortMap{
+							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8081"}},
+						},
+					},
+					NetworkingConfig: &network.NetworkingConfig{},
+				},
+				// "Container3": {
+				// 	Status: "running",
+				// 	ContainerConfig: &container.Config{
+				// 		Hostname:     "Container3",
+				// 		Image:        "nginx:latest",
+				// 		ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+				// 	},
+				// 	HostConfig: &container.HostConfig{
+				// 		PortBindings: nat.PortMap{
+				// 			"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
+				// 		},
+				// 	},
+				// 	NetworkingConfig: &network.NetworkingConfig{},
+				// },
 			},
 			Networks: map[string]*cluster.OrchNetwork{
 				"net1": {
-					ID:     "net ID 1",
-					Name:   "indiana net",
-					Status: "created",
+					ID:            "net ID 1",
+					Name:          "indiana net",
+					DesiredStatus: "created",
 					NetworkConfig: types.NetworkCreate{
 						Driver:         "bridge",
 						CheckDuplicate: true,
@@ -56,43 +84,43 @@ func main() {
 			Images:  map[string]*cluster.OrchImage{},
 		},
 	}
-	nodeManager1 := &cluster.NodeManager{
-		NodeSettings: cluster.NodeSettings{
-			Name:    "Node2",
-			Address: "127.0.0.1",
-		},
-		NodeState: cluster.NodeState{
-			Containers: map[string]*cluster.OrchContainer{
-				"Container2": {
-					ContainerConfig: &container.Config{
-						Image:        "nginx:latest",
-						Hostname:     "Container2",
-						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
-					},
-					HostConfig: &container.HostConfig{
-						PortBindings: nat.PortMap{
-							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8080"}},
-						},
-					},
-					NetworkingConfig: &network.NetworkingConfig{},
-				},
-			},
-			Networks: map[string]*cluster.OrchNetwork{
-				"net2": {
-					ID: "net ID 2",
-				},
-			},
-			Volumes: map[string]*cluster.OrchVolume{
-				"vol2": {
-					Name: "vol2",
-				},
-			},
-			Images: map[string]*cluster.OrchImage{},
-		},
-	}
+	// nodeManager1 := &cluster.NodeManager{
+	// 	NodeSettings: cluster.NodeSettings{
+	// 		Name:    "Node2",
+	// 		Address: "127.0.0.1",
+	// 	},
+	// 	NodeState: cluster.NodeState{
+	// 		Containers: map[string]*cluster.OrchContainer{
+	// 			"Container2": {
+	// 				ContainerConfig: &container.Config{
+	// 					Image:        "nginx:latest",
+	// 					Hostname:     "Container2",
+	// 					ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+	// 				},
+	// 				HostConfig: &container.HostConfig{
+	// 					PortBindings: nat.PortMap{
+	// 						"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8080"}},
+	// 					},
+	// 				},
+	// 				NetworkingConfig: &network.NetworkingConfig{},
+	// 			},
+	// 		},
+	// 		Networks: map[string]*cluster.OrchNetwork{
+	// 			"net2": {
+	// 				ID: "net ID 2",
+	// 			},
+	// 		},
+	// 		Volumes: map[string]*cluster.OrchVolume{
+	// 			"vol2": {
+	// 				Name: "vol2",
+	// 			},
+	// 		},
+	// 		Images: map[string]*cluster.OrchImage{},
+	// 	},
+	// }
 
 	clusterState.Nodes[nodeManager.Name] = nodeManager
-	clusterState.Nodes[nodeManager1.Name] = nodeManager1
+	//clusterState.Nodes[nodeManager1.Name] = nodeManager1
 	clusterState.CollectImages() // to be developed and added to master logic
 	yamlData, _ := clusterState.ToYaml()
 	fmt.Printf("%s", yamlData)

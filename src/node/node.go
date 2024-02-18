@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
-	"strings"
+	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -21,118 +21,116 @@ func (nsvc *NodeService) CompareStates() bool { // true for same, false for diff
 	return true
 }
 
-func (nsvc *NodeService) HandleDuplicateContainers(contNode cluster.OrchContainer, cont cluster.OrchContainer, name string) error {
-	slog.Info("Trying to stop and remove duplicate container if exists", "name", cont.ContainerConfig.Hostname)
-	cont.StopCont(container.StopOptions{})
-	cont.RemoveCont(types.ContainerRemoveOptions{})
-	slog.Info("Trying to create container again", "name", cont.ContainerConfig.Hostname)
-	_, err := contNode.CreateCont()
+func (nsvc *NodeService) HandleDuplicateContainers(newCont *cluster.OrchContainer) error {
+	slog.Info("Trying to remove duplicate container if exists", "name", newCont.ContainerConfig.Hostname)
+	newCont.StopCont(container.StopOptions{})
+	newCont.RemoveCont(types.ContainerRemoveOptions{})
+
+	slog.Info("Trying to create container again", "name", newCont.ContainerConfig.Hostname)
+	_, err := newCont.CreateCont()
 	if err != nil {
-		slog.Error("Second attempt for container creation failed. Aborting...", "name", contNode.ContainerConfig.Hostname)
+		slog.Error("Second attempt for container creation failed. Aborting...", "name", newCont.ContainerConfig.Hostname)
 		return err
 	}
 	return nil
 }
 
-func (nsvc *NodeService) HandleDuplicateNetworks(netNode cluster.OrchNetwork, net cluster.OrchNetwork) error {
-	slog.Info("Trying to remove duplicate network if exists", "name", net.Name)
-	net.RemoveNet()
-	slog.Info("Trying to create network again", "name", net.Name)
-	_, err := netNode.CreateNet(netNode.NetworkConfig)
+func (nsvc *NodeService) HandleDuplicateNetworks(newNet *cluster.OrchNetwork) error {
+	slog.Info("Trying to remove duplicate network if exists", "name", newNet.Name)
+	newNet.RemoveNet()
+
+	slog.Info("Trying to create network again", "name", newNet.Name)
+	_, err := newNet.CreateNet(newNet.NetworkConfig)
 	if err != nil {
-		slog.Error("Second attempt for network creation failed. Aborting...", "name", netNode.Name)
+		slog.Error("Second attempt for network creation failed. Aborting...", "name", newNet.Name)
 		return err
 	}
 	return nil
 }
 
-func (nsvc *NodeService) HandleDuplicateVolumes(volNode cluster.OrchVolume, vol cluster.OrchVolume) error {
-	slog.Info("Trying to remove duplicate volume if exists", "name", vol.Name)
-	vol.RemoveVol(true)
-	slog.Info("Trying to create volume again", "name", vol.Name)
-	_, err := volNode.CreateVol(volNode.Config)
+func (nsvc *NodeService) HandleDuplicateVolumes(newVol *cluster.OrchVolume) error {
+	slog.Info("Trying to remove duplicate volume if exists", "name", newVol.Name)
+	newVol.RemoveVol(true)
+
+	slog.Info("Trying to create volume again", "name", newVol.Name)
+	_, err := newVol.CreateVol(newVol.Config)
 	if err != nil {
-		slog.Error("Second attempt for volume creation failed. Aborting...", "name", volNode.Name)
+		slog.Error("Second attempt for volume creation failed. Aborting...", "name", newVol.Name)
 		return err
 	}
 	return nil
 }
 
-func (nsvc *NodeService) InitCluster() error {
+func (nsvc *NodeService) InitCluster() error { // status change. Refactor function needed
 	nsvc.CurrentNodeState = cluster.NewNodeState()
 	fmt.Println()
 
 	for name, img := range nsvc.DesiredNodeState.Images {
 		img.Cli = nsvc.cli
-		imgNode := *img
-		_, err := imgNode.PullImg(&types.ImagePullOptions{
-			All:           imgNode.All,
-			RegistryAuth:  imgNode.RegistryAuth,
-			Platform:      imgNode.Platform,
+		_, err := img.PullImg(&types.ImagePullOptions{
+			All:           img.All,
+			RegistryAuth:  img.RegistryAuth,
+			Platform:      img.Platform,
 			PrivilegeFunc: nil,
 		})
-		if err == nil {
-			nsvc.CurrentNodeState.Images[name] = &imgNode
-			nsvc.ClusterChangeOutcome.Logs[name] = "sucessfully " + imgNode.Status
-			continue
+		if img.CurrentStatus == img.DesiredStatus && err == nil {
+			nsvc.CurrentNodeState.Images[name] = img
+			nsvc.ClusterChangeOutcome.Logs[name] = "sucessfully " + img.CurrentStatus
+		} else {
+			nsvc.ClusterChangeOutcome.Successful = false
+			nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 		}
-		nsvc.ClusterChangeOutcome.Successful = false
-		nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 	}
 	fmt.Println()
 
-	for name, network := range nsvc.DesiredNodeState.Networks {
-		network.Cli = nsvc.cli
-		netNode := *network
-		_, err := netNode.CreateNet(netNode.NetworkConfig)
+	for name, netw := range nsvc.DesiredNodeState.Networks {
+		netw.Cli = nsvc.cli
+		_, err := netw.CreateNet(netw.NetworkConfig)
 		if err != nil {
-			err = nsvc.HandleDuplicateNetworks(netNode, *network)
+			err = nsvc.HandleDuplicateNetworks(netw)
 		}
-		if netNode.Status == network.Status && err == nil {
-			nsvc.CurrentNodeState.Networks[name] = &netNode
-			nsvc.ClusterChangeOutcome.Logs[name] = "successfully " + netNode.Status
-			continue
+		if netw.DesiredStatus == netw.CurrentStatus && err == nil {
+			nsvc.CurrentNodeState.Networks[name] = netw
+			nsvc.ClusterChangeOutcome.Logs[name] = "successfully " + netw.CurrentStatus
+		} else {
+			nsvc.ClusterChangeOutcome.Successful = false
+			nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 		}
-		nsvc.ClusterChangeOutcome.Successful = false
-		nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 	}
 	fmt.Println()
 
 	for name, vol := range nsvc.DesiredNodeState.Volumes {
 		vol.Cli = nsvc.cli
-		volNode := *vol
-		_, err := volNode.CreateVol(volNode.Config)
+		_, err := vol.CreateVol(vol.Config)
 		if err != nil {
-			err = nsvc.HandleDuplicateVolumes(volNode, *vol)
+			err = nsvc.HandleDuplicateVolumes(vol)
 		}
-		if volNode.Status == vol.Status && err == nil {
-			nsvc.CurrentNodeState.Volumes[name] = &volNode
-			nsvc.ClusterChangeOutcome.Logs[name] = "successfully " + volNode.Status
-			continue
+		if vol.DesiredStatus == vol.CurrentStatus && err == nil {
+			nsvc.CurrentNodeState.Volumes[name] = vol
+			nsvc.ClusterChangeOutcome.Logs[name] = "successfully " + vol.CurrentStatus
+		} else {
+			nsvc.ClusterChangeOutcome.Successful = false
+			nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 		}
-		nsvc.ClusterChangeOutcome.Successful = false
-		nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 	}
 	fmt.Println()
 
 	for name, cont := range nsvc.DesiredNodeState.Containers {
 		cont.Cli = nsvc.cli
-		contNode := *cont
-
-		_, err := contNode.CreateCont()
+		_, err := cont.CreateCont()
 		if err != nil {
-			nsvc.HandleDuplicateContainers(contNode, *cont, name)
+			err = nsvc.HandleDuplicateContainers(cont)
 		}
-		if strings.ToLower(cont.Status) == "running" {
-			contNode.StartCont(types.ContainerStartOptions{})
+		if cont.DesiredStatus == "running" {
+			err = cont.StartCont(types.ContainerStartOptions{})
 		}
-		if contNode.Status == cont.Status {
-			nsvc.CurrentNodeState.Containers[name] = &contNode
-			nsvc.ClusterChangeOutcome.Logs[name] = "successfully " + contNode.Status
-			continue
+		if cont.DesiredStatus == cont.CurrentStatus && err == nil {
+			nsvc.CurrentNodeState.Containers[name] = cont
+			nsvc.ClusterChangeOutcome.Logs[name] = "successfully " + cont.CurrentStatus
+		} else {
+			nsvc.ClusterChangeOutcome.Successful = false
+			nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 		}
-		nsvc.ClusterChangeOutcome.Successful = false
-		nsvc.ClusterChangeOutcome.Logs[name] = err.Error()
 	}
 	fmt.Println()
 	for name, log := range nsvc.ClusterChangeOutcome.Logs { // for result
@@ -164,22 +162,61 @@ func (nsvc *NodeService) postClusterChangeOutcome(URL string) {
 
 }
 
+// func (nsvc *NodeService) findDifferences() error {
+// 	slog.Info("finding differences")
+// 	for name, cont := range nsvc.DesiredNodeState.Containers {
+// 		if nsvc.CurrentNodeState.Containers[name] != nil {
+// 			currentcont := nsvc.CurrentNodeState.Containers[name]
+// 			cont.Cli = currentcont.Cli
+// 			cont.ID = currentcont.ID
+// 			cont.CurrentStatus = currentcont.CurrentStatus
+// 			cont.DesiredStatus = currentcont.DesiredStatus
+// 			if !reflect.DeepEqual(*cont, *currentcont) { // just for setting change. For status change switch case to be implemented
+// 				slog.Info("Change in container", "name", name)
+// 				currentcont.StopCont(container.StopOptions{})
+// 				currentcont.RemoveCont(types.ContainerRemoveOptions{})
+// 				cont.CreateCont()
+// 				if cont.DesiredStatus == "running" {
+// 					cont.StartCont(types.ContainerStartOptions{})
+// 				}
+// 				nsvc.CurrentNodeState.Containers[name] = cont
+// 			} else {
+// 				slog.Info("Same container", "name", name)
+// 			}
+// 		} else {
+// 			cont.Cli = nsvc.cli
+// 			cont.CreateCont()
+// 			if cont.DesiredStatus == "running" {
+// 				cont.StartCont(types.ContainerStartOptions{})
+// 			}
+// 			slog.Info("Container added", "name", name)
+// 		}
+// 	}
+// 	return nil
+// }
+
 func (nsvc *NodeService) Node() error {
 	nsvc.MasterAddress = "http://localhost:1986" //harcoded for now
 	clusterStateURL := nsvc.MasterAddress + "/clusterState"
 
-	recievedClusterState, err := cluster.GetClusterState(clusterStateURL)
-	if err != nil {
-		slog.Error("could not get cluster data", "error", err)
-	} else {
-		nsvc.DesiredNodeState = &recievedClusterState.Nodes[nsvc.Name].NodeState
-		if nsvc.CurrentNodeState == nil {
-			slog.Info("No current node state")
-			err := nsvc.InitCluster()
-			if err != nil {
-				slog.Error("Could not init cluster")
+	for {
+		recievedClusterState, err := cluster.GetClusterState(clusterStateURL)
+		if err != nil {
+			slog.Error("could not get cluster data", "error", err)
+		} else {
+			nsvc.DesiredNodeState = &recievedClusterState.Nodes[nsvc.Name].NodeState
+			if nsvc.CurrentNodeState == nil {
+				slog.Info("No current node state")
+				err := nsvc.InitCluster()
+				if err != nil {
+					slog.Error("Could not init cluster")
+				}
 			}
+			slog.Info("Present current node state")
+			//go nsvc.findDifferences()
 		}
+		slog.Info("Main Node process sleeping...")
+		time.Sleep(time.Second * 5)
+		fmt.Print("\n\n\n")
 	}
-	return nil
 }
