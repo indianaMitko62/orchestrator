@@ -9,13 +9,18 @@ import (
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
+type Log struct {
+	Logger    *slog.Logger
+	logReader io.Reader
+}
+
 type NodeService struct {
 	cluster.NodeSettings
 	cli              *client.Client
 	DesiredNodeState *cluster.NodeState
 	CurrentNodeState *cluster.NodeState
-	clusterChangeLog *slog.Logger
-	logReader        io.Reader
+	clusterChangeLog *Log
+	nodeLog          *Log
 }
 
 func NewNodeService() (*NodeService, error) {
@@ -30,13 +35,24 @@ func NewNodeService() (*NodeService, error) {
 			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes.
 		},
 		DesiredNodeState: cluster.NewNodeState(),
+		clusterChangeLog: &Log{},
+		nodeLog:          &Log{},
 	}
-	f, _ := os.Create("./dat2")
-	ns.logReader, err = os.Open("./dat2")
+	clusterLogFile, _ := os.Create("./clusterChangeLog") // separate Log init function
+	ns.clusterChangeLog.logReader, err = os.Open("./clusterChangeLog")
 	if err != nil {
 		slog.Error("Could not create logger")
 	}
-	logWriter := io.MultiWriter(os.Stdout, f)
-	ns.clusterChangeLog = slog.New(slog.NewTextHandler(logWriter, nil))
+	clusterLogWriter := io.MultiWriter(os.Stdout, clusterLogFile)
+	ns.clusterChangeLog.Logger = slog.New(slog.NewTextHandler(clusterLogWriter, nil))
+
+	nodeLogFile, _ := os.Create("./nodeLog")
+	ns.nodeLog.logReader, err = os.Open("./nodeLog")
+	if err != nil {
+		slog.Error("Could not create logger")
+	}
+	nodeLogWriter := io.MultiWriter(os.Stdout, nodeLogFile)
+	ns.nodeLog.Logger = slog.New(slog.NewTextHandler(nodeLogWriter, nil))
+
 	return ns, nil
 }
