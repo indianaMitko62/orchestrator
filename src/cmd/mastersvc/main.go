@@ -63,15 +63,14 @@ func main() {
 					},
 					HostConfig: &container.HostConfig{
 						PortBindings: nat.PortMap{
-							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
+							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8082"}},
 						},
 					},
 					NetworkingConfig: &network.NetworkingConfig{},
 				},
 			},
 			Networks: map[string]*cluster.OrchNetwork{
-				"net1": {
-					ID:            "net ID 1",
+				"indiana net": {
 					Name:          "indiana net",
 					DesiredStatus: "created",
 					NetworkConfig: types.NetworkCreate{
