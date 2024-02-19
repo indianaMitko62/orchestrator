@@ -123,9 +123,9 @@ func (nsvc *NodeService) InitCluster() error { // status change. Refactor functi
 		}
 		if cont.DesiredStatus == cont.CurrentStatus && err == nil {
 			nsvc.CurrentNodeState.Containers[name] = cont
-			nsvc.clusterChangeLog.Info("Container successfully created", "name", cont.ContainerConfig.Hostname)
+			nsvc.clusterChangeLog.Info("Container successfully", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
 		} else {
-			nsvc.clusterChangeLog.Info("Could not create container", "name", cont.ContainerConfig.Hostname, "err", err.Error())
+			nsvc.clusterChangeLog.Info("Could not create container", "name", cont.ContainerConfig.Hostname)
 
 		}
 	}
@@ -174,20 +174,49 @@ func (nsvc *NodeService) findDifferences() error { // add error handling and log
 					nsvc.CurrentNodeState.Containers[name] = cont
 				}
 				change = true
+			} else if cont.DesiredStatus != currentCont.CurrentStatus { //if none check for desired status change - act accordingly
+				currentCont.DesiredStatus = cont.DesiredStatus
+				var err error
+				switch currentCont.DesiredStatus {
+				case "running":
+					err = currentCont.StartCont(types.ContainerStartOptions{})
+				case "stopped":
+					err = currentCont.StopCont(container.StopOptions{})
+				case "killed":
+					err = currentCont.KillCont("")
+				case "paused":
+					err = currentCont.PauseCont()
+				case "unpause":
+					err = currentCont.UnpauseCont()
+				case "removed":
+					if currentCont.CurrentStatus == "running" {
+						err = currentCont.StopCont(container.StopOptions{})
+					}
+					if err == nil {
+						err = currentCont.RemoveCont(types.ContainerRemoveOptions{})
+					}
+				}
+				if currentCont.CurrentStatus == currentCont.DesiredStatus && err == nil {
+					nsvc.clusterChangeLog.Info("Successful container operation", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
+				} else {
+					nsvc.clusterChangeLog.Error("Failed container operation", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus, "error", err)
+				}
+				change = true
 			}
-			//if none check for desired status change - act accordingly
 		} else {
 			_, err := cont.CreateCont()
 			if err != nil {
 				err = nsvc.HandleDuplicateContainers(cont)
 			}
 			if cont.DesiredStatus == "running" && err == nil {
-				cont.StartCont(types.ContainerStartOptions{})
+				err = cont.StartCont(types.ContainerStartOptions{})
 			}
-			if cont.DesiredStatus == cont.CurrentStatus {
+			if cont.DesiredStatus == cont.CurrentStatus && err == nil {
 				nsvc.CurrentNodeState.Containers[name] = cont
 			}
-			nsvc.clusterChangeLog.Info("Container added", "name", name)
+			if err == nil {
+				nsvc.clusterChangeLog.Info("Container added", "name", name)
+			}
 			change = true
 		}
 	}

@@ -31,8 +31,7 @@ func NewNodeService() (*NodeService, error) {
 		},
 		DesiredNodeState: cluster.NewNodeState(),
 	}
-	os.Create("./dat2")
-	f, _ := os.OpenFile("./dat2", os.O_APPEND, 0666)
+	f, _ := os.Create("./dat2")
 	ns.logReader, err = os.Open("./dat2")
 	if err != nil {
 		slog.Error("Could not create logger")

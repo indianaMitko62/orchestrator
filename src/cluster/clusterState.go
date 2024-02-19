@@ -60,6 +60,7 @@ func GetClusterState(URL string) (*ClusterState, error) {
 	resp, err := http.Get(URL)
 	if err != nil {
 		slog.Error("Could not send cluster state request to master", "error", err)
+		return nil, err
 	}
 	defer resp.Body.Close()
 
