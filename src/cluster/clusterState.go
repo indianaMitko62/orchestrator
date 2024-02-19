@@ -50,7 +50,6 @@ func (cs *ClusterState) CollectImages() { // probably won't be used in final ver
 				Tag:           tag,
 				DesiredStatus: "pulled",
 			}
-
 		}
 	}
 }

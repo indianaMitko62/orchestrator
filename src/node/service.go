@@ -23,6 +23,20 @@ type NodeService struct {
 	nodeLog          *Log
 }
 
+func NewLog(file string) *Log {
+	logFile, _ := os.Create(file)
+	logReader, err := os.Open(file)
+	if err != nil {
+		slog.Error("Could not create logger")
+	}
+	logWriter := io.MultiWriter(os.Stdout, logFile)
+	logger := slog.New(slog.NewTextHandler(logWriter, nil))
+	return &Log{
+		Logger:    logger,
+		logReader: logReader,
+	}
+}
+
 func NewNodeService() (*NodeService, error) {
 	cli, err := client.NewClientWithOpts()
 	if err != nil {
@@ -30,29 +44,13 @@ func NewNodeService() (*NodeService, error) {
 	}
 	ns := &NodeService{
 		cli: cli,
-		NodeSettings: cluster.NodeSettings{ // Can have separate init function for visability
+		NodeSettings: cluster.NodeSettings{
 			Name:    "Node1",
 			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes.
 		},
 		DesiredNodeState: cluster.NewNodeState(),
-		clusterChangeLog: &Log{},
-		nodeLog:          &Log{},
+		clusterChangeLog: NewLog("./clusterChangeLog"),
+		nodeLog:          NewLog("./nodeLog"),
 	}
-	clusterLogFile, _ := os.Create("./clusterChangeLog") // separate Log init function
-	ns.clusterChangeLog.logReader, err = os.Open("./clusterChangeLog")
-	if err != nil {
-		slog.Error("Could not create logger")
-	}
-	clusterLogWriter := io.MultiWriter(os.Stdout, clusterLogFile)
-	ns.clusterChangeLog.Logger = slog.New(slog.NewTextHandler(clusterLogWriter, nil))
-
-	nodeLogFile, _ := os.Create("./nodeLog")
-	ns.nodeLog.logReader, err = os.Open("./nodeLog")
-	if err != nil {
-		slog.Error("Could not create logger")
-	}
-	nodeLogWriter := io.MultiWriter(os.Stdout, nodeLogFile)
-	ns.nodeLog.Logger = slog.New(slog.NewTextHandler(nodeLogWriter, nil))
-
 	return ns, nil
 }

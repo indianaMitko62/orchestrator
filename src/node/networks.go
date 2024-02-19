@@ -1,7 +1,6 @@
 package node
 
 import (
-	"fmt"
 	"reflect"
 
 	"github.com/indianaMitko62/orchestrator/src/cluster"
@@ -59,7 +58,6 @@ func (nsvc *NodeService) changeNetworks() bool {
 				change = true
 			}
 		} else {
-			fmt.Println(currentNetw)
 			nsvc.DeployNewNetwork(netw)
 			change = true
 		}

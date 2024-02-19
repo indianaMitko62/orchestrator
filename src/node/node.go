@@ -14,7 +14,7 @@ import (
 TODO: functions managing overall node performance and loading(cpu, memory, disk) and overall node logic
 */
 
-func (nsvc *NodeService) InitCluster() error { // status change. Refactor function needed
+func (nsvc *NodeService) InitCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
 	fmt.Println()
 
@@ -59,7 +59,7 @@ func (nsvc *NodeService) postClusterChangeOutcome(URL string) {
 	nsvc.clusterChangeLog.logReader = file
 }
 
-func (nsvc *NodeService) findDifferences() error {
+func (nsvc *NodeService) applyChanges() error {
 	nsvc.nodeLog.Logger.Info("finding differences")
 	if nsvc.changeContainers() || nsvc.changeVolumes() || nsvc.changeNetworks() {
 		nsvc.postClusterChangeOutcome(nsvc.MasterAddress + "/clusterState")
@@ -86,10 +86,10 @@ func (nsvc *NodeService) Node() error {
 				}
 			} else {
 				nsvc.nodeLog.Logger.Info("Present current node state")
-				nsvc.findDifferences()
+				go nsvc.applyChanges()
 			}
 		}
-		nsvc.nodeLog.Logger.Info("Main Node process sleeping...") // to be moved to different logger, not the one send to /clusterState
+		nsvc.nodeLog.Logger.Info("Main Node process sleeping...")
 		time.Sleep(time.Second * 5)
 		fmt.Print("\n\n\n")
 	}

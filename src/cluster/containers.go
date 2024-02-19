@@ -23,13 +23,8 @@ type OrchContainer struct {
 }
 
 /*
-TODO: mv List
-NOTES: Most of these functionalities do not need to be accessable remotely.
+TODO: mv List ??
 */
-
-// type ContainerSettings struct { // not needed at the moment, but who knows
-// 	Cont *Container
-// }
 
 func (cont *OrchContainer) CreateCont() (string, error) {
 	slog.Info("Creating container", "name", cont.ContainerConfig.Hostname)

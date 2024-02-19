@@ -28,8 +28,7 @@ type OrchImage struct {
 }
 
 /*
-TODO: mv List and Prune
-NOTES: For I do not believe they have to be accessable remotely.
+TODO: mv List and Prune ??
 */
 
 func (img *OrchImage) BuildImg(buildContext io.Reader, opts types.ImageBuildOptions) (types.ImageBuildResponse, error) {

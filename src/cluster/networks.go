@@ -21,7 +21,7 @@ type OrchNetwork struct {
 }
 
 /*
-TODO: mv List and Prune
+TODO: mv List and Prune ??
 */
 
 func (network *OrchNetwork) CreateNet(opts types.NetworkCreate) (string, error) {
