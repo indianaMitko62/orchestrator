@@ -9,10 +9,16 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type MasterServiceConfig struct {
+}
+
 type NodeSettings struct {
-	Name          string `yaml:"name"`
-	Address       string `yaml:"address"`
-	MasterAddress string `yaml:"master_address"`
+	Name             string `yaml:"name"`
+	Address          string `yaml:"address"`
+	MasterAddress    string `yaml:"master_address"`
+	Port             string `yaml:"port"`
+	LogsPath         string `yaml:"logspath"`
+	ClusterStatePath string `yaml:"clusterchangepath"`
 }
 
 type NodeManager struct {

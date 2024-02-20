@@ -60,7 +60,7 @@ func (msvc *MasterService) postClusterStateHandler(w http.ResponseWriter, r *htt
 func (m *MasterService) Master() {
 	r := mux.NewRouter()
 	r.HandleFunc("/clusterState", m.getClusterStateHandler).Methods("GET")
-	r.HandleFunc("/clusterState", m.postClusterStateHandler).Methods("POST")
+	r.HandleFunc("/clusterState", m.postClusterStateHandler).Methods("POST") // move to /logs. POST to /logs from nodes. GET from /logs from CLI
 	http.ListenAndServe(":1986", r)
 
 	// More Master logic

@@ -15,6 +15,7 @@ import (
 type OrchContainer struct {
 	Cli              *client.Client
 	ID               string
+	CurrHealth       string
 	CurrentStatus    string
 	DesiredStatus    string
 	ContainerConfig  *container.Config
