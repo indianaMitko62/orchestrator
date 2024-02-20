@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -32,6 +33,11 @@ func main() {
 						Hostname:     "Container1",
 						Image:        "nginx:latest",
 						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+						Healthcheck: &container.HealthConfig{
+							Test:     []string{"CMD", "echo", "0"}, // vinagi ama vinagi CMD.
+							Interval: 5 * time.Second,
+							Timeout:  2 * time.Second,
+						},
 					},
 					HostConfig: &container.HostConfig{
 						PortBindings: nat.PortMap{
@@ -40,34 +46,34 @@ func main() {
 					},
 					NetworkingConfig: &network.NetworkingConfig{},
 				},
-				"Container2": {
-					DesiredStatus: "running",
-					ContainerConfig: &container.Config{
-						Image:        "nginx:latest",
-						Hostname:     "Container2",
-						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
-					},
-					HostConfig: &container.HostConfig{
-						PortBindings: nat.PortMap{
-							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8081"}},
-						},
-					},
-					NetworkingConfig: &network.NetworkingConfig{},
-				},
-				"Container3": {
-					DesiredStatus: "running",
-					ContainerConfig: &container.Config{
-						Hostname:     "Container3",
-						Image:        "nginx:latest",
-						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
-					},
-					HostConfig: &container.HostConfig{
-						PortBindings: nat.PortMap{
-							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
-						},
-					},
-					NetworkingConfig: &network.NetworkingConfig{},
-				},
+				// "Container2": {
+				// 	DesiredStatus: "running",
+				// 	ContainerConfig: &container.Config{
+				// 		Image:        "nginx:latest",
+				// 		Hostname:     "Container2",
+				// 		ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+				// 	},
+				// 	HostConfig: &container.HostConfig{
+				// 		PortBindings: nat.PortMap{
+				// 			"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8081"}},
+				// 		},
+				// 	},
+				// 	NetworkingConfig: &network.NetworkingConfig{},
+				// },
+				// "Container3": {
+				// 	DesiredStatus: "running",
+				// 	ContainerConfig: &container.Config{
+				// 		Hostname:     "Container3",
+				// 		Image:        "nginx:latest",
+				// 		ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+				// 	},
+				// 	HostConfig: &container.HostConfig{
+				// 		PortBindings: nat.PortMap{
+				// 			"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
+				// 		},
+				// 	},
+				// 	NetworkingConfig: &network.NetworkingConfig{},
+				// },
 			},
 			Networks: map[string]*cluster.OrchNetwork{
 				"indiana net": {

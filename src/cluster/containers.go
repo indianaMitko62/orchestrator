@@ -69,15 +69,15 @@ func (cont *OrchContainer) StopCont(Opts container.StopOptions) error {
 	return nil
 }
 
-func (cont *OrchContainer) InspectCont(getSize bool) (types.ContainerJSON, []byte, error) {
+func (cont *OrchContainer) InspectCont() (types.ContainerJSON, error) {
 	slog.Info("Inspecting container", "name", cont.ContainerConfig.Hostname)
-	json, byte, err := cont.Cli.ContainerInspectWithRaw(context.Background(), cont.ContainerConfig.Hostname, getSize)
+	json, err := cont.Cli.ContainerInspect(context.Background(), cont.ContainerConfig.Hostname)
 	if err != nil {
 		slog.Error("could not start container", "name", cont.ContainerConfig.Hostname)
-		return json, byte, err
+		return json, err
 	}
 	slog.Info("Container inspected", "name", cont.ContainerConfig.Hostname, "ID", cont.ID)
-	return json, byte, nil
+	return json, nil
 }
 
 func (cont *OrchContainer) LogCont(Opts types.ContainerLogsOptions) (io.ReadCloser, error) {

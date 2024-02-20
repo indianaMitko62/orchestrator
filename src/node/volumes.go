@@ -6,7 +6,7 @@ import (
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
-func (nsvc *NodeService) HandleDuplicateVolumes(newVol *cluster.OrchVolume) error {
+func (nsvc *NodeService) handleDuplicateVolumes(newVol *cluster.OrchVolume) error {
 	nsvc.nodeLog.Logger.Info("Trying to remove duplicate volume if exists", "name", newVol.Name)
 	newVol.RemoveVol(true)
 
@@ -19,11 +19,11 @@ func (nsvc *NodeService) HandleDuplicateVolumes(newVol *cluster.OrchVolume) erro
 	return nil
 }
 
-func (nsvc *NodeService) DeployNewVolume(vol *cluster.OrchVolume) {
+func (nsvc *NodeService) deployNewVolume(vol *cluster.OrchVolume) {
 	vol.Cli = nsvc.cli
 	_, err := vol.CreateVol(vol.Config)
 	if err != nil {
-		err = nsvc.HandleDuplicateVolumes(vol)
+		err = nsvc.handleDuplicateVolumes(vol)
 	}
 	if vol.DesiredStatus == vol.CurrentStatus && err == nil {
 		nsvc.CurrentNodeState.Volumes[vol.Name] = vol
@@ -40,7 +40,7 @@ func (nsvc *NodeService) changeVolumes() bool {
 		currentVol := nsvc.CurrentNodeState.Volumes[name]
 		if currentVol != nil {
 			if !(reflect.DeepEqual(vol.Config, currentVol.Config)) {
-				nsvc.DeployNewVolume(vol)
+				nsvc.deployNewVolume(vol)
 				change = true
 			} else if vol.DesiredStatus != currentVol.CurrentStatus {
 				currentVol.DesiredStatus = vol.DesiredStatus
@@ -58,7 +58,7 @@ func (nsvc *NodeService) changeVolumes() bool {
 				change = true
 			}
 		} else {
-			nsvc.DeployNewVolume(vol)
+			nsvc.deployNewVolume(vol)
 			change = true
 		}
 	}

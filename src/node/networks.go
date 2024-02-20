@@ -6,11 +6,11 @@ import (
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
-func (nsvc *NodeService) DeployNewNetwork(netw *cluster.OrchNetwork) {
+func (nsvc *NodeService) deployNewNetwork(netw *cluster.OrchNetwork) {
 	netw.Cli = nsvc.cli
 	_, err := netw.CreateNet(netw.NetworkConfig)
 	if err != nil {
-		err = nsvc.HandleDuplicateNetworks(netw)
+		err = nsvc.handleDuplicateNetworks(netw)
 	}
 	if netw.DesiredStatus == netw.CurrentStatus && err == nil {
 		nsvc.CurrentNodeState.Networks[netw.Name] = netw
@@ -20,7 +20,7 @@ func (nsvc *NodeService) DeployNewNetwork(netw *cluster.OrchNetwork) {
 	}
 }
 
-func (nsvc *NodeService) HandleDuplicateNetworks(newNet *cluster.OrchNetwork) error {
+func (nsvc *NodeService) handleDuplicateNetworks(newNet *cluster.OrchNetwork) error {
 	nsvc.nodeLog.Logger.Info("Trying to remove duplicate network if exists", "name", newNet.Name)
 	newNet.RemoveNet()
 
@@ -40,7 +40,7 @@ func (nsvc *NodeService) changeNetworks() bool {
 		currentNetw := nsvc.CurrentNodeState.Networks[name]
 		if currentNetw != nil {
 			if !(reflect.DeepEqual(netw.NetworkConfig, currentNetw.NetworkConfig)) {
-				nsvc.DeployNewNetwork(netw)
+				nsvc.deployNewNetwork(netw)
 				change = true
 			} else if netw.DesiredStatus != currentNetw.CurrentStatus {
 				currentNetw.DesiredStatus = netw.DesiredStatus
@@ -58,7 +58,7 @@ func (nsvc *NodeService) changeNetworks() bool {
 				change = true
 			}
 		} else {
-			nsvc.DeployNewNetwork(netw)
+			nsvc.deployNewNetwork(netw)
 			change = true
 		}
 	}

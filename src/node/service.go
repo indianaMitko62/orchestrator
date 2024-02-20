@@ -12,6 +12,7 @@ import (
 type Log struct {
 	Logger    *slog.Logger
 	logReader io.Reader
+	fileName  string
 }
 
 type NodeService struct {
@@ -24,7 +25,7 @@ type NodeService struct {
 }
 
 func NewLog(file string) *Log {
-	logFile, _ := os.Create(file)
+	logFile, _ := os.Create(file) //not create, but open with append
 	logReader, err := os.Open(file)
 	if err != nil {
 		slog.Error("Could not create logger")
@@ -34,6 +35,7 @@ func NewLog(file string) *Log {
 	return &Log{
 		Logger:    logger,
 		logReader: logReader,
+		fileName:  file,
 	}
 }
 
@@ -49,8 +51,8 @@ func NewNodeService() (*NodeService, error) {
 			Address: "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes.
 		},
 		DesiredNodeState: cluster.NewNodeState(),
-		clusterChangeLog: NewLog("./clusterChangeLog"),
-		nodeLog:          NewLog("./nodeLog"),
+		clusterChangeLog: NewLog("./logs/clusterChangeLog"),
+		nodeLog:          NewLog("./logs/nodeLog"),
 	}
 	return ns, nil
 }

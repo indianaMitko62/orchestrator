@@ -5,7 +5,7 @@ import (
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
-func (nsvc *NodeService) DeployNewImage(img *cluster.OrchImage) {
+func (nsvc *NodeService) deployNewImage(img *cluster.OrchImage) { // check if image is present locally
 	img.Cli = nsvc.cli
 	_, err := img.PullImg(&types.ImagePullOptions{
 		All:           img.All,

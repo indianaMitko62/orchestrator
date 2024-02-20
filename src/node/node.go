@@ -14,27 +14,27 @@ import (
 TODO: functions managing overall node performance and loading(cpu, memory, disk) and overall node logic
 */
 
-func (nsvc *NodeService) InitCluster() error {
+func (nsvc *NodeService) initCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
 	fmt.Println()
 
 	for _, img := range nsvc.DesiredNodeState.Images {
-		nsvc.DeployNewImage(img)
+		nsvc.deployNewImage(img)
 	}
 	fmt.Println()
 
 	for _, netw := range nsvc.DesiredNodeState.Networks {
-		nsvc.DeployNewNetwork(netw)
+		nsvc.deployNewNetwork(netw)
 	}
 	fmt.Println()
 
 	for _, vol := range nsvc.DesiredNodeState.Volumes {
-		nsvc.DeployNewVolume(vol)
+		nsvc.deployNewVolume(vol)
 	}
 	fmt.Println()
 
 	for _, cont := range nsvc.DesiredNodeState.Containers {
-		nsvc.DeployNewContainer(cont)
+		nsvc.deployNewContainer(cont)
 	}
 	fmt.Println()
 	nsvc.postClusterChangeOutcome(nsvc.MasterAddress + "/clusterState")
@@ -54,7 +54,7 @@ func (nsvc *NodeService) postClusterChangeOutcome(URL string) {
 	if resp.StatusCode == http.StatusOK {
 		nsvc.nodeLog.Logger.Info("Cluster Change Outcome logs send successfully")
 	}
-	file, _ := os.Open("./clusterChangeLog")
+	file, _ := os.Open(nsvc.clusterChangeLog.fileName)
 	file.Seek(-1, io.SeekEnd)
 	nsvc.clusterChangeLog.logReader = file
 }
@@ -69,6 +69,12 @@ func (nsvc *NodeService) applyChanges() error {
 	return nil
 }
 
+func (nsvc *NodeService) inspectCluster() {
+	for _, cont := range nsvc.CurrentNodeState.Containers {
+		nsvc.inspectContainer(cont)
+	}
+}
+
 func (nsvc *NodeService) Node() error {
 	nsvc.MasterAddress = "http://localhost:1986" //harcoded for now
 	clusterStateURL := nsvc.MasterAddress + "/clusterState"
@@ -80,17 +86,18 @@ func (nsvc *NodeService) Node() error {
 			nsvc.DesiredNodeState = &recievedClusterState.Nodes[nsvc.Name].NodeState
 			if nsvc.CurrentNodeState == nil {
 				nsvc.nodeLog.Logger.Info("No current node state")
-				err := nsvc.InitCluster()
+				err := nsvc.initCluster()
 				if err != nil {
 					nsvc.nodeLog.Logger.Error("Could not init cluster")
 				}
 			} else {
 				nsvc.nodeLog.Logger.Info("Present current node state")
-				go nsvc.applyChanges()
+				nsvc.applyChanges()
 			}
 		}
+		nsvc.inspectCluster()
 		nsvc.nodeLog.Logger.Info("Main Node process sleeping...")
-		time.Sleep(time.Second * 5)
+		time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
 		fmt.Print("\n\n\n")
 	}
 }
