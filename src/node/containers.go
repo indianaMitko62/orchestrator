@@ -1,7 +1,6 @@
 package node
 
 import (
-	"fmt"
 	"reflect"
 
 	"github.com/docker/docker/api/types"
@@ -23,7 +22,7 @@ func (nsvc *NodeService) handleDuplicateContainers(newCont *cluster.OrchContaine
 	return nil
 }
 
-func (nsvc *NodeService) deployNewContainer(cont *cluster.OrchContainer) {
+func (nsvc *NodeService) deployContainer(cont *cluster.OrchContainer) {
 	cont.Cli = nsvc.cli
 	_, err := cont.CreateCont()
 	if err != nil {
@@ -42,19 +41,19 @@ func (nsvc *NodeService) deployNewContainer(cont *cluster.OrchContainer) {
 
 func (nsvc *NodeService) inspectContainer(cont *cluster.OrchContainer) {
 	contInfo, err := cont.InspectCont()
-	fmt.Printf("baba: %+v\n", contInfo.ContainerJSONBase.State)
+	if err != nil {
+		nsvc.nodeLog.Logger.Info("Could not inspect container", "name", cont.ContainerConfig.Hostname, "error", err)
+		return
+	}
+	if contInfo.ContainerJSONBase.State.Health == nil {
+		nsvc.nodeLog.Logger.Info("No container health data. Check Healthcheck configuration", "name", cont.ContainerConfig.Hostname)
+		return
+	}
 	health := contInfo.ContainerJSONBase.State.Health.Status
-	if err == nil {
-		nsvc.nodeLog.Logger.Info("Container health: ", "name", cont.ContainerConfig.Hostname, "status", health)
-		switch health {
-		case "none", "starting":
-			return
-		case "healthy":
-			// add to node status
-		case "unhealthy":
-			// restart container. just use deployNewContainer method??
-			// add to node status
-		}
+	cont.CurrHealth = health
+	nsvc.nodeLog.Logger.Info("Current container health: ", "name", cont.ContainerConfig.Hostname, "status", health)
+	if health == "unhealthy" {
+		nsvc.deployContainer(cont)
 	}
 }
 
@@ -65,8 +64,9 @@ func (nsvc *NodeService) changeContainers() bool {
 		currentCont := nsvc.CurrentNodeState.Containers[name]
 		if currentCont != nil {
 			if !(reflect.DeepEqual(cont.ContainerConfig, currentCont.ContainerConfig) &&
-				reflect.DeepEqual(cont.HostConfig, currentCont.HostConfig) && reflect.DeepEqual(cont.NetworkingConfig, currentCont.NetworkingConfig)) {
-				nsvc.deployNewContainer(cont)
+				reflect.DeepEqual(cont.HostConfig, currentCont.HostConfig) &&
+				reflect.DeepEqual(cont.NetworkingConfig, currentCont.NetworkingConfig)) {
+				nsvc.deployContainer(cont)
 				change = true
 			} else if cont.DesiredStatus != currentCont.CurrentStatus {
 				currentCont.DesiredStatus = cont.DesiredStatus
@@ -101,7 +101,7 @@ func (nsvc *NodeService) changeContainers() bool {
 				change = true
 			}
 		} else {
-			nsvc.deployNewContainer(cont)
+			nsvc.deployContainer(cont)
 			change = true
 		}
 	}

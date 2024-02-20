@@ -19,7 +19,7 @@ func (nsvc *NodeService) handleDuplicateVolumes(newVol *cluster.OrchVolume) erro
 	return nil
 }
 
-func (nsvc *NodeService) deployNewVolume(vol *cluster.OrchVolume) {
+func (nsvc *NodeService) deployVolume(vol *cluster.OrchVolume) {
 	vol.Cli = nsvc.cli
 	_, err := vol.CreateVol(vol.Config)
 	if err != nil {
@@ -40,7 +40,7 @@ func (nsvc *NodeService) changeVolumes() bool {
 		currentVol := nsvc.CurrentNodeState.Volumes[name]
 		if currentVol != nil {
 			if !(reflect.DeepEqual(vol.Config, currentVol.Config)) {
-				nsvc.deployNewVolume(vol)
+				nsvc.deployVolume(vol)
 				change = true
 			} else if vol.DesiredStatus != currentVol.CurrentStatus {
 				currentVol.DesiredStatus = vol.DesiredStatus
@@ -58,7 +58,7 @@ func (nsvc *NodeService) changeVolumes() bool {
 				change = true
 			}
 		} else {
-			nsvc.deployNewVolume(vol)
+			nsvc.deployVolume(vol)
 			change = true
 		}
 	}

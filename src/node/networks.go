@@ -6,7 +6,7 @@ import (
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
-func (nsvc *NodeService) deployNewNetwork(netw *cluster.OrchNetwork) {
+func (nsvc *NodeService) deployNetwork(netw *cluster.OrchNetwork) {
 	netw.Cli = nsvc.cli
 	_, err := netw.CreateNet(netw.NetworkConfig)
 	if err != nil {
@@ -40,7 +40,7 @@ func (nsvc *NodeService) changeNetworks() bool {
 		currentNetw := nsvc.CurrentNodeState.Networks[name]
 		if currentNetw != nil {
 			if !(reflect.DeepEqual(netw.NetworkConfig, currentNetw.NetworkConfig)) {
-				nsvc.deployNewNetwork(netw)
+				nsvc.deployNetwork(netw)
 				change = true
 			} else if netw.DesiredStatus != currentNetw.CurrentStatus {
 				currentNetw.DesiredStatus = netw.DesiredStatus
@@ -58,7 +58,7 @@ func (nsvc *NodeService) changeNetworks() bool {
 				change = true
 			}
 		} else {
-			nsvc.deployNewNetwork(netw)
+			nsvc.deployNetwork(netw)
 			change = true
 		}
 	}

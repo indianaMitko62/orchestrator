@@ -1,3 +1,3 @@
-time=2024-02-20T16:03:26.156+02:00 level=INFO msg="Image successfully pulled" name=nginx
-time=2024-02-20T16:03:26.301+02:00 level=INFO msg="Network successfully created" name="indiana net"
-time=2024-02-20T16:03:26.884+02:00 level=INFO msg="Container successfully running" name=Container1 status=running
+time=2024-02-20T18:14:38.966+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-20T18:14:39.136+02:00 level=INFO msg="Network successfully created" name="indiana net"
+time=2024-02-20T18:14:39.670+02:00 level=INFO msg="Container successfully running" name=Container1 status=running

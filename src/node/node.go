@@ -24,25 +24,25 @@ func (nsvc *NodeService) initCluster() error {
 	fmt.Println()
 
 	for _, netw := range nsvc.DesiredNodeState.Networks {
-		nsvc.deployNewNetwork(netw)
+		nsvc.deployNetwork(netw)
 	}
 	fmt.Println()
 
 	for _, vol := range nsvc.DesiredNodeState.Volumes {
-		nsvc.deployNewVolume(vol)
+		nsvc.deployVolume(vol)
 	}
 	fmt.Println()
 
 	for _, cont := range nsvc.DesiredNodeState.Containers {
-		nsvc.deployNewContainer(cont)
+		nsvc.deployContainer(cont)
 	}
 	fmt.Println()
-	nsvc.postClusterChangeOutcome(nsvc.MasterAddress + "/clusterState")
+	nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
 	return nil
 }
 
-func (nsvc *NodeService) postClusterChangeOutcome(URL string) {
-	req, err := http.NewRequest(http.MethodPost, URL, nsvc.clusterChangeLog.logReader)
+func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) {
+	req, err := http.NewRequest(http.MethodPost, URL, Log.LogReader)
 	if err != nil {
 		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
 	}
@@ -54,15 +54,15 @@ func (nsvc *NodeService) postClusterChangeOutcome(URL string) {
 	if resp.StatusCode == http.StatusOK {
 		nsvc.nodeLog.Logger.Info("Cluster Change Outcome logs send successfully")
 	}
-	file, _ := os.Open(nsvc.clusterChangeLog.fileName)
+	file, _ := os.Open(Log.FileName)
 	file.Seek(-1, io.SeekEnd)
-	nsvc.clusterChangeLog.logReader = file
+	Log.LogReader = file
 }
 
 func (nsvc *NodeService) applyChanges() error {
 	nsvc.nodeLog.Logger.Info("finding differences")
 	if nsvc.changeContainers() || nsvc.changeVolumes() || nsvc.changeNetworks() {
-		nsvc.postClusterChangeOutcome(nsvc.MasterAddress + "/clusterState")
+		nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
 	} else {
 		nsvc.nodeLog.Logger.Info("No changes in cluster")
 	}
@@ -76,8 +76,8 @@ func (nsvc *NodeService) inspectCluster() {
 }
 
 func (nsvc *NodeService) Node() error {
-	nsvc.MasterAddress = "http://localhost:1986" //harcoded for now
-	clusterStateURL := nsvc.MasterAddress + "/clusterState"
+	nsvc.MasterAddress = "http://" + nsvc.MasterAddress + nsvc.Port
+	clusterStateURL := nsvc.MasterAddress + nsvc.ClusterStatePath // move these logs to /logs - to be separeted in master for different nodes
 	for {
 		recievedClusterState, err := cluster.GetClusterState(clusterStateURL)
 		if err != nil {
