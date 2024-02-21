@@ -20,7 +20,7 @@ func main() {
 
 	clusterState := cluster.NewClusterState() // for testing yaml
 
-	nodeManager := &cluster.NodeManager{
+	nodeManager := cluster.NodeManager{
 		NodeSettings: cluster.NodeSettings{
 			Name:    "Node1",
 			Address: "127.0.0.1",
@@ -130,7 +130,8 @@ func main() {
 	yamlData, _ := cluster.ToYaml(clusterState)
 	fmt.Printf("%s", yamlData)
 
-	msvc := master.NewMasterService(clusterState)
+	msvc := master.NewMasterService()
+	msvc.CS = clusterState
 	//err = msvc.ConnectToNodes()
 	if err != nil {
 		slog.Error("could not connect to nodes", "err", err)

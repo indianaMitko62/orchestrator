@@ -76,6 +76,6 @@ func (nsvc *NodeService) getClusterState(URL string) error {
 	} else {
 		slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
 	}
-	nsvc.DesiredNodeState = &cs.Nodes[nsvc.Name].NodeState
+	*nsvc.DesiredNodeState = cs.Nodes[nsvc.Name].NodeState
 	return nil
 }

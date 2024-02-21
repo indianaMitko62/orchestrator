@@ -8,7 +8,7 @@ import (
 type NodeService struct {
 	cluster.NodeSettings
 	cli              *client.Client
-	DesiredNodeState *cluster.NodeState
+	DesiredNodeState *cluster.NodeState // no pointer required
 	CurrentNodeState *cluster.NodeState
 	clusterChangeLog *cluster.Log
 	nodeLog          *cluster.Log

@@ -5,12 +5,15 @@ import (
 )
 
 type MasterService struct {
-	CS                   *cluster.ClusterState
-	ClusterChangeOutcome *cluster.ClusterChangeOutcome
+	CS          *cluster.ClusterState
+	NodesStatus map[string]cluster.NodeStatus
+	MasterLog   *cluster.Log
 }
 
-func NewMasterService(cs *cluster.ClusterState) *MasterService {
-	m := &MasterService{}
-	m.CS = cs
+func NewMasterService() *MasterService {
+	m := &MasterService{
+		MasterLog:   cluster.NewLog("./logs/masterLog"),
+		NodesStatus: make(map[string]cluster.NodeStatus),
+	}
 	return m
 }

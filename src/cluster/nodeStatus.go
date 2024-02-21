@@ -4,6 +4,7 @@ import (
 	"io"
 	"log/slog"
 	"os"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -18,7 +19,7 @@ func NewLog(file string) *Log {
 	logFile, _ := os.Create(file) //not create, but open with append
 	logReader, err := os.Open(file)
 	if err != nil {
-		slog.Error("Could not create logger")
+		slog.Error("Could not create logger" + file)
 	}
 	logWriter := io.MultiWriter(os.Stdout, logFile)
 	logger := slog.New(slog.NewTextHandler(logWriter, nil))
@@ -34,6 +35,7 @@ type NodeStatus struct {
 	Memory           float32
 	Disc             float32
 	CurrentNodeState NodeState
+	Timestamp        time.Time
 }
 
 func ToYaml(data interface{}) ([]byte, error) {

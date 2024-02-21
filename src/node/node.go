@@ -57,6 +57,7 @@ func (nsvc *NodeService) inspectCluster() {
 		Memory:           10,
 		Disc:             40,
 		CurrentNodeState: *nsvc.CurrentNodeState,
+		Timestamp:        time.Now(),
 	}
 	nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusPath, &ns)
 }

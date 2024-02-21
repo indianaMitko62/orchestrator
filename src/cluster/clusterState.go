@@ -20,12 +20,12 @@ type NodeManager struct {
 }
 
 type ClusterState struct {
-	Nodes map[string]*NodeManager `yaml:"nodes"`
+	Nodes map[string]NodeManager `yaml:"nodes"`
 }
 
 func NewClusterState() *ClusterState {
 	return &ClusterState{
-		Nodes: make(map[string]*NodeManager),
+		Nodes: make(map[string]NodeManager),
 	}
 }
 
