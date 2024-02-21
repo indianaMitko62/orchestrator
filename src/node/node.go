@@ -1,11 +1,7 @@
 package node
 
 import (
-	"bytes"
 	"fmt"
-	"io"
-	"net/http"
-	"os"
 	"time"
 
 	"github.com/indianaMitko62/orchestrator/src/cluster"
@@ -14,45 +10,6 @@ import (
 /*
 TODO: functions managing overall node performance and loading(cpu, memory, disk) and overall node logic
 */
-
-func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStatus) error {
-	NSToSend, _ := cluster.ToYaml(nodeStatus)
-	fmt.Println("YAML Output:")
-	fmt.Println(string(NSToSend))
-	yamlBytes := []byte(NSToSend)
-	fmt.Println(yamlBytes)
-	req, err := http.NewRequest(http.MethodPost, URL, bytes.NewBuffer(yamlBytes))
-	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
-	}
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not send POST request")
-	}
-
-	if resp.StatusCode == http.StatusOK {
-		nsvc.nodeLog.Logger.Info("Node Status logs send successfully")
-	}
-	return nil
-}
-
-func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) {
-	req, err := http.NewRequest(http.MethodPost, URL, Log.LogReader)
-	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
-	}
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not send POST request")
-	}
-
-	if resp.StatusCode == http.StatusOK {
-		nsvc.nodeLog.Logger.Info("Cluster Change Outcome logs send successfully")
-	}
-	file, _ := os.Open(Log.FileName)
-	file.Seek(-1, io.SeekEnd)
-	Log.LogReader = file
-}
 
 func (nsvc *NodeService) initCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
@@ -108,11 +65,10 @@ func (nsvc *NodeService) Node() error {
 	nsvc.MasterAddress = "http://" + nsvc.MasterAddress + nsvc.Port
 	clusterStateURL := nsvc.MasterAddress + nsvc.ClusterStatePath // move these logs to /logs - to be separeted in master for different nodes
 	for {
-		recievedClusterState, err := cluster.GetClusterState(clusterStateURL)
+		err := nsvc.getClusterState(clusterStateURL)
 		if err != nil {
 			nsvc.nodeLog.Logger.Error("could not get cluster data", "error", err)
 		} else {
-			nsvc.DesiredNodeState = &recievedClusterState.Nodes[nsvc.Name].NodeState
 			if nsvc.CurrentNodeState == nil {
 				nsvc.nodeLog.Logger.Info("No current node state")
 				err := nsvc.initCluster()

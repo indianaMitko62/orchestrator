@@ -1,16 +1,8 @@
 package cluster
 
 import (
-	"io"
-	"log/slog"
-	"net/http"
 	"strings"
-
-	"gopkg.in/yaml.v3"
 )
-
-type MasterServiceConfig struct {
-}
 
 type NodeSettings struct {
 	Name             string `yaml:"name"`
@@ -29,11 +21,6 @@ type NodeManager struct {
 
 type ClusterState struct {
 	Nodes map[string]*NodeManager `yaml:"nodes"`
-}
-
-type ClusterChangeOutcome struct {
-	Successful bool
-	Logs       map[string]string
 }
 
 func NewClusterState() *ClusterState {
@@ -59,32 +46,4 @@ func (cs *ClusterState) CollectImages() { // probably won't be used in final ver
 			}
 		}
 	}
-}
-
-func GetClusterState(URL string) (*ClusterState, error) {
-	var cs ClusterState
-	resp, err := http.Get(URL)
-	if err != nil {
-		slog.Error("Could not send cluster state request to master", "error", err)
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode == http.StatusOK {
-		yamlData, err := io.ReadAll(resp.Body)
-		if err != nil {
-			slog.Error("Error reading YAML data:", err)
-			return &ClusterState{}, err
-		}
-		//fmt.Println(string(yamlData)) // for testing
-
-		err = yaml.Unmarshal(yamlData, &cs)
-		if err != nil {
-			slog.Error("could not unmarshal cluster state yaml", "error", err)
-			return &ClusterState{}, err
-		}
-	} else {
-		slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
-	}
-	return &cs, nil
 }
