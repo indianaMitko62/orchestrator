@@ -15,33 +15,6 @@ import (
 TODO: functions managing overall node performance and loading(cpu, memory, disk) and overall node logic
 */
 
-func (nsvc *NodeService) initCluster() error {
-	nsvc.CurrentNodeState = cluster.NewNodeState()
-	fmt.Println()
-
-	for _, img := range nsvc.DesiredNodeState.Images {
-		nsvc.deployNewImage(img)
-	}
-	fmt.Println()
-
-	for _, netw := range nsvc.DesiredNodeState.Networks {
-		nsvc.deployNetwork(netw)
-	}
-	fmt.Println()
-
-	for _, vol := range nsvc.DesiredNodeState.Volumes {
-		nsvc.deployVolume(vol)
-	}
-	fmt.Println()
-
-	for _, cont := range nsvc.DesiredNodeState.Containers {
-		nsvc.deployContainer(cont)
-	}
-	fmt.Println()
-	nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
-	return nil
-}
-
 func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStatus) error {
 	NSToSend, _ := cluster.ToYaml(nodeStatus)
 	fmt.Println("YAML Output:")
@@ -79,6 +52,33 @@ func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) {
 	file, _ := os.Open(Log.FileName)
 	file.Seek(-1, io.SeekEnd)
 	Log.LogReader = file
+}
+
+func (nsvc *NodeService) initCluster() error {
+	nsvc.CurrentNodeState = cluster.NewNodeState()
+	fmt.Println()
+
+	for _, img := range nsvc.DesiredNodeState.Images {
+		nsvc.deployNewImage(img)
+	}
+	fmt.Println()
+
+	for _, netw := range nsvc.DesiredNodeState.Networks {
+		nsvc.deployNetwork(netw)
+	}
+	fmt.Println()
+
+	for _, vol := range nsvc.DesiredNodeState.Volumes {
+		nsvc.deployVolume(vol)
+	}
+	fmt.Println()
+
+	for _, cont := range nsvc.DesiredNodeState.Containers {
+		nsvc.deployContainer(cont)
+	}
+	fmt.Println()
+	nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
+	return nil
 }
 
 func (nsvc *NodeService) applyChanges() error {
