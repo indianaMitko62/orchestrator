@@ -127,7 +127,7 @@ func main() {
 	clusterState.Nodes[nodeManager.Name] = nodeManager
 	//clusterState.Nodes[nodeManager1.Name] = nodeManager1
 	clusterState.CollectImages() // to be developed and added to master logic
-	yamlData, _ := clusterState.ToYaml()
+	yamlData, _ := cluster.ToYaml(clusterState)
 	fmt.Printf("%s", yamlData)
 
 	msvc := master.NewMasterService(clusterState)

@@ -1,6 +1,7 @@
 package node
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"net/http"
@@ -41,6 +42,27 @@ func (nsvc *NodeService) initCluster() error {
 	return nil
 }
 
+func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStatus) error {
+	NSToSend, _ := cluster.ToYaml(nodeStatus)
+	fmt.Println("YAML Output:")
+	fmt.Println(string(NSToSend))
+	yamlBytes := []byte(NSToSend)
+	fmt.Println(yamlBytes)
+	req, err := http.NewRequest(http.MethodPost, URL, bytes.NewBuffer(yamlBytes))
+	if err != nil {
+		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		nsvc.nodeLog.Logger.Error("Could not send POST request")
+	}
+
+	if resp.StatusCode == http.StatusOK {
+		nsvc.nodeLog.Logger.Info("Node Status logs send successfully")
+	}
+	return nil
+}
+
 func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) {
 	req, err := http.NewRequest(http.MethodPost, URL, Log.LogReader)
 	if err != nil {
@@ -73,6 +95,13 @@ func (nsvc *NodeService) inspectCluster() {
 	for _, cont := range nsvc.CurrentNodeState.Containers {
 		nsvc.inspectContainer(cont)
 	}
+	ns := cluster.NodeStatus{
+		CPU:              50, // add these
+		Memory:           10,
+		Disc:             40,
+		CurrentNodeState: *nsvc.CurrentNodeState,
+	}
+	nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusPath, &ns)
 }
 
 func (nsvc *NodeService) Node() error {
@@ -96,7 +125,7 @@ func (nsvc *NodeService) Node() error {
 			}
 		}
 		nsvc.inspectCluster()
-		nsvc.nodeLog.Logger.Info("Main Node process sleeping...")
+		nsvc.nodeLog.Logger.Info("Main Node process sleeping...") // not to be logged everytime. Stays for now for development purposes
 		time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
 		fmt.Print("\n\n\n")
 	}

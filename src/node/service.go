@@ -28,6 +28,7 @@ func NewNodeService() (*NodeService, error) {
 			Port:             ":1986",
 			LogsPath:         "/logs",
 			ClusterStatePath: "/clusterState",
+			NodeStatusPath:   "/nodeStatus",
 		},
 		DesiredNodeState: cluster.NewNodeState(),
 		clusterChangeLog: cluster.NewLog("./logs/clusterChangeLog"),
