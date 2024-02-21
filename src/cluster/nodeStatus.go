@@ -20,6 +20,7 @@ func NewLog(file string) *Log {
 	logReader, err := os.Open(file)
 	if err != nil {
 		slog.Error("Could not create logger" + file)
+		return nil
 	}
 	logWriter := io.MultiWriter(os.Stdout, logFile)
 	logger := slog.New(slog.NewTextHandler(logWriter, nil))

@@ -1,0 +1,16 @@
+time=2024-02-21T23:43:25.055+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-21T23:43:25.056+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:27.036+02:00 level=INFO msg="recieved POST on /clusterState from" name=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:27.039+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:30.044+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-21T23:43:30.044+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:30.049+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:35.052+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-21T23:43:35.053+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:35.059+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:40.060+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-21T23:43:40.060+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:40.068+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:45.072+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-21T23:43:45.072+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-21T23:43:45.076+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1

@@ -1,0 +1,5 @@
+time=2024-02-21T23:43:27.042+02:00 level=INFO msg="Node Status" Node=Node1 CPU=50 Memory=10 Disk=40
+time=2024-02-21T23:43:30.050+02:00 level=INFO msg="Node Status" Node=Node1 CPU=50 Memory=10 Disk=40
+time=2024-02-21T23:43:35.059+02:00 level=INFO msg="Node Status" Node=Node1 CPU=50 Memory=10 Disk=40
+time=2024-02-21T23:43:40.070+02:00 level=INFO msg="Node Status" Node=Node1 CPU=50 Memory=10 Disk=40
+time=2024-02-21T23:43:45.076+02:00 level=INFO msg="Node Status" Node=Node1 CPU=50 Memory=10 Disk=40

@@ -31,8 +31,8 @@ func NewNodeService() (*NodeService, error) {
 			NodeStatusPath:   "/nodeStatus",
 		},
 		DesiredNodeState: cluster.NewNodeState(),
-		clusterChangeLog: cluster.NewLog("./logs/clusterChangeLog"),
-		nodeLog:          cluster.NewLog("./logs/nodeLog"),
+		clusterChangeLog: cluster.NewLog("./logs/nodeLogs/clusterChangeLog"),
+		nodeLog:          cluster.NewLog("./logs/nodeLogs/nodeLog"),
 	}
 	return ns, nil
 }

@@ -34,7 +34,7 @@ func (nsvc *NodeService) initCluster() error {
 		nsvc.deployContainer(cont)
 	}
 	fmt.Println()
-	nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
+	nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsPath, nsvc.clusterChangeLog)
 	return nil
 }
 
@@ -49,6 +49,11 @@ func (nsvc *NodeService) applyChanges() error {
 }
 
 func (nsvc *NodeService) inspectCluster() {
+	if nsvc.CurrentNodeState == nil {
+		nsvc.nodeLog.Logger.Error("No Current Node State")
+		return
+	}
+
 	for _, cont := range nsvc.CurrentNodeState.Containers {
 		nsvc.inspectContainer(cont)
 	}
