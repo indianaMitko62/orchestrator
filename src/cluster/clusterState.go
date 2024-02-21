@@ -19,6 +19,7 @@ type NodeSettings struct {
 	Port             string `yaml:"port"`
 	LogsPath         string `yaml:"logspath"`
 	ClusterStatePath string `yaml:"clusterchangepath"`
+	NodeStatusPath   string `yaml:"nodestatuspath"`
 }
 
 type NodeManager struct {
@@ -86,13 +87,4 @@ func GetClusterState(URL string) (*ClusterState, error) {
 		slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
 	}
 	return &cs, nil
-}
-
-func (CS *ClusterState) ToYaml() ([]byte, error) {
-	copyCS := *CS
-	yamlData, err := yaml.Marshal(copyCS)
-	if err != nil {
-		slog.Error("could create yaml representation")
-	}
-	return yamlData, nil
 }

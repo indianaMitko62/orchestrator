@@ -4,6 +4,8 @@ import (
 	"io"
 	"log/slog"
 	"os"
+
+	"gopkg.in/yaml.v3"
 )
 
 type Log struct {
@@ -34,39 +36,11 @@ type NodeStatus struct {
 	CurrentNodeState NodeState
 }
 
-func PostNodeStatus(URL string) (*NodeStatus, error) {
-	var ns NodeStatus
-	// resp, err := http.Get(URL)
-	// if err != nil {
-	// 	slog.Error("Could not send cluster state request to master", "error", err)
-	// 	return nil, err
-	// }
-	// defer resp.Body.Close()
-
-	// if resp.StatusCode == http.StatusOK {
-	// 	yamlData, err := io.ReadAll(resp.Body)
-	// 	if err != nil {
-	// 		slog.Error("Error reading YAML data:", err)
-	// 		return &ClusterState{}, err
-	// 	}
-	// 	//fmt.Println(string(yamlData)) // for testing
-
-	// 	err = yaml.Unmarshal(yamlData, &cs)
-	// 	if err != nil {
-	// 		slog.Error("could not unmarshal cluster state yaml", "error", err)
-	// 		return &ClusterState{}, err
-	// 	}
-	// } else {
-	// 	slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
-	// }
-	return &ns, nil
-}
-
-func (NS *NodeStatus) ToYaml() ([]byte, error) {
-	// copyCS := *NS
-	// yamlData, err := yaml.Marshal(copyCS)
-	// if err != nil {
-	// 	slog.Error("could create yaml representation")
-	// }
-	return []byte{}, nil
+func ToYaml(data interface{}) ([]byte, error) {
+	dataCopy := data
+	yamlData, err := yaml.Marshal(dataCopy)
+	if err != nil {
+		slog.Error("could create yaml representation")
+	}
+	return yamlData, nil
 }
