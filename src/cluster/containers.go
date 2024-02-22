@@ -41,7 +41,11 @@ func (cont *OrchContainer) CreateCont() (string, error) {
 	}
 
 	cont.ID = reply.ID
-	cont.CurrentStatus = "created"
+	if cont.DesiredStatus == "stopped" {
+		cont.CurrentStatus = "stopped"
+	} else {
+		cont.CurrentStatus = "running"
+	}
 	slog.Info("Container created", "name", cont.ContainerConfig.Hostname)
 	return reply.ID, nil
 }
