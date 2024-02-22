@@ -81,7 +81,7 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 			msvc.NodesStatusLogs[nodeName] = log
 		}
 	}
-	var unhealthyCnt = 0
+	var unhealthyCnt = 0 // separate node Status logging functions
 	var healthyCnt = 0
 	var startingCnt = 0
 	unhealthyConts := ""
@@ -123,7 +123,7 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 func (msvc *MasterService) Master() {
 	r := mux.NewRouter() // separate HTTP server init
 	r.HandleFunc("/clusterState", msvc.getClusterStateHandler).Methods("GET")
-	r.HandleFunc("/logs", msvc.postLogsHandler).Methods("POST") // move to /logs. POST to /logs from nodes. GET from /logs from CLI
+	r.HandleFunc("/logs", msvc.postLogsHandler).Methods("POST")
 	r.HandleFunc("/nodeStatus", msvc.postNodeStatusHandler).Methods("POST")
 	go http.ListenAndServe(":1986", r)
 

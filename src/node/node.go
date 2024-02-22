@@ -41,7 +41,7 @@ func (nsvc *NodeService) initCluster() error {
 func (nsvc *NodeService) applyChanges() error {
 	nsvc.nodeLog.Logger.Info("finding differences")
 	if nsvc.changeContainers() || nsvc.changeVolumes() || nsvc.changeNetworks() {
-		return nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
+		return nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsPath, nsvc.clusterChangeLog)
 	} else {
 		nsvc.nodeLog.Logger.Info("No changes in cluster")
 	}
@@ -55,7 +55,9 @@ func (nsvc *NodeService) inspectCluster() {
 	}
 
 	for _, cont := range nsvc.CurrentNodeState.Containers {
-		nsvc.inspectContainer(cont)
+		if cont.CurrentStatus == "running" {
+			nsvc.inspectContainer(cont)
+		}
 	}
 	ns := cluster.NodeStatus{
 		CPU:              50, // add these
@@ -69,9 +71,8 @@ func (nsvc *NodeService) inspectCluster() {
 
 func (nsvc *NodeService) Node() error {
 	nsvc.MasterAddress = "http://" + nsvc.MasterAddress + nsvc.Port
-	clusterStateURL := nsvc.MasterAddress + nsvc.ClusterStatePath // move these logs to /logs - to be separeted in master for different nodes
 	for {
-		err := nsvc.getClusterState(clusterStateURL)
+		err := nsvc.getClusterState(nsvc.MasterAddress + nsvc.ClusterStatePath)
 		if err != nil {
 			nsvc.nodeLog.Logger.Error("could not get cluster data", "error", err)
 		} else {
@@ -89,7 +90,7 @@ func (nsvc *NodeService) Node() error {
 		nsvc.inspectCluster()
 		nsvc.nodeLog.Logger.Info("Main Node process sleeping...") // not to be logged everytime. Stays for now for development purposes
 		time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
-		//time.Sleep(20 * time.Second)
+		//time.Sleep(20 * time.Second) // for node inactivity simulation
 		fmt.Print("\n\n\n")
 	}
 }
