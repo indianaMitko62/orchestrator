@@ -51,7 +51,7 @@ func (nsvc *NodeService) inspectContainer(cont *cluster.OrchContainer) {
 	}
 	health := contInfo.ContainerJSONBase.State.Health.Status
 	cont.CurrHealth = health
-	nsvc.nodeLog.Logger.Info("Current container health: ", "name", cont.ContainerConfig.Hostname, "status", health)
+	nsvc.nodeLog.Logger.Info("Current container health", "name", cont.ContainerConfig.Hostname, "status", health)
 	if health == "unhealthy" {
 		nsvc.deployContainer(cont)
 	}

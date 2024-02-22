@@ -81,10 +81,43 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 			msvc.NodesStatusLogs[nodeName] = log
 		}
 	}
-	msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disc)
-	// To add container stat to logging ^.
-	// If there is a unhealthy containers, "Healthy containers: N%: ContainerName unhealthy. Restarted."
-	// If none - "Healthy containers percent: 100%"
+	var unhealthyCnt = 0
+	var healthyCnt = 0
+	var startingCnt = 0
+	unhealthyConts := ""
+	var unhealthyContLog string
+	var healthyContLog string
+	for name, cont := range nodeStatus.CurrentNodeState.Containers {
+		if cont.CurrHealth == "unhealthy" {
+			unhealthyCnt++
+			unhealthyConts += name + ", "
+		}
+		if cont.CurrHealth == "healthy" {
+			healthyCnt++
+		}
+		if cont.CurrHealth == "starting" {
+			startingCnt++
+		}
+	}
+	if healthyCnt+unhealthyCnt == 0 {
+		if startingCnt == 0 {
+			msvc.NodesStatusLogs[nodeName].Logger.Info("No containers on node")
+		} else {
+			msvc.NodesStatusLogs[nodeName].Logger.Info("All Containers starting")
+		}
+	} else {
+		healthyPercent := healthyCnt / (healthyCnt + unhealthyCnt) * 100
+		healthyContLog = "Healthy containers: " + fmt.Sprintf("%f", float32(healthyPercent))
+		fmt.Println(healthyCnt + unhealthyCnt)
+		if unhealthyConts != "" {
+			unhealthyContLog = "Unhealthy containers: " + unhealthyConts
+			msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disc,
+				"HealthyContainers", healthyContLog, "UnhealthyContainers", unhealthyContLog)
+		} else {
+			msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disc,
+				"HealthyContainers", healthyContLog)
+		}
+	}
 }
 
 func (msvc *MasterService) Master() {
@@ -105,7 +138,6 @@ func (msvc *MasterService) Master() {
 		msvc.masterLog.Logger.Info("Main Master process sleeping...") // not to be logged everytime. Stays for now for development purposes
 		time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
 		fmt.Print("\n\n\n")
-
 	}
 	// More Master logic
 }

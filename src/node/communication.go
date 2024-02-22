@@ -21,10 +21,12 @@ func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStat
 	req, err := http.NewRequest(http.MethodPost, URL, bytes.NewBuffer(yamlBytes))
 	if err != nil {
 		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
+		return err
 	}
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not send POST request")
+		nsvc.nodeLog.Logger.Error("Could not send POST request to " + URL)
+		return err
 	}
 
 	if resp.StatusCode == http.StatusOK {
@@ -33,14 +35,16 @@ func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStat
 	return nil
 }
 
-func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) {
+func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) error {
 	req, err := http.NewRequest(http.MethodPost, URL, Log.LogReader)
 	if err != nil {
 		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
+		return err
 	}
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not send POST request")
+		nsvc.nodeLog.Logger.Error("Could not send POST request to " + URL)
+		return err
 	}
 
 	if resp.StatusCode == http.StatusOK {
@@ -49,13 +53,14 @@ func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) {
 	file, _ := os.Open(Log.FileName)
 	file.Seek(-1, io.SeekEnd)
 	Log.LogReader = file
+	return nil
 }
 
 func (nsvc *NodeService) getClusterState(URL string) error {
 	var cs cluster.ClusterState
 	resp, err := http.Get(URL)
 	if err != nil {
-		slog.Error("Could not send cluster state request to master", "error", err)
+		slog.Error("Could not send GET request to "+URL, "error", err)
 		return err
 	}
 	defer resp.Body.Close()

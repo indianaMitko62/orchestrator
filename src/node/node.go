@@ -34,14 +34,14 @@ func (nsvc *NodeService) initCluster() error {
 		nsvc.deployContainer(cont)
 	}
 	fmt.Println()
-	nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsPath, nsvc.clusterChangeLog)
-	return nil
+	err := nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsPath, nsvc.clusterChangeLog)
+	return err
 }
 
 func (nsvc *NodeService) applyChanges() error {
 	nsvc.nodeLog.Logger.Info("finding differences")
 	if nsvc.changeContainers() || nsvc.changeVolumes() || nsvc.changeNetworks() {
-		nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
+		return nsvc.sendLogs(nsvc.MasterAddress+nsvc.ClusterStatePath, nsvc.clusterChangeLog)
 	} else {
 		nsvc.nodeLog.Logger.Info("No changes in cluster")
 	}

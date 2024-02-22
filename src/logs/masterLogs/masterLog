@@ -1,36 +1,15 @@
-time=2024-02-22T08:48:31.510+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:48:32.436+02:00 level=INFO msg="recieved from" IP=127.0.0.1
-time=2024-02-22T08:48:32.436+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:35.511+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:48:36.622+02:00 level=INFO msg="recieved POST on /clusterState from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:36.625+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:40.514+02:00 level=INFO msg="Node active" name=Node1 time=3.889536093s
-time=2024-02-22T08:48:40.514+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:48:40.630+02:00 level=INFO msg="recieved from" IP=127.0.0.1
-time=2024-02-22T08:48:40.630+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:40.636+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:45.518+02:00 level=INFO msg="Node active" name=Node1 time=4.883743252s
-time=2024-02-22T08:48:45.518+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:48:45.641+02:00 level=INFO msg="recieved from" IP=127.0.0.1
-time=2024-02-22T08:48:45.641+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:45.646+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:48:50.520+02:00 level=INFO msg="Node active" name=Node1 time=4.874910339s
-time=2024-02-22T08:48:50.520+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:48:55.522+02:00 level=INFO msg="Node active" name=Node1 time=9.877252046s
-time=2024-02-22T08:48:55.522+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:48:57.635+02:00 level=INFO msg="recieved from" IP=127.0.0.1
-time=2024-02-22T08:48:57.635+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
-time=2024-02-22T08:49:00.523+02:00 level=INFO msg="Node active" name=Node1 time=14.87808457s
-time=2024-02-22T08:49:00.523+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:49:01.777+02:00 level=INFO msg="recieved POST on /clusterState from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:49:01.780+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:49:05.526+02:00 level=INFO msg="Node active" name=Node1 time=3.746866013s
-time=2024-02-22T08:49:05.526+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:49:05.782+02:00 level=INFO msg="recieved from" IP=127.0.0.1
-time=2024-02-22T08:49:05.782+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
-time=2024-02-22T08:49:05.789+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
-time=2024-02-22T08:49:10.527+02:00 level=INFO msg="Node active" name=Node1 time=4.738841285s
-time=2024-02-22T08:49:10.527+02:00 level=INFO msg="Main Master process sleeping..."
-time=2024-02-22T08:49:10.794+02:00 level=INFO msg="recieved from" IP=127.0.0.1
-time=2024-02-22T08:49:10.794+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
-time=2024-02-22T08:49:10.799+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:27.578+02:00 level=INFO msg="Main Master process sleeping..."
+time=2024-02-22T14:21:30.579+02:00 level=INFO msg="Main Master process sleeping..."
+time=2024-02-22T14:21:30.966+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-22T14:21:30.966+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:31.248+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:35.250+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-22T14:21:35.250+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:35.260+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:35.579+02:00 level=INFO msg="Node active" name=Node1 time=320.409796ms
+time=2024-02-22T14:21:35.579+02:00 level=INFO msg="Main Master process sleeping..."
+time=2024-02-22T14:21:40.264+02:00 level=INFO msg="recieved from" IP=127.0.0.1
+time=2024-02-22T14:21:40.264+02:00 level=INFO msg="Received GET on /clusterState from" node=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:40.272+02:00 level=INFO msg="recieved POST on /nodeStatus from" name=Node1 IP=127.0.0.1
+time=2024-02-22T14:21:40.580+02:00 level=INFO msg="Node active" name=Node1 time=309.604678ms
+time=2024-02-22T14:21:40.580+02:00 level=INFO msg="Main Master process sleeping..."
