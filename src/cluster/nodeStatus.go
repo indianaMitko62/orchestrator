@@ -36,6 +36,7 @@ type NodeStatus struct {
 	Memory           float32
 	Disc             float32
 	CurrentNodeState NodeState
+	Active           bool
 	Timestamp        time.Time
 }
 

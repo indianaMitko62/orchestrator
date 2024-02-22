@@ -1,6 +1,5 @@
-time=2024-02-22T14:37:59.105+02:00 level=INFO msg="Image successfully pulled" name=nginx
-time=2024-02-22T14:37:59.275+02:00 level=INFO msg="Network successfully created" name="indiana net"
-time=2024-02-22T14:37:59.847+02:00 level=INFO msg="Container successfully running" name=Container2 status=running
-time=2024-02-22T14:37:59.864+02:00 level=INFO msg="Container successfully stopped" name=Container3 status=stopped
-time=2024-02-22T14:38:00.375+02:00 level=INFO msg="Container successfully running" name=Container1 status=running
-time=2024-02-22T14:38:30.643+02:00 level=INFO msg="Successful container operation" name=Container3 status=running
+time=2024-02-22T21:11:38.708+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-22T21:11:38.870+02:00 level=INFO msg="Network successfully created" name="indiana net"
+time=2024-02-22T21:11:39.445+02:00 level=INFO msg="Container successfully running" name=Container3 status=running
+time=2024-02-22T21:11:40.022+02:00 level=INFO msg="Container successfully running" name=Container1 status=running
+time=2024-02-22T21:11:40.560+02:00 level=INFO msg="Container successfully running" name=Container2 status=running
