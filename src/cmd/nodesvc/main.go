@@ -11,7 +11,10 @@ import (
 
 func main() {
 	var err error
-	confFile := "./config/node1Conf.yaml"
+	confFile := os.Args[1]
+	if confFile == "" {
+		slog.Error("No command line argument")
+	}
 	f, err := os.Open(confFile)
 	if err != nil {
 		slog.Error("Could not open config file", "name", confFile)

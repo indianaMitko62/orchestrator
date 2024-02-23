@@ -1,154 +1,336 @@
-time=2024-02-23T11:07:58.569+02:00 level=INFO msg="No current node state"
-time=2024-02-23T11:08:00.495+02:00 level=INFO msg="Trying to remove duplicate network if exists" name="indiana net"
-time=2024-02-23T11:08:00.618+02:00 level=INFO msg="Trying to create network again" name="indiana net"
-time=2024-02-23T11:08:00.684+02:00 level=INFO msg="Trying to remove duplicate container if exists" name=Container1
-time=2024-02-23T11:08:01.026+02:00 level=INFO msg="Trying to create container again" name=Container1
-time=2024-02-23T11:08:01.318+02:00 level=INFO msg="Trying to remove duplicate container if exists" name=Container2
-time=2024-02-23T11:08:01.633+02:00 level=INFO msg="Trying to create container again" name=Container2
-time=2024-02-23T11:08:01.957+02:00 level=INFO msg="Trying to remove duplicate container if exists" name=Container3
-time=2024-02-23T11:08:01.964+02:00 level=INFO msg="Trying to create container again" name=Container3
-time=2024-02-23T11:08:01.991+02:00 level=INFO msg="Cluster Change Outcome logs send successfully"
-time=2024-02-23T11:08:01.992+02:00 level=INFO msg="Current container health" name=Container1 status=starting
-time=2024-02-23T11:08:01.996+02:00 level=INFO msg="Current container health" name=Container2 status=starting
-time=2024-02-23T11:08:02.001+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:02.001+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:05.018+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:05.018+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:05.018+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:05.022+02:00 level=INFO msg="Current container health" name=Container1 status=starting
-time=2024-02-23T11:08:05.024+02:00 level=INFO msg="Current container health" name=Container2 status=starting
-time=2024-02-23T11:08:05.034+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:05.034+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:10.046+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:10.046+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:10.047+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:10.054+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:10.060+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:10.066+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:10.066+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:15.076+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:15.076+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:15.076+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:15.077+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:15.084+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:15.101+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:15.101+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:20.108+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:20.108+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:20.108+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:20.109+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:20.109+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:20.112+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:20.112+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:25.120+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:25.120+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:25.120+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:25.121+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:25.121+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:25.123+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:25.123+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:30.131+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:30.131+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:30.131+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:30.132+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:30.132+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:30.135+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:30.135+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:35.141+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:35.141+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:35.141+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:35.142+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:35.142+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:35.144+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:35.144+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:40.150+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:40.150+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:40.150+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:40.151+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:40.151+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:40.153+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:40.153+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:45.184+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:45.184+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:45.185+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:45.188+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:45.195+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:45.201+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:45.202+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:50.211+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:50.211+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:50.211+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:50.214+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:50.216+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:50.231+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:50.231+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:08:55.240+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:08:55.240+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:08:55.240+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:08:55.241+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:08:55.242+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:08:55.244+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:08:55.244+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:00.250+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:00.250+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:00.250+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:00.252+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:00.253+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:00.256+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:00.256+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:05.262+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:05.263+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:05.263+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:05.267+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:05.271+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:05.275+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:05.275+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:10.284+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:10.284+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:10.284+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:10.284+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:10.285+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:10.287+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:10.287+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:15.294+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:15.294+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:15.294+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:15.295+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:15.295+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:15.297+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:15.297+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:20.303+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:20.303+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:20.303+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:20.303+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:20.304+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:20.308+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:20.308+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:25.313+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:25.313+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:25.313+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:25.314+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:25.314+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:25.317+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:25.317+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:30.322+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:30.322+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:30.322+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:30.323+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:30.323+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:30.326+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:30.326+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:35.333+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:35.333+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:35.333+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:35.336+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:35.336+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:35.338+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:35.338+02:00 level=INFO msg="Main Node process sleeping..."
-time=2024-02-23T11:09:40.345+02:00 level=INFO msg="Present current node state"
-time=2024-02-23T11:09:40.345+02:00 level=INFO msg="finding differences"
-time=2024-02-23T11:09:40.345+02:00 level=INFO msg="No changes in cluster"
-time=2024-02-23T11:09:40.345+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
-time=2024-02-23T11:09:40.346+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
-time=2024-02-23T11:09:40.349+02:00 level=INFO msg="Node Status send successfully"
-time=2024-02-23T11:09:40.349+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:23:36.932+02:00 level=INFO msg="No current node state"
+time=2024-02-23T11:23:38.608+02:00 level=INFO msg="Trying to remove duplicate network if exists" name="indiana net"
+time=2024-02-23T11:23:38.747+02:00 level=INFO msg="Trying to create network again" name="indiana net"
+time=2024-02-23T11:23:38.830+02:00 level=INFO msg="Trying to remove duplicate container if exists" name=Container1
+time=2024-02-23T11:23:39.144+02:00 level=INFO msg="Trying to create container again" name=Container1
+time=2024-02-23T11:23:39.421+02:00 level=INFO msg="Trying to remove duplicate container if exists" name=Container2
+time=2024-02-23T11:23:39.739+02:00 level=INFO msg="Trying to create container again" name=Container2
+time=2024-02-23T11:23:40.229+02:00 level=INFO msg="Trying to remove duplicate container if exists" name=Container3
+time=2024-02-23T11:23:40.236+02:00 level=INFO msg="Trying to create container again" name=Container3
+time=2024-02-23T11:23:40.254+02:00 level=INFO msg="Cluster Change Outcome logs send successfully"
+time=2024-02-23T11:23:40.257+02:00 level=INFO msg="Current container health" name=Container1 status=starting
+time=2024-02-23T11:23:40.260+02:00 level=INFO msg="Current container health" name=Container2 status=starting
+time=2024-02-23T11:23:40.266+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:23:40.266+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:23:45.286+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:23:45.287+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:23:45.288+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:23:45.289+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:23:45.297+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:23:45.301+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:23:45.301+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:23:50.316+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:23:50.316+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:23:50.316+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:23:50.318+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:23:50.319+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:23:50.323+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:23:50.323+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:23:55.330+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:23:55.330+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:23:55.330+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:23:55.331+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:23:55.331+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:23:55.334+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:23:55.334+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:00.340+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:00.340+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:00.340+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:00.342+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:00.343+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:00.348+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:00.348+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:05.355+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:05.355+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:05.355+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:05.357+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:05.358+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:05.362+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:05.362+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:10.371+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:10.371+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:10.371+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:10.372+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:10.372+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:10.375+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:10.375+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:15.382+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:15.382+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:15.382+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:15.382+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:15.383+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:15.385+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:15.385+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:20.392+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:20.392+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:20.392+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:20.393+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:20.394+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:20.397+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:20.397+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:25.409+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:25.409+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:25.409+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:25.410+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:25.410+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:25.412+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:25.412+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:30.422+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:30.422+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:30.422+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:30.425+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:30.426+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:30.429+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:30.429+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:35.438+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:35.438+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:35.438+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:35.439+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:35.440+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:35.442+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:35.442+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:40.455+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:40.455+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:40.455+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:40.455+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:40.456+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:40.458+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:40.458+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:45.463+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:45.464+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:45.464+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:45.464+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:45.465+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:45.467+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:45.467+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:50.475+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:50.475+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:50.475+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:50.476+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:50.477+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:50.480+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:50.480+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:24:55.489+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:24:55.489+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:24:55.489+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:24:55.490+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:24:55.490+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:24:55.492+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:24:55.492+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:00.499+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:00.499+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:00.499+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:00.500+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:00.500+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:00.504+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:00.504+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:05.513+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:05.513+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:05.513+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:05.513+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:05.514+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:05.516+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:05.516+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:10.527+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:10.527+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:10.527+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:10.531+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:10.537+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:10.544+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:10.544+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:15.570+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:15.570+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:15.570+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:15.572+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:15.574+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:15.581+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:15.581+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:20.591+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:20.591+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:20.591+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:20.594+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:20.595+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:20.599+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:20.599+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:25.623+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:25.635+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:25.637+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:25.641+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:25.644+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:25.650+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:25.650+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:30.659+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:30.659+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:30.659+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:30.660+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:30.660+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:30.662+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:30.662+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:35.668+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:35.668+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:35.668+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:35.669+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:35.669+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:35.672+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:35.672+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:40.679+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:40.679+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:40.679+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:40.680+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:40.680+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:40.683+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:40.683+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:45.693+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:45.693+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:45.693+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:45.694+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:45.694+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:45.697+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:45.697+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:50.704+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:50.704+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:50.704+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:50.704+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:50.705+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:50.707+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:50.708+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:25:55.715+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:25:55.715+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:25:55.715+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:25:55.716+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:25:55.717+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:25:55.719+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:25:55.719+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:00.729+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:00.729+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:00.729+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:00.730+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:00.730+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:00.732+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:00.732+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:05.744+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:05.744+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:05.744+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:05.746+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:05.747+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:05.755+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:05.755+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:10.765+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:10.765+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:10.765+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:10.767+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:10.768+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:10.770+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:10.770+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:15.776+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:15.776+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:15.776+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:15.777+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:15.777+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:15.780+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:15.780+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:20.792+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:20.792+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:20.792+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:20.793+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:20.793+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:20.797+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:20.797+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:25.803+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:25.803+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:25.803+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:25.804+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:25.805+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:25.807+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:25.807+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:30.825+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:30.826+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:30.826+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:30.832+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:30.835+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:30.842+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:30.843+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:35.849+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:35.849+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:35.849+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:35.850+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:35.850+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:35.852+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:35.852+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:40.866+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:40.866+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:40.867+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:40.868+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:40.869+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:40.874+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:40.874+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:45.882+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:45.883+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:45.883+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:45.884+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:45.885+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:45.888+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:45.888+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:50.896+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:50.896+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:50.897+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:50.897+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:50.898+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:50.900+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:50.900+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:26:55.923+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:26:55.923+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:26:55.923+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:26:55.925+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:26:55.927+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:26:55.957+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:26:55.958+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:00.970+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:00.970+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:00.970+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:00.972+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:00.973+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:00.975+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:00.975+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:05.984+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:05.984+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:05.984+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:05.985+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:05.986+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:05.988+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:05.988+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:10.995+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:10.995+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:10.996+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:10.998+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:10.999+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:11.005+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:11.005+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:15.017+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:15.017+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:15.017+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:15.022+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:15.023+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:15.026+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:15.026+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:20.034+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:20.034+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:20.034+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:20.037+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:20.038+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:20.044+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:20.045+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:25.074+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:25.074+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:25.074+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:25.076+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:25.081+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:25.097+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:25.099+02:00 level=INFO msg="Main Node process sleeping..."
+time=2024-02-23T11:27:30.115+02:00 level=INFO msg="Present current node state"
+time=2024-02-23T11:27:30.116+02:00 level=INFO msg="finding differences"
+time=2024-02-23T11:27:30.116+02:00 level=INFO msg="No changes in cluster"
+time=2024-02-23T11:27:30.121+02:00 level=INFO msg="Current container health" name=Container1 status=healthy
+time=2024-02-23T11:27:30.127+02:00 level=INFO msg="Current container health" name=Container2 status=healthy
+time=2024-02-23T11:27:30.136+02:00 level=INFO msg="Node Status send successfully"
+time=2024-02-23T11:27:30.136+02:00 level=INFO msg="Main Node process sleeping..."

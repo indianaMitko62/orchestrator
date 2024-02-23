@@ -17,7 +17,7 @@ func (msvc *MasterService) getClusterStateHandler(w http.ResponseWriter, r *http
 	msvc.masterLog.Logger.Info("Received GET on /clusterState from", "node", nodeName, "IP", r.RemoteAddr)
 
 	CSToSend, _ := cluster.ToYaml(msvc.CS)
-	fmt.Println("YAML Output:") // for testing
+	// fmt.Println("YAML Output:") // for testing
 	fmt.Println(string(CSToSend))
 
 	w.Header().Set("Content-Type", "application/x-yaml")
@@ -32,7 +32,7 @@ func (msvc *MasterService) postLogsHandler(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		msvc.masterLog.Logger.Error("Error reading YAML data:", err)
 	}
-	fmt.Println(string(logData)) // for testing
+	// fmt.Println(string(logData)) // for testing
 	f, err := os.OpenFile(msvc.LogsPath+nodeName+"Logs", os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 		msvc.masterLog.Logger.Warn("Could not open file. Trying to create it", "name", msvc.LogsPath+nodeName+"Logs")
@@ -64,7 +64,7 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 	yaml.Unmarshal(yamlData, &nodeStatus)
 	msvc.NodesStatus[nodeName] = nodeStatus
 	if msvc.NodesStatusLogs[nodeName] == nil {
-		log := cluster.NewLog("./logs/masterLogs/" + nodeName + "StatusLogs")
+		log := cluster.NewLog(msvc.LogsPath + nodeName + "StatusLogs")
 		if log != nil {
 			msvc.NodesStatusLogs[nodeName] = log
 		}
@@ -108,6 +108,12 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 	}
 }
 
+func (msvc *MasterService) inactiveNode(name string) {
+	for name, cont := range msvc.CS.Nodes[name].Containers {
+		fmt.Println(name, cont)
+	}
+}
+
 func (msvc *MasterService) Master() {
 	r := mux.NewRouter() // separate HTTP server init
 	r.HandleFunc("/clusterState", msvc.getClusterStateHandler).Methods("GET")
@@ -119,6 +125,8 @@ func (msvc *MasterService) Master() {
 		for name, status := range msvc.NodesStatus {
 			if time.Since(status.Timestamp) > time.Duration(15*time.Second) {
 				msvc.masterLog.Logger.Error("Node inactive", "name", name, "time", time.Since(status.Timestamp))
+				status.Active = false
+				msvc.inactiveNode(name)
 			} else {
 				msvc.masterLog.Logger.Info("Node active", "name", name, "time", time.Since(status.Timestamp))
 			}

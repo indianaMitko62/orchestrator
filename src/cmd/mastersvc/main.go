@@ -22,8 +22,7 @@ func main() {
 
 	nodeManager := cluster.NodeManager{
 		NodeSettings: cluster.NodeSettings{
-			Name:    "Node1",
-			Address: "127.0.0.1",
+			Name: "Node1",
 		},
 		NodeState: cluster.NodeState{
 			Containers: map[string]*cluster.OrchContainer{
@@ -99,43 +98,87 @@ func main() {
 			Images:  map[string]*cluster.OrchImage{},
 		},
 	}
-	// nodeManager1 := &cluster.NodeManager{
-	// 	NodeSettings: cluster.NodeSettings{
-	// 		Name:    "Node2",
-	// 		Address: "127.0.0.1",
-	// 	},
-	// 	NodeState: cluster.NodeState{
-	// 		Containers: map[string]*cluster.OrchContainer{
-	// 			"Container2": {
-	// 				ContainerConfig: &container.Config{
-	// 					Image:        "nginx:latest",
-	// 					Hostname:     "Container2",
-	// 					ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
-	// 				},
-	// 				HostConfig: &container.HostConfig{
-	// 					PortBindings: nat.PortMap{
-	// 						"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8080"}},
-	// 					},
-	// 				},
-	// 				NetworkingConfig: &network.NetworkingConfig{},
-	// 			},
-	// 		},
-	// 		Networks: map[string]*cluster.OrchNetwork{
-	// 			"net2": {
-	// 				ID: "net ID 2",
-	// 			},
-	// 		},
-	// 		Volumes: map[string]*cluster.OrchVolume{
-	// 			"vol2": {
-	// 				Name: "vol2",
-	// 			},
-	// 		},
-	// 		Images: map[string]*cluster.OrchImage{},
-	// 	},
-	// }
+	nodeManager1 := cluster.NodeManager{
+		NodeSettings: cluster.NodeSettings{
+			Name: "Node2",
+		},
+		NodeState: cluster.NodeState{
+			Containers: map[string]*cluster.OrchContainer{
+				"Container21": {
+					DesiredStatus: "running",
+					ContainerConfig: &container.Config{
+						Hostname:     "Container21",
+						Image:        "nginx:latest",
+						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+						Healthcheck: &container.HealthConfig{
+							Test:     []string{"CMD", "echo", "0"}, // vinagi ama vinagi CMD.
+							Interval: 5 * time.Second,
+							Timeout:  2 * time.Second,
+						},
+					},
+					HostConfig: &container.HostConfig{
+						PortBindings: nat.PortMap{
+							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8090"}},
+						},
+					},
+					NetworkingConfig: &network.NetworkingConfig{},
+				},
+				"Container22": {
+					DesiredStatus: "running",
+					ContainerConfig: &container.Config{
+						Image:        "nginx:latest",
+						Hostname:     "Container22",
+						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+						Healthcheck: &container.HealthConfig{
+							Test:     []string{"CMD", "echo", "0"}, // vinagi ama vinagi CMD.
+							Interval: 5 * time.Second,
+							Timeout:  2 * time.Second,
+						},
+					},
+					HostConfig: &container.HostConfig{
+						PortBindings: nat.PortMap{
+							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8091"}},
+						},
+					},
+					NetworkingConfig: &network.NetworkingConfig{},
+				},
+				"Container23": {
+					DesiredStatus: "stopped",
+					ContainerConfig: &container.Config{
+						Hostname:     "Container23",
+						Image:        "nginx:latest",
+						ExposedPorts: map[nat.Port]struct{}{"80/tcp": {}},
+						Healthcheck: &container.HealthConfig{
+							Test:     []string{"CMD", "echo", "0"}, // vinagi ama vinagi CMD.
+							Interval: 5 * time.Second,
+							Timeout:  2 * time.Second,
+						},
+					},
+					HostConfig: &container.HostConfig{
+						PortBindings: nat.PortMap{
+							"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8093"}},
+						},
+					},
+					NetworkingConfig: &network.NetworkingConfig{},
+				},
+			},
+			Networks: map[string]*cluster.OrchNetwork{
+				"indiana net2": {
+					Name:          "indiana net2",
+					DesiredStatus: "created",
+					NetworkConfig: types.NetworkCreate{
+						Driver:         "bridge",
+						CheckDuplicate: true,
+					},
+				},
+			},
+			Volumes: map[string]*cluster.OrchVolume{},
+			Images:  map[string]*cluster.OrchImage{},
+		},
+	}
 
 	clusterState.Nodes[nodeManager.Name] = nodeManager
-	//clusterState.Nodes[nodeManager1.Name] = nodeManager1
+	clusterState.Nodes[nodeManager1.Name] = nodeManager1
 	clusterState.CollectImages() // to be developed and added to master logic
 	yamlData, _ := cluster.ToYaml(clusterState)
 	fmt.Printf("%s", yamlData)
