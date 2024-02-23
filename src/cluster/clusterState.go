@@ -10,7 +10,7 @@ type NodeSettings struct {
 	MasterAddress    string `yaml:"master_address"`
 	MasterPort       string `yaml:"master_port"`
 	LogsPath         string `yaml:"logspath"`
-	ClusterStatePath string `yaml:"clusterchangepath"`
+	ClusterStatePath string `yaml:"clusterstatepath"`
 	NodeStatusPath   string `yaml:"nodestatuspath"`
 }
 

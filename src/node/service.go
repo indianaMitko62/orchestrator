@@ -18,22 +18,14 @@ type NodeService struct {
 	LogsDir          string
 }
 
-func NewNodeService() (*NodeService, error) {
+func NewNodeService(nodeSetting cluster.NodeSettings) (*NodeService, error) {
 	cli, err := client.NewClientWithOpts()
 	if err != nil {
 		return nil, err
 	}
 	ns := &NodeService{
-		cli: cli,
-		NodeSettings: cluster.NodeSettings{
-			Name:             "Node1",
-			Address:          "127.0.0.1", // Node IP from machine setup. Left to 127.0.0.1 for testing purposes.
-			MasterAddress:    "127.0.0.1",
-			MasterPort:       ":1986",
-			LogsPath:         "/logs",
-			ClusterStatePath: "/clusterState",
-			NodeStatusPath:   "/nodeStatus",
-		},
+		cli:              cli,
+		NodeSettings:     nodeSetting,
 		DesiredNodeState: cluster.NewNodeState(),
 	}
 	ns.LogsDir = "./logs/" + ns.Name + "Logs/"
