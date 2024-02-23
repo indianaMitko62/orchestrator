@@ -3,7 +3,6 @@ package master
 import (
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"os"
 	"time"
@@ -13,28 +12,12 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func (msvc *MasterService) getNodeNameByIP(nodeIP string) string {
-	for name, node := range msvc.CS.Nodes {
-		if node.Address == nodeIP {
-			return name
-		}
-	}
-	return ""
-}
-
 func (msvc *MasterService) getClusterStateHandler(w http.ResponseWriter, r *http.Request) {
-	nodeIP, _, err := net.SplitHostPort(r.RemoteAddr)
-	if err != nil {
-		msvc.masterLog.Logger.Error("Error parsing node IP:", err)
-		return
-	}
-	msvc.masterLog.Logger.Info("recieved from", "IP", nodeIP)
-
-	nodeName := msvc.getNodeNameByIP(nodeIP)
-	msvc.masterLog.Logger.Info("Received GET on /clusterState from", "node", nodeName, "IP", nodeIP)
+	nodeName := r.Header.Get("nodeName")
+	msvc.masterLog.Logger.Info("Received GET on /clusterState from", "node", nodeName, "IP", r.RemoteAddr)
 
 	CSToSend, _ := cluster.ToYaml(msvc.CS)
-	fmt.Println("YAML Output:")
+	fmt.Println("YAML Output:") // for testing
 	fmt.Println(string(CSToSend))
 
 	w.Header().Set("Content-Type", "application/x-yaml")
@@ -42,14 +25,8 @@ func (msvc *MasterService) getClusterStateHandler(w http.ResponseWriter, r *http
 }
 
 func (msvc *MasterService) postLogsHandler(w http.ResponseWriter, r *http.Request) {
-	nodeIP, _, err := net.SplitHostPort(r.RemoteAddr)
-	if err != nil {
-		msvc.masterLog.Logger.Error("Error parsing node IP:", err)
-		return
-	}
-
-	nodeName := msvc.getNodeNameByIP(nodeIP)
-	msvc.masterLog.Logger.Info("recieved POST on /logs from", "name", nodeName, "IP", nodeIP)
+	nodeName := r.Header.Get("nodeName")
+	msvc.masterLog.Logger.Info("recieved POST on /logs from", "name", nodeName, "IP", r.RemoteAddr)
 
 	logData, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -76,15 +53,8 @@ func (msvc *MasterService) postLogsHandler(w http.ResponseWriter, r *http.Reques
 }
 
 func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.Request) {
-	nodeIP, _, err := net.SplitHostPort(r.RemoteAddr)
-	if err != nil {
-		msvc.masterLog.Logger.Error("Error parsing node IP:", err)
-		return
-	}
-
-	nodeName := msvc.getNodeNameByIP(nodeIP)
-	msvc.masterLog.Logger.Info("recieved POST on /nodeStatus from", "name", nodeName, "IP", nodeIP)
-
+	nodeName := r.Header.Get("nodeName")
+	msvc.masterLog.Logger.Info("recieved POST on /nodeStatus from", "name", nodeName, "IP", r.RemoteAddr)
 	var nodeStatus cluster.NodeStatus
 	yamlData, err := io.ReadAll(r.Body)
 	if err != nil {

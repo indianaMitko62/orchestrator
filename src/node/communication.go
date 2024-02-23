@@ -23,6 +23,7 @@ func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStat
 		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
 		return err
 	}
+	req.Header.Set("nodeName", nsvc.Name)
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		nsvc.nodeLog.Logger.Error("Could not send POST request to " + URL)
@@ -41,6 +42,7 @@ func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) error {
 		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
 		return err
 	}
+	req.Header.Set("nodeName", nsvc.Name)
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		nsvc.nodeLog.Logger.Error("Could not send POST request to " + URL)
@@ -58,13 +60,26 @@ func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) error {
 
 func (nsvc *NodeService) getClusterState(URL string) error {
 	var cs cluster.ClusterState
-	resp, err := http.Get(URL)
+	// req, err := http.NewRequest(http.MethodPost, URL, Log.LogReader)
+	// if err != nil {
+	// 	nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
+	// 	return err
+	// }
+	// resp, err := http.DefaultClient.Do(req)
+	req, err := http.NewRequest(http.MethodGet, URL, nil)
+	if err != nil {
+		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
+		return err
+	}
+	req.Header.Set("nodeName", nsvc.Name)
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		slog.Error("Could not send GET request to "+URL, "error", err)
 		return err
 	}
-	defer resp.Body.Close()
-
+	// defer resp.Body.Close()
+	// fmt.Println("aaaaaa" + resp.Request.RemoteAddr)
+	// _, nsvc.Port, _ = net.SplitHostPort(resp.Request.RemoteAddr)
 	if resp.StatusCode == http.StatusOK {
 		yamlData, err := io.ReadAll(resp.Body)
 		if err != nil {

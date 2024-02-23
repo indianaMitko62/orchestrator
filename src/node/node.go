@@ -71,7 +71,7 @@ func (nsvc *NodeService) inspectCluster() {
 }
 
 func (nsvc *NodeService) Node() error {
-	nsvc.MasterAddress = "http://" + nsvc.MasterAddress + nsvc.Port
+	nsvc.MasterAddress = "http://" + nsvc.MasterAddress + nsvc.MasterPort
 	for {
 		err := nsvc.getClusterState(nsvc.MasterAddress + nsvc.ClusterStatePath)
 		if err != nil {

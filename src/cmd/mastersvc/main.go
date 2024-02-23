@@ -66,7 +66,7 @@ func main() {
 					NetworkingConfig: &network.NetworkingConfig{},
 				},
 				"Container3": {
-					DesiredStatus: "running",
+					DesiredStatus: "stopped",
 					ContainerConfig: &container.Config{
 						Hostname:     "Container3",
 						Image:        "nginx:latest",
