@@ -5,6 +5,8 @@ import (
 	"time"
 
 	"github.com/indianaMitko62/orchestrator/src/cluster"
+	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/mem"
 )
 
 /*
@@ -59,9 +61,15 @@ func (nsvc *NodeService) inspectCluster() {
 			nsvc.inspectContainer(cont)
 		}
 	}
+	percent, _ := cpu.Percent(time.Second, false)
+	memInfo, err := mem.VirtualMemory()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	ns := cluster.NodeStatus{
-		CPU:              50, // add these
-		Memory:           10,
+		CPU:              percent[0], // add these
+		Memory:           memInfo.UsedPercent,
 		Disc:             40,
 		CurrentNodeState: *nsvc.CurrentNodeState,
 		Active:           true,

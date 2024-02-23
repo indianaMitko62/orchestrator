@@ -32,9 +32,9 @@ func NewLog(file string) *Log {
 }
 
 type NodeStatus struct {
-	CPU              float32
-	Memory           float32
-	Disc             float32
+	CPU              float64
+	Memory           float64
+	Disc             float64
 	CurrentNodeState NodeState
 	Active           bool
 	Timestamp        time.Time
