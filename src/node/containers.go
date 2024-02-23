@@ -60,6 +60,11 @@ func (nsvc *NodeService) inspectContainer(cont *cluster.OrchContainer) {
 func (nsvc *NodeService) changeContainers() bool {
 	var err error
 	change := false
+	// if len(nsvc.DesiredNodeState.Containers) == 0 { // only if they are on a different machines
+	// 	for _, cont := range nsvc.CurrentNodeState.Containers {
+	// 		cont.StopCont(container.StopOptions{})
+	// 	}
+	// }
 	for name, cont := range nsvc.DesiredNodeState.Containers {
 		currentCont := nsvc.CurrentNodeState.Containers[name]
 		if currentCont != nil {

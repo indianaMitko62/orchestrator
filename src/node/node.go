@@ -98,8 +98,8 @@ func (nsvc *NodeService) Node() error {
 		}
 		nsvc.inspectCluster()
 		nsvc.nodeLog.Logger.Info("Main Node process sleeping...") // not to be logged everytime. Stays for now for development purposes
-		time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
-		//time.Sleep(20 * time.Second) // for node inactivity simulation
+		// time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
+		time.Sleep(40 * time.Second) // for node inactivity simulation
 		fmt.Print("\n\n\n")
 	}
 }

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
 func (msvc *MasterService) initHTTPServer() {
@@ -17,11 +18,11 @@ func (msvc *MasterService) initHTTPServer() {
 	go http.ListenAndServe(":1986", r)
 }
 
-func (msvc *MasterService) evaluateNodes() (string, error) {
+func (msvc *MasterService) evaluateNodes(inactiveNodeName string) (string, error) {
 	bestScore := 1000.0
 	var bestNodeName string
 	for name, node := range msvc.CS.Nodes {
-		if msvc.NodesStatus[node.Name].Active {
+		if node.Name != inactiveNodeName {
 			score := (msvc.NodesStatus[node.Name].CPU + msvc.NodesStatus[node.Name].Memory + msvc.NodesStatus[node.Name].Disc) / 3
 			score += float64(len(msvc.NodesStatus[node.Name].CurrentNodeState.Containers))
 			if score < bestScore {
@@ -36,8 +37,8 @@ func (msvc *MasterService) evaluateNodes() (string, error) {
 	return bestNodeName, nil
 }
 
-func (msvc *MasterService) inactiveNode(inactiveNodeName string) {
-	bestActiveNode, err := msvc.evaluateNodes()
+func (msvc *MasterService) lostANode(inactiveNodeName string) {
+	bestActiveNode, err := msvc.evaluateNodes(inactiveNodeName)
 	if err != nil {
 		msvc.masterLog.Logger.Error("Could not choose active node", "error", err.Error())
 		return
@@ -64,7 +65,8 @@ func (msvc *MasterService) Master() {
 			if time.Since(status.Timestamp) > time.Duration(15*time.Second) {
 				msvc.masterLog.Logger.Error("Node inactive", "name", name, "time", time.Since(status.Timestamp))
 				status.Active = false
-				msvc.inactiveNode(name)
+				msvc.lostANode(name)
+				msvc.CS.Nodes[name] = cluster.NodeManager{}
 			} else {
 				msvc.masterLog.Logger.Info("Node active", "name", name, "time", time.Since(status.Timestamp))
 			}

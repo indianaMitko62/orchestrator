@@ -16,7 +16,7 @@ func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStat
 	NSToSend, _ := cluster.ToYaml(nodeStatus)
 	fmt.Println("YAML Output:")
 	yamlBytes := []byte(NSToSend)
-	//fmt.Println(string(NSToSend))
+	// fmt.Println(string(NSToSend))
 	// fmt.Println(yamlBytes) // for testing
 	req, err := http.NewRequest(http.MethodPost, URL, bytes.NewBuffer(yamlBytes))
 	if err != nil {
@@ -60,12 +60,6 @@ func (nsvc *NodeService) sendLogs(URL string, Log *cluster.Log) error {
 
 func (nsvc *NodeService) getClusterState(URL string) error {
 	var cs cluster.ClusterState
-	// req, err := http.NewRequest(http.MethodPost, URL, Log.LogReader)
-	// if err != nil {
-	// 	nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
-	// 	return err
-	// }
-	// resp, err := http.DefaultClient.Do(req)
 	req, err := http.NewRequest(http.MethodGet, URL, nil)
 	if err != nil {
 		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
@@ -77,16 +71,13 @@ func (nsvc *NodeService) getClusterState(URL string) error {
 		slog.Error("Could not send GET request to "+URL, "error", err)
 		return err
 	}
-	// defer resp.Body.Close()
-	// fmt.Println("aaaaaa" + resp.Request.RemoteAddr)
-	// _, nsvc.Port, _ = net.SplitHostPort(resp.Request.RemoteAddr)
 	if resp.StatusCode == http.StatusOK {
 		yamlData, err := io.ReadAll(resp.Body)
 		if err != nil {
 			slog.Error("Error reading YAML data:", err)
 			return err
 		}
-		//fmt.Println(string(yamlData)) // for testing
+		fmt.Println(string(yamlData)) // for testing
 
 		err = yaml.Unmarshal(yamlData, &cs)
 		if err != nil {

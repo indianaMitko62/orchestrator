@@ -23,3 +23,113 @@ time=2024-02-23T17:57:02.472+02:00 level=INFO msg="Network successfully created"
 time=2024-02-23T17:57:03.059+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
 time=2024-02-23T17:57:03.652+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
 time=2024-02-23T17:57:03.675+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:10:22.333+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:10:22.490+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:10:22.555+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:10:23.078+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:10:23.714+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:12:09.434+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:12:09.600+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:12:10.180+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:12:10.738+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:12:10.756+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:15:21.392+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:15:21.676+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:15:21.745+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:15:22.502+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:15:23.432+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:16:10.189+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:16:10.357+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:16:10.980+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:16:11.663+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:16:11.707+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:18:51.687+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:18:51.868+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:18:52.634+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:18:53.375+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:18:53.436+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:21:59.247+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:21:59.468+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:22:00.310+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:22:00.904+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:22:00.935+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:22:39.621+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:22:39.820+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:22:40.455+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:22:41.150+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:22:41.170+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:39:51.297+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:39:51.494+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:39:52.156+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:39:52.743+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:39:52.759+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:40:25.256+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:40:25.449+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:40:26.022+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:40:26.634+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:40:26.664+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:42:34.536+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:42:34.725+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:42:35.537+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:42:36.362+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:42:36.394+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:43:00.843+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:43:01.075+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:43:01.649+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:43:02.334+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:43:02.358+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:43:33.512+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:43:33.721+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:43:34.318+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:43:34.960+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:43:34.978+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:46:38.546+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:46:38.713+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:46:39.319+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:46:39.895+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:46:39.921+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:57:36.572+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:57:36.764+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:57:36.818+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:57:37.379+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:57:37.910+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:58:02.186+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:58:02.320+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:58:02.882+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:58:03.460+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:58:03.478+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:58:39.523+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:58:39.660+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:58:40.268+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:58:40.846+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:58:40.863+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T18:59:26.959+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T18:59:27.100+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T18:59:27.670+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T18:59:28.301+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T18:59:28.321+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T19:02:13.802+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T19:02:13.973+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T19:02:14.527+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T19:02:15.149+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T19:02:15.170+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T19:02:39.462+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T19:02:39.617+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T19:02:40.238+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T19:02:40.797+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T19:02:40.821+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T19:10:04.751+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T19:10:04.914+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T19:10:05.516+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T19:10:06.127+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T19:10:06.144+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T19:10:27.853+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T19:10:28.001+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T19:10:28.535+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T19:10:29.137+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T19:10:29.156+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-23T19:10:44.756+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-23T19:10:44.927+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-23T19:10:45.518+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-23T19:10:46.105+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-23T19:10:46.122+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
