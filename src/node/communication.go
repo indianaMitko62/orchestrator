@@ -77,7 +77,7 @@ func (nsvc *NodeService) getClusterState(URL string) error {
 			slog.Error("Error reading YAML data:", err)
 			return err
 		}
-		fmt.Println(string(yamlData)) // for testing
+		//fmt.Println(string(yamlData)) // for testing
 
 		err = yaml.Unmarshal(yamlData, &cs)
 		if err != nil {
@@ -87,6 +87,6 @@ func (nsvc *NodeService) getClusterState(URL string) error {
 	} else {
 		slog.Error("could not get cluster state", "URL", URL, "status", resp.Status)
 	}
-	*nsvc.DesiredNodeState = cs.Nodes[nsvc.Name].NodeState
+	*nsvc.DesiredNodeState = cs.Nodes[nsvc.Name]
 	return nil
 }

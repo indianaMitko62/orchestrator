@@ -21,10 +21,10 @@ func (msvc *MasterService) initHTTPServer() {
 func (msvc *MasterService) evaluateNodes(inactiveNodeName string) (string, error) {
 	bestScore := 1000.0
 	var bestNodeName string
-	for name, node := range msvc.CS.Nodes {
-		if node.Name != inactiveNodeName {
-			score := (msvc.NodesStatus[node.Name].CPU + msvc.NodesStatus[node.Name].Memory + msvc.NodesStatus[node.Name].Disc) / 3
-			score += float64(len(msvc.NodesStatus[node.Name].CurrentNodeState.Containers))
+	for name := range msvc.CS.Nodes {
+		if name != inactiveNodeName {
+			score := (msvc.NodesStatus[name].CPU + msvc.NodesStatus[name].Memory + msvc.NodesStatus[name].Disk) / 3
+			score += float64(len(msvc.NodesStatus[name].CurrentNodeState.Containers))
 			if score < bestScore {
 				bestScore = score
 				bestNodeName = name
@@ -66,7 +66,7 @@ func (msvc *MasterService) Master() {
 				msvc.masterLog.Logger.Error("Node inactive", "name", name, "time", time.Since(status.Timestamp))
 				status.Active = false
 				msvc.lostANode(name)
-				msvc.CS.Nodes[name] = cluster.NodeManager{}
+				msvc.CS.Nodes[name] = cluster.NodeState{}
 			} else {
 				msvc.masterLog.Logger.Info("Node active", "name", name, "time", time.Since(status.Timestamp))
 			}

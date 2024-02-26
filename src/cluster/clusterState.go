@@ -4,28 +4,13 @@ import (
 	"strings"
 )
 
-type NodeSettings struct {
-	Name             string `yaml:"name"`
-	Address          string `yaml:"address"`
-	MasterAddress    string `yaml:"master_address"`
-	MasterPort       string `yaml:"master_port"`
-	LogsPath         string `yaml:"logspath"`
-	ClusterStatePath string `yaml:"clusterstatepath"`
-	NodeStatusPath   string `yaml:"nodestatuspath"`
-}
-
-type NodeManager struct {
-	NodeSettings
-	NodeState
-}
-
 type ClusterState struct {
-	Nodes map[string]NodeManager `yaml:"nodes"`
+	Nodes map[string]NodeState `yaml:"nodes"`
 }
 
 func NewClusterState() *ClusterState {
 	return &ClusterState{
-		Nodes: make(map[string]NodeManager),
+		Nodes: make(map[string]NodeState),
 	}
 }
 

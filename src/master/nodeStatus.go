@@ -56,10 +56,10 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 		fmt.Println(healthyCnt + unhealthyCnt)
 		if unhealthyConts != "" {
 			unhealthyContLog = "Unhealthy containers: " + unhealthyConts
-			msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disc,
+			msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disk,
 				"HealthyContainers", healthyContLog, "UnhealthyContainers", unhealthyContLog)
 		} else {
-			msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disc,
+			msvc.NodesStatusLogs[nodeName].Logger.Info("Node Status", "Node", nodeName, "CPU", nodeStatus.CPU, "Memory", nodeStatus.Memory, "Disk", nodeStatus.Disk,
 				"HealthyContainers", healthyContLog)
 		}
 	}

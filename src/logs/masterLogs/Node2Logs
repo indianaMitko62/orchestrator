@@ -133,3 +133,18 @@ time=2024-02-23T19:10:44.927+02:00 level=INFO msg="Network successfully created"
 time=2024-02-23T19:10:45.518+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
 time=2024-02-23T19:10:46.105+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
 time=2024-02-23T19:10:46.122+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-26T14:12:34.630+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-26T14:12:34.833+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-26T14:12:35.523+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-26T14:12:36.106+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-26T14:12:36.136+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-26T14:20:06.585+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-26T14:20:06.792+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-26T14:20:07.403+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-26T14:20:07.426+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped
+time=2024-02-26T14:20:08.070+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-26T14:20:40.006+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-26T14:20:40.183+02:00 level=INFO msg="Network successfully created" name="indiana net2"
+time=2024-02-26T14:20:40.814+02:00 level=INFO msg="Container successfully running" name=Container21 status=running
+time=2024-02-26T14:20:41.522+02:00 level=INFO msg="Container successfully running" name=Container22 status=running
+time=2024-02-26T14:20:41.547+02:00 level=INFO msg="Container successfully stopped" name=Container23 status=stopped

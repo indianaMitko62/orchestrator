@@ -8,8 +8,18 @@ import (
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
+type NodeSettings struct {
+	Name             string `yaml:"name"`
+	Address          string `yaml:"address"`
+	MasterAddress    string `yaml:"master_address"`
+	MasterPort       string `yaml:"master_port"`
+	LogsPath         string `yaml:"logspath"`
+	ClusterStatePath string `yaml:"clusterstatepath"`
+	NodeStatusPath   string `yaml:"nodestatuspath"`
+}
+
 type NodeService struct {
-	cluster.NodeSettings
+	NodeSettings
 	cli              *client.Client
 	DesiredNodeState *cluster.NodeState // no pointer required
 	CurrentNodeState *cluster.NodeState
@@ -18,7 +28,7 @@ type NodeService struct {
 	LogsDir          string
 }
 
-func NewNodeService(nodeSetting cluster.NodeSettings) (*NodeService, error) {
+func NewNodeService(nodeSetting NodeSettings) (*NodeService, error) {
 	cli, err := client.NewClientWithOpts()
 	if err != nil {
 		return nil, err

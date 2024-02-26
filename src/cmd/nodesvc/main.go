@@ -4,7 +4,6 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/indianaMitko62/orchestrator/src/cluster"
 	"github.com/indianaMitko62/orchestrator/src/node"
 	"gopkg.in/yaml.v3"
 )
@@ -20,7 +19,7 @@ func main() {
 		slog.Error("Could not open config file", "name", confFile)
 	}
 
-	var nodeSet cluster.NodeSettings
+	var nodeSet node.NodeSettings
 	decoder := yaml.NewDecoder(f)
 	err = decoder.Decode(&nodeSet)
 	if err != nil {

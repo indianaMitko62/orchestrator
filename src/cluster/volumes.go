@@ -64,7 +64,7 @@ func (volume *OrchVolume) RemoveVol(force bool) error {
 		return err
 	}
 	volume.CurrentStatus = "removed"
-	slog.Info("Volume removed", "name", &volume.Name)
+	slog.Info("Volume removed", "name", volume.Name)
 	return err
 }
 

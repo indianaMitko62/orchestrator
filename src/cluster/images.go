@@ -2,7 +2,6 @@ package cluster
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"log/slog"
 	"os"
@@ -20,7 +19,7 @@ type OrchImage struct {
 	ID            string
 	CurrentStatus string
 	DesiredStatus string
-	BuildOptions  types.ImageBuildOptions
+	//BuildOptions  types.ImageBuildOptions
 	// ImagePull options. Cannot marshall RequestPrivilegeFunc in ImagePull
 	All          bool
 	RegistryAuth string
@@ -45,9 +44,6 @@ func (img *OrchImage) BuildImg(buildContext io.Reader, opts types.ImageBuildOpti
 } // ImageCreate???
 
 func (img *OrchImage) PullImg(opts *types.ImagePullOptions) (io.ReadCloser, error) {
-	fmt.Println(context.Background())
-	fmt.Println(img.Name)
-	fmt.Println(opts.PrivilegeFunc)
 	slog.Info("Pulling image", "name", img.Name)
 	res, err := img.Cli.ImagePull(context.Background(), img.Name, *opts)
 	if err != nil {
