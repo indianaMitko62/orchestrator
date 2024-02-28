@@ -89,6 +89,7 @@ func main() {
 				NetworkConfig: types.NetworkCreate{
 					Driver:         "bridge",
 					CheckDuplicate: true,
+					Internal:       false,
 				},
 			},
 		},

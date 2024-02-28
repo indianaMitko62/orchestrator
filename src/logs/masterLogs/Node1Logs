@@ -313,3 +313,330 @@ time=2024-02-28T18:04:27.287+02:00 level=INFO msg="Network successfully created"
 time=2024-02-28T18:04:27.642+02:00 level=INFO msg="Container successfully running" name=Container1 status=running
 time=2024-02-28T18:04:27.964+02:00 level=INFO msg="Container successfully running" name=Container2 status=running
 time=2024-02-28T18:04:28.285+02:00 level=INFO msg="Container successfully running" name=Container3 status=running
+time=2024-02-28T18:44:22.054+02:00 level=INFO msg="Image successfully pulled" name=nginx
+time=2024-02-28T18:44:22.089+02:00 level=INFO msg="Network successfully created" name=indiana_net
+time=2024-02-28T18:44:22.393+02:00 level=INFO msg="Container successfully running" name=Container1 status=running
+time=2024-02-28T18:44:22.700+02:00 level=INFO msg="Container successfully running" name=Container2 status=running
+time=2024-02-28T18:44:22.997+02:00 level=INFO msg="Container successfully running" name=Container3 status=running
+
+time=2024-02-28T18:44:35.574+02:00 level=INFO msg="Network successfully created" name=indiana_net
+
+time=2024-02-28T18:44:40.636+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:44:45.686+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:44:50.741+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:44:55.780+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:00.823+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:05.863+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:10.920+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:15.976+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:21.025+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:25.072+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:30.113+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:35.158+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:40.207+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:45.258+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:50.300+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:45:55.339+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:00.372+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:05.405+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:10.447+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:15.481+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:20.532+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:25.562+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:30.594+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:35.628+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:40.679+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:45.713+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:50.756+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:46:55.830+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:00.871+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:05.916+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:10.949+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:15.985+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:21.024+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:25.062+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:30.107+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:35.145+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:40.187+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:45.227+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:50.274+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:47:55.309+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:00.349+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:05.379+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:10.420+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:15.463+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:20.496+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:25.576+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:30.653+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:35.720+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:40.752+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:45.800+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:50.840+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:48:55.880+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:00.908+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:05.955+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:10.997+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:15.039+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:20.086+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:25.126+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:30.177+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:35.225+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:40.258+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:45.296+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:50.340+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:49:55.377+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:00.413+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:05.459+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:10.518+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:15.558+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:20.595+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:25.631+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:30.669+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:35.712+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:40.749+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:45.795+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:50.862+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:50:55.902+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:00.939+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:05.983+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:11.026+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:15.065+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:20.107+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:25.151+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:30.201+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:35.240+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:40.276+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:45.314+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:50.355+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:51:55.391+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:00.423+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:05.457+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:10.498+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:15.534+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:20.577+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:25.639+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:30.684+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:35.722+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:40.756+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:45.796+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:50.863+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:52:55.912+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:00.944+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:05.982+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:11.046+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:15.095+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:20.142+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:25.213+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:30.278+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:35.325+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:40.369+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:45.417+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:50.459+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:53:55.500+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:00.533+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:05.573+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:10.613+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:15.651+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:20.689+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:25.725+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:30.766+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:35.807+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:40.864+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:45.911+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:50.956+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:54:55.985+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:01.020+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:05.058+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:10.093+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:15.134+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:20.171+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:25.215+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:30.249+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:35.283+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:40.338+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:45.388+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:50.427+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:55:55.470+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:00.506+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:05.546+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:10.586+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:15.626+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:20.688+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:25.730+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:30.786+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:35.831+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:40.875+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:45.913+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:50.940+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:56:55.988+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:01.030+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:05.068+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:10.119+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:15.162+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:20.203+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:25.245+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:30.288+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:35.324+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:40.370+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:45.407+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:50.467+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
+
+time=2024-02-28T18:57:55.512+02:00 level=ERROR msg="Failed container operation" name=Container2 status=stopped error="Error response from daemon: network 17639fb7155a48321d93f70d8ff5633657b9a64b0c8f7912a7e988643f1dcc2d not found"
