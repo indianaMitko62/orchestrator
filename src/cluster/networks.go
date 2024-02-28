@@ -41,7 +41,7 @@ func (network *OrchNetwork) ConnectToNet(container OrchContainer, config *networ
 	slog.Info("Connecting to network", "name", network.Name)
 	err := network.Cli.NetworkConnect(context.Background(), network.Name, container.ContainerConfig.Hostname, config)
 	if err != nil {
-		slog.Error("Could not connect container to network", "container", container.ContainerConfig.Hostname, "network", network.Name)
+		slog.Error("Could not connect container to network", "container", container.ContainerConfig.Hostname, "network", network.Name, "err", err.Error())
 		return err
 	}
 	network.ActiveConnections += 1
@@ -49,7 +49,7 @@ func (network *OrchNetwork) ConnectToNet(container OrchContainer, config *networ
 	return err
 }
 
-func (network *OrchNetwork) DisconnectFromNet(container *OrchContainer, force bool) error {
+func (network *OrchNetwork) DisconnectFromNet(container OrchContainer, force bool) error {
 	slog.Info("Disconnecting from network", "name", network.Name)
 	err := network.Cli.NetworkDisconnect(context.Background(), network.Name, container.ContainerConfig.Hostname, force)
 	if err != nil {
@@ -87,7 +87,7 @@ func (network *OrchNetwork) RemoveNet() error {
 	slog.Info("Removing network", "name", network.Name)
 	err := network.Cli.NetworkRemove(context.Background(), network.Name)
 	if err != nil {
-		slog.Error("Could not remove network", "network", network.Name)
+		slog.Error("Could not remove network", "network", network.Name, "err", err.Error())
 		return err
 	}
 	network.CurrentStatus = "removed"

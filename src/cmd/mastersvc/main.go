@@ -58,7 +58,9 @@ func main() {
 						"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8081"}},
 					},
 				},
-				NetworkingConfig: &network.NetworkingConfig{},
+				NetworkingConfig: &network.NetworkingConfig{
+					EndpointsConfig: map[string]*network.EndpointSettings{"indiana_net": {NetworkID: "indiana_net"}},
+				},
 			},
 			"Container3": {
 				DesiredStatus: "running",
@@ -77,12 +79,11 @@ func main() {
 						"80/tcp": []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "8083"}},
 					},
 				},
-				NetworkingConfig: &network.NetworkingConfig{},
 			},
 		},
 		Networks: map[string]*cluster.OrchNetwork{
-			"indiana net": {
-				Name:          "indiana net",
+			"indiana_net": {
+				Name:          "indiana_net",
 				DesiredStatus: "created",
 				NetworkConfig: types.NetworkCreate{
 					Driver:         "bridge",
@@ -154,8 +155,8 @@ func main() {
 			},
 		},
 		Networks: map[string]*cluster.OrchNetwork{
-			"indiana net2": {
-				Name:          "indiana net2",
+			"indiana_net2": {
+				Name:          "indiana_net2",
 				DesiredStatus: "created",
 				NetworkConfig: types.NetworkCreate{
 					Driver:         "bridge",

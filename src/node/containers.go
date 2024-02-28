@@ -1,6 +1,7 @@
 package node
 
 import (
+	"fmt"
 	"reflect"
 
 	"github.com/docker/docker/api/types"
@@ -34,6 +35,12 @@ func (nsvc *NodeService) deployContainer(cont *cluster.OrchContainer) {
 	if cont.DesiredStatus == cont.CurrentStatus && err == nil {
 		nsvc.CurrentNodeState.Containers[cont.ContainerConfig.Hostname] = cont
 		nsvc.clusterChangeLog.Logger.Info("Container successfully "+cont.CurrentStatus, "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
+		if cont.NetworkingConfig != nil {
+			for name, netw := range cont.NetworkingConfig.EndpointsConfig {
+				fmt.Print(name, netw)
+				nsvc.CurrentNodeState.Networks[name].ConnectToNet(*cont, netw)
+			}
+		}
 	} else {
 		nsvc.clusterChangeLog.Logger.Info("Could not create container", "name", cont.ContainerConfig.Hostname)
 	}

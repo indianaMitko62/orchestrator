@@ -1,9 +1,12 @@
 package node
 
 import (
+	"context"
 	"fmt"
 	"time"
 
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/mem"
@@ -15,10 +18,24 @@ TODO: Connecting containers to networks by creation. Pausing containers when cha
 	CLI basics... ????
 */
 
+func (nsvc *NodeService) stopAllContainers() error {
+	nsvc.nodeLog.Logger.Info("Stopping all containers on node")
+	containers, err := nsvc.cli.ContainerList(context.Background(), types.ContainerListOptions{All: true})
+	if err != nil {
+		return err
+	}
+	for _, cont := range containers {
+		if err := nsvc.cli.ContainerStop(context.Background(), cont.ID, container.StopOptions{}); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (nsvc *NodeService) initCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
 	fmt.Println()
-
+	nsvc.stopAllContainers()
 	for _, img := range nsvc.DesiredNodeState.Images {
 		nsvc.deployNewImage(img)
 	}
