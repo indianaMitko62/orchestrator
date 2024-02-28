@@ -13,12 +13,12 @@ import (
 )
 
 /*
-TODO: Connecting containers to networks by creation. Pausing containers when changing network or volume.
+TODO: Pausing containers when changing network or volume.
 	Create MasterSetting with yaml config file support for command line argument.
 	CLI basics... ????
 */
 
-func (nsvc *NodeService) stopAllContainers() error {
+func (nsvc *NodeService) stopAllContainersOnMachine() error {
 	nsvc.nodeLog.Logger.Info("Stopping all containers on node")
 	containers, err := nsvc.cli.ContainerList(context.Background(), types.ContainerListOptions{All: true})
 	if err != nil {
@@ -35,7 +35,7 @@ func (nsvc *NodeService) stopAllContainers() error {
 func (nsvc *NodeService) initCluster() error {
 	nsvc.CurrentNodeState = cluster.NewNodeState()
 	fmt.Println()
-	nsvc.stopAllContainers()
+	nsvc.stopAllContainersOnMachine()
 	for _, img := range nsvc.DesiredNodeState.Images {
 		nsvc.deployNewImage(img)
 	}
