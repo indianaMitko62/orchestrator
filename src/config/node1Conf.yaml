@@ -1,6 +1,6 @@
 name: Node1
-master_address: 192.168.1.21
+master_address: 192.168.69.51
 master_port: :1986
-logspath: "/logs"
-clusterstatepath: "/clusterState"
-nodestatuspath: "/nodeStatus"
+logs_endpoint: "/logs"
+clusterstate_endpoint: "/clusterState"
+nodestatus_endpoint: "/nodeStatus"

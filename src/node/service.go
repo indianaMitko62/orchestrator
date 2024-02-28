@@ -1,6 +1,7 @@
 package node
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 
@@ -9,13 +10,12 @@ import (
 )
 
 type NodeSettings struct {
-	Name             string `yaml:"name"`
-	Address          string `yaml:"address"`
-	MasterAddress    string `yaml:"master_address"`
-	MasterPort       string `yaml:"master_port"`
-	LogsPath         string `yaml:"logspath"`
-	ClusterStatePath string `yaml:"clusterstatepath"`
-	NodeStatusPath   string `yaml:"nodestatuspath"`
+	Name                 string `yaml:"name"`
+	MasterAddress        string `yaml:"master_address"`
+	MasterPort           string `yaml:"master_port"`
+	LogsEndpoint         string `yaml:"logs_endpoint"`
+	ClusterStateEndpoint string `yaml:"clusterstate_endpoint"`
+	NodeStatusEndpoint   string `yaml:"nodestatus_endpoint"`
 }
 
 type NodeService struct {
@@ -44,6 +44,7 @@ func NewNodeService(nodeSetting NodeSettings) (*NodeService, error) {
 	} else {
 		slog.Info("Directory created", "name", ns.LogsDir)
 	}
+	fmt.Println(ns.NodeSettings.ClusterStateEndpoint)
 	ns.clusterChangeLog = cluster.NewLog(ns.LogsDir + "clusterChangeLog")
 	ns.nodeLog = cluster.NewLog(ns.LogsDir + "nodeLog")
 	return ns, nil

@@ -39,7 +39,7 @@ func (nsvc *NodeService) deployContainer(cont *cluster.OrchContainer) {
 	}
 }
 
-func (nsvc *NodeService) inspectContainer(cont *cluster.OrchContainer) {
+func (nsvc *NodeService) getContHealth(cont *cluster.OrchContainer) {
 	contInfo, err := cont.InspectCont()
 	if err != nil {
 		nsvc.nodeLog.Logger.Info("Could not inspect container", "name", cont.ContainerConfig.Hostname, "error", err)

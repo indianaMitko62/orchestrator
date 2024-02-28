@@ -10,7 +10,9 @@ import (
 )
 
 /*
-TODO: functions managing overall node performance and loading(cpu, memory, disk) and overall node logic
+TODO: Connecting containers to networks by creation. Pausing containers when changing network or volume.
+	Create MasterSetting with yaml config file support for command line argument.
+	CLI basics... ????
 */
 
 func (nsvc *NodeService) initCluster() error {
@@ -36,14 +38,14 @@ func (nsvc *NodeService) initCluster() error {
 		nsvc.deployContainer(cont)
 	}
 	fmt.Println()
-	err := nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsPath, nsvc.clusterChangeLog)
+	err := nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsEndpoint, nsvc.clusterChangeLog)
 	return err
 }
 
 func (nsvc *NodeService) applyChanges() error {
 	nsvc.nodeLog.Logger.Info("finding differences")
 	if nsvc.changeContainers() || nsvc.changeVolumes() || nsvc.changeNetworks() {
-		return nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsPath, nsvc.clusterChangeLog)
+		return nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsEndpoint, nsvc.clusterChangeLog)
 	} else {
 		nsvc.nodeLog.Logger.Info("No changes in cluster")
 	}
@@ -58,7 +60,7 @@ func (nsvc *NodeService) inspectCluster() {
 
 	for _, cont := range nsvc.CurrentNodeState.Containers {
 		if cont.CurrentStatus == "running" {
-			nsvc.inspectContainer(cont)
+			nsvc.getContHealth(cont)
 		}
 	}
 	percent, _ := cpu.Percent(time.Second, false)
@@ -75,13 +77,13 @@ func (nsvc *NodeService) inspectCluster() {
 		Active:           true,
 		Timestamp:        time.Now(),
 	}
-	nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusPath, &ns)
+	nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusEndpoint, &ns)
 }
 
 func (nsvc *NodeService) Node() error {
 	nsvc.MasterAddress = "http://" + nsvc.MasterAddress + nsvc.MasterPort
 	for {
-		err := nsvc.getClusterState(nsvc.MasterAddress + nsvc.ClusterStatePath)
+		err := nsvc.getClusterState(nsvc.MasterAddress + nsvc.ClusterStateEndpoint)
 		if err != nil {
 			nsvc.nodeLog.Logger.Error("could not get cluster data", "error", err)
 		} else {

@@ -62,7 +62,7 @@ func (nsvc *NodeService) getClusterState(URL string) error {
 	var cs cluster.ClusterState
 	req, err := http.NewRequest(http.MethodGet, URL, nil)
 	if err != nil {
-		nsvc.nodeLog.Logger.Error("Could not create POST request", "URL", URL)
+		nsvc.nodeLog.Logger.Error("Could not create GET request", "URL", URL)
 		return err
 	}
 	req.Header.Set("nodeName", nsvc.Name)
