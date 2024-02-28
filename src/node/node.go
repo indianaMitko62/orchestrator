@@ -13,9 +13,7 @@ import (
 )
 
 /*
-TODO: Pausing containers when changing network or volume.
-	Create MasterSetting with yaml config file support for command line argument.
-	CLI basics... ????
+TODO:	CLI basics... ????
 */
 
 func (nsvc *NodeService) stopAllContainersOnMachine() error {

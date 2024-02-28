@@ -1,6 +1,2 @@
-time=2024-02-28T17:45:17.016+02:00 level=INFO msg="All Containers starting"
-time=2024-02-28T17:45:21.035+02:00 level=INFO msg="All Containers starting"
-time=2024-02-28T17:45:26.055+02:00 level=INFO msg="Node Status" Node=Node1 CPU=17.684478371525298 Memory=22.80073086070508 Disk=40 HealthyContainers="Healthy containers: 100.000000"
-time=2024-02-28T17:45:31.093+02:00 level=INFO msg="Node Status" Node=Node1 CPU=35.6336260979481 Memory=22.894085033881126 Disk=40 HealthyContainers="Healthy containers: 100.000000"
-time=2024-02-28T17:45:36.109+02:00 level=INFO msg="Node Status" Node=Node1 CPU=40.47919293862285 Memory=22.87133010775293 Disk=40 HealthyContainers="Healthy containers: 100.000000"
-time=2024-02-28T17:45:41.133+02:00 level=INFO msg="Node Status" Node=Node1 CPU=22.601010100809663 Memory=22.94385836311726 Disk=40 HealthyContainers="Healthy containers: 100.000000"
+time=2024-02-28T18:04:29.296+02:00 level=INFO msg="All Containers starting"
+time=2024-02-28T18:04:31.316+02:00 level=INFO msg="All Containers starting"

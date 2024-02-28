@@ -12,6 +12,7 @@ import (
 	"github.com/docker/go-connections/nat"
 	"github.com/indianaMitko62/orchestrator/src/cluster"
 	"github.com/indianaMitko62/orchestrator/src/master"
+	"gopkg.in/yaml.v3"
 )
 
 func main() {
@@ -174,7 +175,26 @@ func main() {
 	yamlData, _ := cluster.ToYaml(clusterState)
 	fmt.Printf("%s", yamlData)
 
-	msvc := master.NewMasterService()
+	if os.Args == nil {
+		slog.Error("No configuration file passes as command line argument")
+	}
+	confFile := os.Args[1]
+	if confFile == "" {
+		slog.Error("No command line argument")
+	}
+	f, err := os.Open(confFile)
+	if err != nil {
+		slog.Error("Could not open config file", "name", confFile)
+	}
+
+	var masterSet master.MasterSettings
+	decoder := yaml.NewDecoder(f)
+	err = decoder.Decode(&masterSet)
+	if err != nil {
+		slog.Error("Could not decode config file", "name", confFile)
+	}
+	f.Close()
+	msvc := master.NewMasterService(masterSet)
 	msvc.CS = clusterState
 	//err = msvc.ConnectToNodes()
 	if err != nil {

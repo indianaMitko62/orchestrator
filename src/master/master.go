@@ -15,7 +15,7 @@ func (msvc *MasterService) initHTTPServer() {
 	r.HandleFunc("/clusterState", msvc.getClusterStateHandler).Methods("GET")
 	r.HandleFunc("/logs", msvc.postLogsHandler).Methods("POST")
 	r.HandleFunc("/nodeStatus", msvc.postNodeStatusHandler).Methods("POST")
-	go http.ListenAndServe(":1986", r)
+	go http.ListenAndServe(msvc.HTTPServerPort, r)
 }
 
 func (msvc *MasterService) evaluateNodes(inactiveNodeName string) (string, error) {
