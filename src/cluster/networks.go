@@ -34,19 +34,19 @@ func (network *OrchNetwork) CreateNet(opts types.NetworkCreate) (string, error) 
 	network.CurrentStatus = "created"
 	network.ID = res.ID
 	slog.Info("Network Created", "name", network.Name, "ID", network.ID)
-	return res.ID, err
+	return res.ID, nil
 }
 
-func (network *OrchNetwork) ConnectToNet(container OrchContainer, config *network.EndpointSettings) error {
-	slog.Info("Connecting to network", "name", network.Name)
-	err := network.Cli.NetworkConnect(context.Background(), network.Name, container.ContainerConfig.Hostname, config)
+func (netw *OrchNetwork) ConnectToNet(container OrchContainer, config *network.EndpointSettings) error {
+	slog.Info("Connecting to network", "name", netw.Name)
+	err := netw.Cli.NetworkConnect(context.Background(), netw.Name, container.ContainerConfig.Hostname, config)
 	if err != nil {
-		slog.Error("Could not connect container to network", "container", container.ContainerConfig.Hostname, "network", network.Name, "err", err.Error())
+		slog.Error("Could not connect container to network", "container", container.ContainerConfig.Hostname, "network", netw.Name, "err", err.Error())
 		return err
 	}
-	network.ActiveConnections += 1
-	slog.Info("Connected to network", "name", network.Name, "ID", network.ID, "container", container.ContainerConfig.Hostname)
-	return err
+	netw.ActiveConnections += 1
+	slog.Info("Connected to network", "name", netw.Name, "ID", netw.ID, "container", container.ContainerConfig.Hostname)
+	return nil
 }
 
 func (network *OrchNetwork) DisconnectFromNet(container OrchContainer, force bool) error {
@@ -58,18 +58,18 @@ func (network *OrchNetwork) DisconnectFromNet(container OrchContainer, force boo
 	}
 	network.ActiveConnections -= 1
 	slog.Info("Disconnected from network", "name", network.Name, "ID", network.ID, "container", container.ContainerConfig.Hostname)
-	return err
+	return nil
 }
 
 func (network *OrchNetwork) InspectNet(opts types.NetworkInspectOptions) (types.NetworkResource, error) {
 	slog.Info("Inspecting networks", "name", network.Name)
 	res, err := network.Cli.NetworkInspect(context.Background(), network.Name, opts)
 	if err != nil {
-		slog.Error("Could not inspect network", "network", network.Name)
+		slog.Error("Could not inspect network", "network", network.Name, "err", err.Error())
 		return res, err
 	}
 	slog.Info("Network inspected", "name", network.Name, "ID", network.ID)
-	return res, err
+	return res, nil
 }
 
 func (network *OrchNetwork) ListNets(opts types.NetworkListOptions) ([]types.NetworkResource, error) {
@@ -80,7 +80,7 @@ func (network *OrchNetwork) ListNets(opts types.NetworkListOptions) ([]types.Net
 		return res, err
 	}
 	slog.Info("Networks listed")
-	return res, err
+	return res, nil
 }
 
 func (network *OrchNetwork) RemoveNet() error {
@@ -92,7 +92,7 @@ func (network *OrchNetwork) RemoveNet() error {
 	}
 	network.CurrentStatus = "removed"
 	slog.Info("Network removed", "name", network.Name, "ID", network.ID)
-	return err
+	return nil
 }
 
 func (network *OrchNetwork) PruneNetws(pruneFilters filters.Args) (types.NetworksPruneReport, error) {
@@ -103,5 +103,5 @@ func (network *OrchNetwork) PruneNetws(pruneFilters filters.Args) (types.Network
 		return res, err
 	}
 	slog.Info("Networks pruned")
-	return res, err
+	return res, nil
 }
