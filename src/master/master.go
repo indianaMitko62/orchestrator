@@ -22,7 +22,7 @@ func (msvc *MasterService) evaluateNodes(inactiveNodeName string) (string, error
 	bestScore := 1000.0
 	var bestNodeName string
 	for name := range msvc.CS.Nodes {
-		if name != inactiveNodeName {
+		if name != inactiveNodeName && msvc.NodesStatus[name].Active {
 			score := (msvc.NodesStatus[name].CPU + msvc.NodesStatus[name].Memory + msvc.NodesStatus[name].Disk) / 3
 			score += float64(len(msvc.NodesStatus[name].CurrentNodeState.Containers))
 			if score < bestScore {
