@@ -1,0 +1,81 @@
+nodes:
+    Node1:
+        containers:
+            Container1:
+                desiredstatus: running
+                containerconfig:
+                    hostname: Container1
+                    exposedports:
+                        80/tcp: {}
+                    healthcheck:
+                        test:
+                            - CMD
+                            - echo
+                            - "0"
+                        interval: 5s
+                        timeout: 2s
+                        startperiod: 0s
+                        retries: 0
+                    argsescaped: false
+                    image: nginx:latest
+                hostconfig:
+                    portbindings:
+                        80/tcp:
+                            - hostip: 0.0.0.0
+                              hostport: "8080"
+            Container2:
+                desiredstatus: running
+                containerconfig:
+                    hostname: Container2
+                    exposedports:
+                        80/tcp: {}
+                    healthcheck:
+                        test:
+                            - CMD
+                            - echo
+                            - "0"
+                        interval: 5s
+                        timeout: 2s
+                        startperiod: 0s
+                        retries: 0
+                    image: nginx:latest
+                hostconfig:
+                    portbindings:
+                        80/tcp:
+                            - hostip: 0.0.0.0
+                              hostport: "8081"
+                networkingconfig:
+                    endpointsconfig:
+                        indiana_net:
+                            networkid: indiana_net
+            Container3:
+                desiredstatus: running
+                containerconfig:
+                    hostname: Container3
+                    exposedports:
+                        80/tcp: {}
+                    healthcheck:
+                        test:
+                            - CMD
+                            - echo
+                            - "0"
+                        interval: 5s
+                        timeout: 2s
+                        startperiod: 0s
+                        retries: 0
+                    argsescaped: false
+                    image: nginx:latest
+                hostconfig:
+                    portbindings:
+                        80/tcp:
+                            - hostip: 0.0.0.0
+                              hostport: "8082"
+        networks:
+            indiana_net:
+                name: indiana_net
+                desiredstatus: created
+                networkconfig:
+                    checkduplicate: true
+                    driver: bridge
+        volumes: {}
+        images: {}

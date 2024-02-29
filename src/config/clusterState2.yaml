@@ -1,0 +1,424 @@
+nodes:
+    Node1:
+        containers:
+            Container1:
+                cli: null
+                id: ""
+                currhealth: ""
+                currentstatus: ""
+                desiredstatus: running
+                containerconfig:
+                    hostname: Container1
+                    domainname: ""
+                    user: ""
+                    attachstdin: false
+                    attachstdout: false
+                    attachstderr: false
+                    exposedports:
+                        80/tcp: {}
+                    tty: false
+                    openstdin: false
+                    stdinonce: false
+                    env: []
+                    cmd: []
+                    healthcheck:
+                        test:
+                            - CMD
+                            - echo
+                            - "0"
+                        interval: 5s
+                        timeout: 2s
+                        startperiod: 0s
+                        retries: 0
+                    argsescaped: false
+                    image: nginx:latest
+                    volumes: {}
+                    workingdir: ""
+                    entrypoint: []
+                    networkdisabled: false
+                    macaddress: ""
+                    onbuild: []
+                    labels: {}
+                    stopsignal: ""
+                    stoptimeout: null
+                    shell: []
+                hostconfig:
+                    binds: []
+                    containeridfile: ""
+                    logconfig:
+                        type: ""
+                        config: {}
+                    networkmode: ""
+                    portbindings:
+                        80/tcp:
+                            - hostip: 0.0.0.0
+                              hostport: "8080"
+                    restartpolicy:
+                        name: ""
+                        maximumretrycount: 0
+                    autoremove: false
+                    volumedriver: ""
+                    volumesfrom: []
+                    consolesize:
+                        - 0
+                        - 0
+                    annotations: {}
+                    capadd: []
+                    capdrop: []
+                    cgroupnsmode: ""
+                    dns: []
+                    dnsoptions: []
+                    dnssearch: []
+                    extrahosts: []
+                    groupadd: []
+                    ipcmode: ""
+                    cgroup: ""
+                    links: []
+                    oomscoreadj: 0
+                    pidmode: ""
+                    privileged: false
+                    publishallports: false
+                    readonlyrootfs: false
+                    securityopt: []
+                    storageopt: {}
+                    tmpfs: {}
+                    utsmode: ""
+                    usernsmode: ""
+                    shmsize: 0
+                    sysctls: {}
+                    runtime: ""
+                    isolation: ""
+                    resources:
+                        cpushares: 0
+                        memory: 0
+                        nanocpus: 0
+                        cgroupparent: ""
+                        blkioweight: 0
+                        blkioweightdevice: []
+                        blkiodevicereadbps: []
+                        blkiodevicewritebps: []
+                        blkiodevicereadiops: []
+                        blkiodevicewriteiops: []
+                        cpuperiod: 0
+                        cpuquota: 0
+                        cpurealtimeperiod: 0
+                        cpurealtimeruntime: 0
+                        cpusetcpus: ""
+                        cpusetmems: ""
+                        devices: []
+                        devicecgrouprules: []
+                        devicerequests: []
+                        kernelmemory: 0
+                        kernelmemorytcp: 0
+                        memoryreservation: 0
+                        memoryswap: 0
+                        memoryswappiness: null
+                        oomkilldisable: null
+                        pidslimit: null
+                        ulimits: []
+                        cpucount: 0
+                        cpupercent: 0
+                        iomaximumiops: 0
+                        iomaximumbandwidth: 0
+                    mounts: []
+                    maskedpaths: []
+                    readonlypaths: []
+                    init: null
+                networkingconfig:
+                    endpointsconfig: {}
+            Container2:
+                cli: null
+                id: ""
+                currhealth: ""
+                currentstatus: ""
+                desiredstatus: running
+                containerconfig:
+                    hostname: Container2
+                    domainname: ""
+                    user: ""
+                    attachstdin: false
+                    attachstdout: false
+                    attachstderr: false
+                    exposedports:
+                        80/tcp: {}
+                    tty: false
+                    openstdin: false
+                    stdinonce: false
+                    env: []
+                    cmd: []
+                    healthcheck:
+                        test:
+                            - CMD
+                            - echo
+                            - "0"
+                        interval: 5s
+                        timeout: 2s
+                        startperiod: 0s
+                        retries: 0
+                    argsescaped: false
+                    image: nginx:latest
+                    volumes: {}
+                    workingdir: ""
+                    entrypoint: []
+                    networkdisabled: false
+                    macaddress: ""
+                    onbuild: []
+                    labels: {}
+                    stopsignal: ""
+                    stoptimeout: null
+                    shell: []
+                hostconfig:
+                    binds: []
+                    containeridfile: ""
+                    logconfig:
+                        type: ""
+                        config: {}
+                    networkmode: ""
+                    portbindings:
+                        80/tcp:
+                            - hostip: 0.0.0.0
+                              hostport: "8081"
+                    restartpolicy:
+                        name: ""
+                        maximumretrycount: 0
+                    autoremove: false
+                    volumedriver: ""
+                    volumesfrom: []
+                    consolesize:
+                        - 0
+                        - 0
+                    annotations: {}
+                    capadd: []
+                    capdrop: []
+                    cgroupnsmode: ""
+                    dns: []
+                    dnsoptions: []
+                    dnssearch: []
+                    extrahosts: []
+                    groupadd: []
+                    ipcmode: ""
+                    cgroup: ""
+                    links: []
+                    oomscoreadj: 0
+                    pidmode: ""
+                    privileged: false
+                    publishallports: false
+                    readonlyrootfs: false
+                    securityopt: []
+                    storageopt: {}
+                    tmpfs: {}
+                    utsmode: ""
+                    usernsmode: ""
+                    shmsize: 0
+                    sysctls: {}
+                    runtime: ""
+                    isolation: ""
+                    resources:
+                        cpushares: 0
+                        memory: 0
+                        nanocpus: 0
+                        cgroupparent: ""
+                        blkioweight: 0
+                        blkioweightdevice: []
+                        blkiodevicereadbps: []
+                        blkiodevicewritebps: []
+                        blkiodevicereadiops: []
+                        blkiodevicewriteiops: []
+                        cpuperiod: 0
+                        cpuquota: 0
+                        cpurealtimeperiod: 0
+                        cpurealtimeruntime: 0
+                        cpusetcpus: ""
+                        cpusetmems: ""
+                        devices: []
+                        devicecgrouprules: []
+                        devicerequests: []
+                        kernelmemory: 0
+                        kernelmemorytcp: 0
+                        memoryreservation: 0
+                        memoryswap: 0
+                        memoryswappiness: null
+                        oomkilldisable: null
+                        pidslimit: null
+                        ulimits: []
+                        cpucount: 0
+                        cpupercent: 0
+                        iomaximumiops: 0
+                        iomaximumbandwidth: 0
+                    mounts: []
+                    maskedpaths: []
+                    readonlypaths: []
+                    init: null
+                networkingconfig:
+                    endpointsconfig:
+                        indiana_net:
+                            ipamconfig: null
+                            links: []
+                            aliases: []
+                            networkid: indiana_net
+                            endpointid: ""
+                            gateway: ""
+                            ipaddress: ""
+                            ipprefixlen: 0
+                            ipv6gateway: ""
+                            globalipv6address: ""
+                            globalipv6prefixlen: 0
+                            macaddress: ""
+                            driveropts: {}
+            Container3:
+                cli: null
+                id: ""
+                currhealth: ""
+                currentstatus: ""
+                desiredstatus: running
+                containerconfig:
+                    hostname: Container3
+                    domainname: ""
+                    user: ""
+                    attachstdin: false
+                    attachstdout: false
+                    attachstderr: false
+                    exposedports:
+                        80/tcp: {}
+                    tty: false
+                    openstdin: false
+                    stdinonce: false
+                    env: []
+                    cmd: []
+                    healthcheck:
+                        test:
+                            - CMD
+                            - echo
+                            - "0"
+                        interval: 5s
+                        timeout: 2s
+                        startperiod: 0s
+                        retries: 0
+                    argsescaped: false
+                    image: nginx:latest
+                    volumes: {}
+                    workingdir: ""
+                    entrypoint: []
+                    networkdisabled: false
+                    macaddress: ""
+                    onbuild: []
+                    labels: {}
+                    stopsignal: ""
+                    stoptimeout: null
+                    shell: []
+                hostconfig:
+                    binds: []
+                    containeridfile: ""
+                    logconfig:
+                        type: ""
+                        config: {}
+                    networkmode: ""
+                    portbindings:
+                        80/tcp:
+                            - hostip: 0.0.0.0
+                              hostport: "8083"
+                    restartpolicy:
+                        name: ""
+                        maximumretrycount: 0
+                    autoremove: false
+                    volumedriver: ""
+                    volumesfrom: []
+                    consolesize:
+                        - 0
+                        - 0
+                    annotations: {}
+                    capadd: []
+                    capdrop: []
+                    cgroupnsmode: ""
+                    dns: []
+                    dnsoptions: []
+                    dnssearch: []
+                    extrahosts: []
+                    groupadd: []
+                    ipcmode: ""
+                    cgroup: ""
+                    links: []
+                    oomscoreadj: 0
+                    pidmode: ""
+                    privileged: false
+                    publishallports: false
+                    readonlyrootfs: false
+                    securityopt: []
+                    storageopt: {}
+                    tmpfs: {}
+                    utsmode: ""
+                    usernsmode: ""
+                    shmsize: 0
+                    sysctls: {}
+                    runtime: ""
+                    isolation: ""
+                    resources:
+                        cpushares: 0
+                        memory: 0
+                        nanocpus: 0
+                        cgroupparent: ""
+                        blkioweight: 0
+                        blkioweightdevice: []
+                        blkiodevicereadbps: []
+                        blkiodevicewritebps: []
+                        blkiodevicereadiops: []
+                        blkiodevicewriteiops: []
+                        cpuperiod: 0
+                        cpuquota: 0
+                        cpurealtimeperiod: 0
+                        cpurealtimeruntime: 0
+                        cpusetcpus: ""
+                        cpusetmems: ""
+                        devices: []
+                        devicecgrouprules: []
+                        devicerequests: []
+                        kernelmemory: 0
+                        kernelmemorytcp: 0
+                        memoryreservation: 0
+                        memoryswap: 0
+                        memoryswappiness: null
+                        oomkilldisable: null
+                        pidslimit: null
+                        ulimits: []
+                        cpucount: 0
+                        cpupercent: 0
+                        iomaximumiops: 0
+                        iomaximumbandwidth: 0
+                    mounts: []
+                    maskedpaths: []
+                    readonlypaths: []
+                    init: null
+                networkingconfig: null
+        networks:
+            indiana_net:
+                cli: null
+                name: indiana_net
+                id: ""
+                currentstatus: ""
+                desiredstatus: created
+                activeconnections: 0
+                networkconfig:
+                    checkduplicate: true
+                    driver: bridge
+                    scope: ""
+                    enableipv6: false
+                    ipam: null
+                    internal: false
+                    attachable: false
+                    ingress: false
+                    configonly: false
+                    configfrom: null
+                    options: {}
+                    labels: {}
+        volumes: {}
+        images:
+            nginx:latest:
+                cli: null
+                name: nginx
+                tag: latest
+                id: ""
+                currentstatus: ""
+                desiredstatus: pulled
+                all: false
+                registryauth: ""
+                platform: ""

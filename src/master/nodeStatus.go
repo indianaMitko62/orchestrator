@@ -20,13 +20,13 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 	// fmt.Println(string(yamlData)) // for testing
 	yaml.Unmarshal(yamlData, &nodeStatus)
 	msvc.NodesStatus[nodeName] = nodeStatus
-	if msvc.NodesStatusLogs[nodeName] == nil {
+	if msvc.NodesStatusLogs[nodeName] == nil { // separate node Status logging functions
 		log := cluster.NewLog(msvc.LogsPath + nodeName + "StatusLogs")
 		if log != nil {
 			msvc.NodesStatusLogs[nodeName] = log
 		}
 	}
-	var unhealthyCnt = 0 // separate node Status logging functions
+	var unhealthyCnt = 0
 	var healthyCnt = 0
 	var startingCnt = 0
 	unhealthyConts := ""

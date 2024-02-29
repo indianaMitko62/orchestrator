@@ -34,9 +34,8 @@ func NewNodeService(nodeSetting NodeSettings) (*NodeService, error) {
 		return nil, err
 	}
 	ns := &NodeService{
-		cli:              cli,
-		NodeSettings:     nodeSetting,
-		DesiredNodeState: cluster.NewNodeState(),
+		cli:          cli,
+		NodeSettings: nodeSetting,
 	}
 	ns.LogsDir = "./logs/" + ns.Name + "Logs/"
 	if err := os.Mkdir(ns.LogsDir, 0755); os.IsExist(err) {

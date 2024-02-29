@@ -13,6 +13,7 @@ import (
 func (msvc *MasterService) initHTTPServer() {
 	r := mux.NewRouter() // separate HTTP server init
 	r.HandleFunc("/clusterState", msvc.getClusterStateHandler).Methods("GET")
+	r.HandleFunc("/clusterState", msvc.postClusterStateHandler).Methods("POST")
 	r.HandleFunc("/logs", msvc.postLogsHandler).Methods("POST")
 	r.HandleFunc("/nodeStatus", msvc.postNodeStatusHandler).Methods("POST")
 	go http.ListenAndServe(msvc.HTTPServerPort, r)
@@ -62,7 +63,7 @@ func (msvc *MasterService) Master() {
 	msvc.initHTTPServer()
 	for {
 		for name, status := range msvc.NodesStatus {
-			if time.Since(status.Timestamp) > time.Duration(15*time.Second) {
+			if time.Since(status.Timestamp) > time.Duration(15*time.Second) && len(status.CurrentNodeState.Containers) > 0 {
 				msvc.masterLog.Logger.Error("Node inactive", "name", name, "time", time.Since(status.Timestamp))
 				status.Active = false
 				msvc.lostANode(name)
@@ -75,5 +76,4 @@ func (msvc *MasterService) Master() {
 		time.Sleep(time.Duration(5-time.Now().Second()%5) * time.Second)
 		fmt.Print("\n\n\n")
 	}
-	// More Master logic
 }

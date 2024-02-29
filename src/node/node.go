@@ -102,15 +102,19 @@ func (nsvc *NodeService) Node() error {
 		if err != nil {
 			nsvc.nodeLog.Logger.Error("could not get cluster data", "error", err)
 		} else {
-			if nsvc.CurrentNodeState == nil {
-				nsvc.nodeLog.Logger.Info("No current node state")
-				err := nsvc.initCluster()
-				if err != nil {
-					nsvc.nodeLog.Logger.Error("Could not init cluster")
+			if nsvc.DesiredNodeState != nil {
+				if nsvc.CurrentNodeState == nil {
+					nsvc.nodeLog.Logger.Info("No current node state")
+					err := nsvc.initCluster()
+					if err != nil {
+						nsvc.nodeLog.Logger.Error("Could not init cluster")
+					}
+				} else {
+					nsvc.nodeLog.Logger.Info("Present current node state")
+					nsvc.applyChanges()
 				}
 			} else {
-				nsvc.nodeLog.Logger.Info("Present current node state")
-				nsvc.applyChanges()
+				nsvc.nodeLog.Logger.Info("No desired node state")
 			}
 		}
 		nsvc.inspectCluster()

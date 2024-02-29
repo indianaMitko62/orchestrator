@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log/slog"
 	"os"
 	"time"
@@ -173,10 +172,10 @@ func main() {
 	clusterState.Nodes["Node1"] = nodeState
 	clusterState.Nodes["Node2"] = nodeState1
 	clusterState.CollectImages() // to be developed and added to master logic
-	yamlData, _ := cluster.ToYaml(clusterState)
-	fmt.Printf("%s", yamlData)
+	//yamlData, _ := cluster.ToYaml(clusterState)
+	//fmt.Printf("%s", yamlData)
 
-	if os.Args == nil {
+	if len(os.Args) < 2 {
 		slog.Error("No configuration file passes as command line argument")
 	}
 	confFile := os.Args[1]
@@ -196,12 +195,7 @@ func main() {
 	}
 	f.Close()
 	msvc := master.NewMasterService(masterSet)
-	msvc.CS = clusterState
-	//err = msvc.ConnectToNodes()
-	if err != nil {
-		slog.Error("could not connect to nodes", "err", err)
-		os.Exit(1)
-	}
+	// msvc.CS = clusterState
 
 	msvc.Master()
 }

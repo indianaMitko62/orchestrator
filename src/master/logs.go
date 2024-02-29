@@ -23,7 +23,7 @@ func (msvc *MasterService) postLogsHandler(w http.ResponseWriter, r *http.Reques
 			msvc.masterLog.Logger.Error("Could not create file", "name", msvc.LogsPath+nodeName+"Logs", "error", err)
 			return
 		}
-		f, _ = os.OpenFile(msvc.LogsPath+nodeName+"Logs", os.O_TRUNC|os.O_WRONLY, 0600)
+		f, err = os.OpenFile(msvc.LogsPath+nodeName+"Logs", os.O_TRUNC|os.O_WRONLY, 0600)
 		if err != nil {
 			msvc.masterLog.Logger.Error("Could not open file", "name", msvc.LogsPath+nodeName+"Logs", "error", err)
 			return

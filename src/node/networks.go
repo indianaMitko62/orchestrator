@@ -56,9 +56,9 @@ func (nsvc *NodeService) changeNetworks() bool {
 				currentNetw.DesiredStatus = netw.DesiredStatus
 				switch currentNetw.DesiredStatus {
 				case "created":
-					currentNetw.CreateNet(netw.NetworkConfig)
+					_, err = currentNetw.CreateNet(netw.NetworkConfig)
 				case "removed":
-					currentNetw.RemoveNet()
+					err = currentNetw.RemoveNet()
 				}
 				if currentNetw.CurrentStatus == currentNetw.DesiredStatus && err == nil {
 					nsvc.clusterChangeLog.Logger.Info("Successful network operation", "name", currentNetw.Name, "status", currentNetw.CurrentStatus)

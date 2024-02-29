@@ -46,9 +46,9 @@ func (nsvc *NodeService) changeVolumes() bool {
 				currentVol.DesiredStatus = vol.DesiredStatus
 				switch currentVol.DesiredStatus {
 				case "created":
-					currentVol.CreateVol(vol.Config)
+					_, err = currentVol.CreateVol(vol.Config)
 				case "removed":
-					currentVol.RemoveVol(true)
+					err = currentVol.RemoveVol(true)
 				}
 				if currentVol.CurrentStatus == currentVol.DesiredStatus && err == nil {
 					nsvc.clusterChangeLog.Logger.Info("Successful volume operation", "name", currentVol.Name, "status", currentVol.CurrentStatus)
