@@ -7,12 +7,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-
-	homedir "github.com/mitchellh/go-homedir"
-	"github.com/spf13/viper"
 )
-
-var cfgFile string
 
 var rootCmd = &cobra.Command{
 	Use:   "indiana",
@@ -64,29 +59,6 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
-
 	initCmd.Flags().String("config", "/home/indiana/orchestrator/src/config/clusterState.yaml", "Pass yaml configuration file name")
 	rootCmd.AddCommand(initCmd)
-}
-
-func initConfig() {
-	if cfgFile != "" {
-		viper.SetConfigFile(cfgFile)
-	} else {
-		home, err := homedir.Dir()
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".indiana")
-	}
-
-	viper.AutomaticEnv()
-
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
-	}
 }

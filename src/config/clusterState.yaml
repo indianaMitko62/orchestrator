@@ -16,7 +16,6 @@ nodes:
                         timeout: 2s
                         startperiod: 0s
                         retries: 0
-                    argsescaped: false
                     image: nginx:latest
                 hostconfig:
                     portbindings:
