@@ -4,12 +4,20 @@ import (
 	"io"
 	"net/http"
 	"os"
+
+	"github.com/indianaMitko62/orchestrator/src/cluster"
 )
 
 func (msvc *MasterService) postLogsHandler(w http.ResponseWriter, r *http.Request) {
 	nodeName := r.Header.Get("nodeName")
 	msvc.masterLog.Logger.Info("recieved POST on /logs from", "name", nodeName, "IP", r.RemoteAddr)
-
+	_, ok := msvc.CS.Nodes[nodeName]
+	if !ok {
+		newNode := *cluster.NewNodeState()
+		newNode.Active = false
+		msvc.CS.Nodes[nodeName] = newNode
+		msvc.masterLog.Logger.Info("added Node to CS", "name", nodeName, "IP", r.RemoteAddr)
+	}
 	logData, err := io.ReadAll(r.Body)
 	if err != nil {
 		msvc.masterLog.Logger.Error("Error reading YAML data:", err)

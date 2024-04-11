@@ -59,7 +59,7 @@ func (nsvc *NodeService) initCluster() error {
 
 func (nsvc *NodeService) applyChanges() error {
 	nsvc.nodeLog.Logger.Info("finding differences")
-	if nsvc.changeContainers() || nsvc.changeVolumes() || nsvc.changeNetworks() {
+	if nsvc.changeVolumes() || nsvc.changeNetworks() || nsvc.changeContainers() {
 		return nsvc.sendLogs(nsvc.MasterAddress+nsvc.LogsEndpoint, nsvc.clusterChangeLog)
 	} else {
 		nsvc.nodeLog.Logger.Info("No changes in cluster")
@@ -89,7 +89,7 @@ func (nsvc *NodeService) inspectCluster() {
 		Memory:           memInfo.UsedPercent,
 		Disk:             40,
 		CurrentNodeState: *nsvc.CurrentNodeState,
-		Active:           true,
+		Operating:        true,
 		Timestamp:        time.Now(),
 	}
 	nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusEndpoint, &ns)

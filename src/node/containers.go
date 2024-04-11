@@ -37,7 +37,7 @@ func (nsvc *NodeService) deployContainer(cont *cluster.OrchContainer) {
 		nsvc.clusterChangeLog.Logger.Info("Container successfully "+cont.CurrentStatus, "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
 		if cont.NetworkingConfig != nil {
 			for name, netw := range cont.NetworkingConfig.EndpointsConfig {
-				fmt.Print(name, netw)
+				fmt.Print(cont.ContainerConfig.Hostname, name, netw)
 				fmt.Print(name, nsvc.CurrentNodeState.Networks[name].Name)
 				nsvc.CurrentNodeState.Networks[name].ConnectToNet(*cont, netw)
 			}

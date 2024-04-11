@@ -5,6 +5,7 @@ type NodeState struct {
 	Networks   map[string]*OrchNetwork   `yaml:"networks"`
 	Volumes    map[string]*OrchVolume    `yaml:"volumes"`
 	Images     map[string]*OrchImage     `yaml:"images"`
+	Active     bool                      `yaml:"active"`
 }
 
 func NewNodeState() *NodeState {
@@ -13,5 +14,6 @@ func NewNodeState() *NodeState {
 		Networks:   make(map[string]*OrchNetwork),
 		Images:     make(map[string]*OrchImage),
 		Volumes:    make(map[string]*OrchVolume),
+		Active:     true,
 	}
 }

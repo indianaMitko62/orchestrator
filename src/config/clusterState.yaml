@@ -23,7 +23,7 @@ nodes:
                             - hostip: 0.0.0.0
                               hostport: "8080"
             Container2:
-                desiredstatus: running
+                desiredstatus: stopped
                 containerconfig:
                     hostname: Container2
                     exposedports:
@@ -78,3 +78,4 @@ nodes:
                     driver: bridge
         volumes: {}
         images: {}
+        active: true

@@ -1,5 +1,5 @@
 name: Node1
-master_address: 192.168.69.51
+master_address: localhost
 master_port: :1986
 logs_endpoint: "/logs"
 clusterstate_endpoint: "/clusterState"

@@ -12,7 +12,7 @@ func (msvc *MasterService) getClusterStateHandler(w http.ResponseWriter, r *http
 	nodeName := r.Header.Get("nodeName")
 	msvc.masterLog.Logger.Info("Received GET on /clusterState from", "node", nodeName, "IP", r.RemoteAddr)
 
-	if !msvc.NodesStatus[nodeName].Active {
+	if !msvc.NodesStatus[nodeName].Operating {
 		msvc.masterLog.Logger.Info("Node  online", "name", nodeName)
 	}
 	if msvc.CS == nil {
