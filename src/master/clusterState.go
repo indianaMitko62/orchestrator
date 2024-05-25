@@ -53,16 +53,15 @@ func (msvc *MasterService) check_CS(cs *cluster.ClusterState) {
 		}
 
 		// connect containers to newly created default network
-		node_number := 1
+		cont_number := 0
 		for _, node := range cs.Nodes {
 			node.Networks["default_container_network"] = &cluster.OrchNetwork{
 				Name:          "default_container_network",
 				DesiredStatus: "created",
 				NetworkConfig: macvlanNetworkConfig,
 			}
-			cont_number := 0
 			for _, cont := range node.Containers {
-				host_address := fmt.Sprint(node_number) + fmt.Sprint(cont_number)
+				host_address := fmt.Sprint(cont_number + 20)
 				if cont.NetworkingConfig == nil {
 					cont.NetworkingConfig = &network.NetworkingConfig{}
 				}
@@ -79,7 +78,6 @@ func (msvc *MasterService) check_CS(cs *cluster.ClusterState) {
 				}
 				cont_number++
 			}
-			node_number++
 		}
 	}
 	// add default healthcheck if not not specified

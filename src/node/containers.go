@@ -117,5 +117,15 @@ func (nsvc *NodeService) changeContainers() bool {
 			change = true
 		}
 	}
+	for name, cont := range nsvc.CurrentNodeState.Containers {
+		if nsvc.DesiredNodeState.Containers[name] == nil {
+			err := cont.StopCont(container.StopOptions{})
+			if err != nil {
+				nsvc.nodeLog.Logger.Error("Could not stop container", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus, "error", err)
+			}
+			nsvc.clusterChangeLog.Logger.Info("Container stopped", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
+			change = true
+		}
+	}
 	return change
 }
