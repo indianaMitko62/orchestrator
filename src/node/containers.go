@@ -123,6 +123,7 @@ func (nsvc *NodeService) changeContainers() bool {
 			if err != nil {
 				nsvc.nodeLog.Logger.Error("Could not stop container", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus, "error", err)
 			}
+			delete(nsvc.CurrentNodeState.Containers, name)
 			nsvc.clusterChangeLog.Logger.Info("Container stopped", "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
 			change = true
 		}
