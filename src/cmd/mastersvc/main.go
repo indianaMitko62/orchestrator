@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 	"time"
@@ -194,6 +195,7 @@ func main() {
 		slog.Error("Could not decode config file", "name", confFile)
 	}
 	f.Close()
+	fmt.Println(masterSet.DefaultNetworking)
 	msvc := master.NewMasterService(masterSet)
 	// msvc.CS = clusterState
 

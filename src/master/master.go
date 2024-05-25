@@ -48,19 +48,15 @@ func (msvc *MasterService) lostANode(inactiveNodeName string) {
 	msvc.masterLog.Logger.Info("Moving containers", "from", inactiveNodeName, "to", bestActiveNode)
 	for name, img := range msvc.CS.Nodes[inactiveNodeName].Images {
 		msvc.CS.Nodes[bestActiveNode].Images[name] = img
-		fmt.Println(name)
 	}
 	for name, netw := range msvc.CS.Nodes[inactiveNodeName].Networks {
 		msvc.CS.Nodes[bestActiveNode].Networks[name] = netw
-		fmt.Println(name)
 	}
 	for name, vol := range msvc.CS.Nodes[inactiveNodeName].Volumes {
 		msvc.CS.Nodes[bestActiveNode].Volumes[name] = vol
-		fmt.Println(name)
 	}
 	for name, cont := range msvc.CS.Nodes[inactiveNodeName].Containers {
 		msvc.CS.Nodes[bestActiveNode].Containers[name] = cont
-		fmt.Println(name)
 	}
 	node := msvc.CS.Nodes[bestActiveNode]
 	node.Active = true

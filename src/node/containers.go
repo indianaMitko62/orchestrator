@@ -1,7 +1,6 @@
 package node
 
 import (
-	"fmt"
 	"reflect"
 
 	"github.com/docker/docker/api/types"
@@ -17,7 +16,7 @@ func (nsvc *NodeService) handleDuplicateContainers(newCont *cluster.OrchContaine
 	nsvc.nodeLog.Logger.Info("Trying to create container again", "name", newCont.ContainerConfig.Hostname)
 	_, err := newCont.CreateCont()
 	if err != nil {
-		nsvc.nodeLog.Logger.Error("Second attempt for container creation failed. Aborting...", "name", newCont.ContainerConfig.Hostname)
+		nsvc.nodeLog.Logger.Error("Second attempt for container creation failed. Aborting...", "name", newCont.ContainerConfig.Hostname, "error", err)
 		return err
 	}
 	return nil
@@ -37,8 +36,8 @@ func (nsvc *NodeService) deployContainer(cont *cluster.OrchContainer) {
 		nsvc.clusterChangeLog.Logger.Info("Container successfully "+cont.CurrentStatus, "name", cont.ContainerConfig.Hostname, "status", cont.CurrentStatus)
 		if cont.NetworkingConfig != nil {
 			for name, netw := range cont.NetworkingConfig.EndpointsConfig {
-				fmt.Print(cont.ContainerConfig.Hostname, name, netw)
-				fmt.Print(name, nsvc.CurrentNodeState.Networks[name].Name)
+				// fmt.Print(cont.ContainerConfig.Hostname, name, netw)
+				// fmt.Print(name, nsvc.CurrentNodeState.Networks[name].Name)
 				nsvc.CurrentNodeState.Networks[name].ConnectToNet(*cont, netw)
 			}
 		}

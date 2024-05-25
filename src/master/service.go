@@ -8,9 +8,10 @@ import (
 )
 
 type MasterSettings struct {
-	Name           string `yaml:"name"`
-	HTTPServerPort string `yaml:"httpserver_port"`
-	LogsPath       string `yaml:"logs_path"`
+	Name              string `yaml:"name"`
+	HTTPServerPort    string `yaml:"httpserver_port"`
+	LogsPath          string `yaml:"logs_path"`
+	DefaultNetworking bool   `yaml:"use_default_networking"`
 }
 
 type MasterService struct {
