@@ -2,7 +2,6 @@ package node
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -14,7 +13,7 @@ import (
 
 func (nsvc *NodeService) SendNodeStatus(URL string, nodeStatus *cluster.NodeStatus) error {
 	NSToSend, _ := cluster.ToYaml(nodeStatus)
-	fmt.Println("YAML Output:")
+	// fmt.Println("YAML Output:")
 	yamlBytes := []byte(NSToSend)
 	// fmt.Println(string(NSToSend))
 	// fmt.Println(yamlBytes) // for testing

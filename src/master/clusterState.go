@@ -17,6 +17,9 @@ func (msvc *MasterService) getClusterStateHandler(w http.ResponseWriter, r *http
 
 	if !msvc.NodesStatus[nodeName].Operating {
 		msvc.masterLog.Logger.Info("Node  online", "name", nodeName)
+		ns := msvc.NodesStatus[nodeName]
+		ns.Operating = true
+		msvc.NodesStatus[nodeName] = ns
 	}
 	if msvc.CS == nil {
 		w.Write([]byte("No cluster state configuration"))

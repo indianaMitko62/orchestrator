@@ -68,11 +68,12 @@ func (nsvc *NodeService) applyChanges() error {
 }
 
 func (nsvc *NodeService) inspectCluster() {
-	var ns *cluster.NodeStatus
-	defer nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusEndpoint, ns)
-
 	if nsvc.CurrentNodeState == nil {
 		nsvc.nodeLog.Logger.Error("No Current Node State")
+		nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusEndpoint, &cluster.NodeStatus{
+			Timestamp: time.Now(),
+			Operating: true,
+		})
 		return
 	}
 
@@ -87,7 +88,7 @@ func (nsvc *NodeService) inspectCluster() {
 		fmt.Println("Error:", err)
 		return
 	}
-	ns = &cluster.NodeStatus{
+	ns := cluster.NodeStatus{
 		CPU:              percent[0], // add these
 		Memory:           memInfo.UsedPercent,
 		Disk:             40,
@@ -95,6 +96,7 @@ func (nsvc *NodeService) inspectCluster() {
 		Operating:        true,
 		Timestamp:        time.Now(),
 	}
+	nsvc.SendNodeStatus(nsvc.MasterAddress+nsvc.NodeStatusEndpoint, &ns)
 }
 
 func (nsvc *NodeService) Node() error {

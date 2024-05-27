@@ -64,3 +64,16 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 		}
 	}
 }
+
+func (msvc *MasterService) getNodeStatusHandler(w http.ResponseWriter, r *http.Request) {
+	senderName := r.Header.Get("senderName")
+	msvc.masterLog.Logger.Info("Received GET request for nodes status", "sender", senderName)
+
+	statusToSend, err := cluster.ToYaml(msvc.NodesStatus)
+	if err != nil {
+		msvc.masterLog.Logger.Error("Could not represent node statuses in YAML")
+		return
+	}
+	w.Header().Set("Content-Type", "application/x-yaml")
+	w.Write(statusToSend)
+}

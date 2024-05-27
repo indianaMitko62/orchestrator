@@ -16,6 +16,7 @@ func (msvc *MasterService) initHTTPServer() {
 	r.HandleFunc("/clusterState", msvc.postClusterStateHandler).Methods("POST")
 	r.HandleFunc("/logs", msvc.postLogsHandler).Methods("POST")
 	r.HandleFunc("/nodeStatus", msvc.postNodeStatusHandler).Methods("POST")
+	r.HandleFunc("/nodeStatus", msvc.getNodeStatusHandler).Methods("GET")
 	go http.ListenAndServe(msvc.HTTPServerPort, r)
 }
 
