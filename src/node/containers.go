@@ -61,6 +61,7 @@ func (nsvc *NodeService) getContHealth(cont *cluster.OrchContainer) {
 	nsvc.nodeLog.Logger.Info("Current container health", "name", cont.ContainerConfig.Hostname, "status", health)
 	if health == "unhealthy" {
 		nsvc.deployContainer(cont)
+		nsvc.clusterChangeLog.Logger.Info("Restarting container...", "name", cont.ContainerConfig.Hostname)
 	}
 }
 

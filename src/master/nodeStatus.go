@@ -51,7 +51,7 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 			msvc.NodesStatusLogs[nodeName].Logger.Info("All Containers starting")
 		}
 	} else {
-		healthyPercent := healthyCnt / (healthyCnt + unhealthyCnt) * 100
+		healthyPercent := (float32(healthyCnt) / float32(healthyCnt+unhealthyCnt)) * 100
 		healthyContLog = "Healthy containers: " + fmt.Sprintf("%f", float32(healthyPercent))
 		fmt.Println(healthyCnt + unhealthyCnt)
 		if unhealthyConts != "" {
@@ -68,10 +68,16 @@ func (msvc *MasterService) postNodeStatusHandler(w http.ResponseWriter, r *http.
 func (msvc *MasterService) getNodeStatusHandler(w http.ResponseWriter, r *http.Request) {
 	senderName := r.Header.Get("senderName")
 	msvc.masterLog.Logger.Info("Received GET request for nodes status", "sender", senderName)
+	nodeName := r.Header.Get("nodeName")
 
-	statusToSend, err := cluster.ToYaml(msvc.NodesStatus)
+	if !msvc.CS.Nodes[nodeName].Active {
+		w.Write([]byte("Node1 is not active"))
+		return
+	}
+	statusToSend, err := cluster.ToYaml(msvc.NodesStatus[nodeName])
 	if err != nil {
 		msvc.masterLog.Logger.Error("Could not represent node statuses in YAML")
+		w.Write([]byte("Could not represent node statuses in YAML"))
 		return
 	}
 	w.Header().Set("Content-Type", "application/x-yaml")

@@ -15,6 +15,9 @@ func (msvc *MasterService) postLogsHandler(w http.ResponseWriter, r *http.Reques
 	if !ok {
 		newNode := *cluster.NewNodeState()
 		newNode.Active = false
+		if msvc.CS.Nodes == nil {
+			msvc.masterLog.Logger.Error("Cluster State not present. Check YAML configuration")
+		}
 		msvc.CS.Nodes[nodeName] = newNode
 		msvc.masterLog.Logger.Info("added Node to CS", "name", nodeName, "IP", r.RemoteAddr)
 	}

@@ -20,6 +20,7 @@ type MasterService struct {
 	NodesStatus     map[string]cluster.NodeStatus
 	masterLog       *cluster.Log
 	NodesStatusLogs map[string]*cluster.Log
+	nodeNameToIP    map[string]string
 }
 
 func NewMasterService(ms MasterSettings) *MasterService {
@@ -33,6 +34,8 @@ func NewMasterService(ms MasterSettings) *MasterService {
 	} else {
 		slog.Info("Directory created", "name", m.LogsPath)
 	}
+	m.CS = cluster.NewClusterState()
 	m.masterLog = cluster.NewLog(m.LogsPath + "masterLog")
+	m.nodeNameToIP = make(map[string]string)
 	return m
 }

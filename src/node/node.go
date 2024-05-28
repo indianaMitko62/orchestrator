@@ -18,6 +18,7 @@ TODO:	CLI basics... ????
 
 func (nsvc *NodeService) stopAllContainersOnMachine() error {
 	nsvc.nodeLog.Logger.Info("Stopping all containers on node")
+	nsvc.clusterChangeLog.Logger.Info("Stopping all containers on node")
 	containers, err := nsvc.cli.ContainerList(context.Background(), types.ContainerListOptions{All: true})
 	if err != nil {
 		return err

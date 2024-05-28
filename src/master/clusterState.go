@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sort"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/network"
@@ -56,15 +57,34 @@ func (msvc *MasterService) check_CS(cs *cluster.ClusterState) {
 		}
 
 		// connect containers to newly created default network
+
 		cont_number := 0
-		for _, node := range cs.Nodes {
+		nodeNames := make([]string, 0)
+		for k := range cs.Nodes {
+			nodeNames = append(nodeNames, k)
+		}
+		sort.Strings(nodeNames)
+		for _, nodeName := range nodeNames {
+			node := cs.Nodes[nodeName]
 			node.Networks["default_container_network"] = &cluster.OrchNetwork{
 				Name:          "default_container_network",
 				DesiredStatus: "created",
 				NetworkConfig: macvlanNetworkConfig,
 			}
-			for _, cont := range node.Containers {
+			// contNames := make([]string, 0)
+			// for k := range node.Containers {
+			// 	contNames = append(contNames, k)
+			// }
+			// sort.Strings(contNames)
+			// for _, name := range contNames {
+			for name, cont := range node.Containers {
+				// cont := node.Containers[name]
 				host_address := fmt.Sprint(cont_number + 20)
+				IP := "192.168.42." + host_address
+				if msvc.nodeNameToIP[name] == "" {
+					msvc.nodeNameToIP[name] = IP
+					fmt.Println(name + " : " + IP)
+				}
 				if cont.NetworkingConfig == nil {
 					cont.NetworkingConfig = &network.NetworkingConfig{}
 				}
@@ -75,7 +95,7 @@ func (msvc *MasterService) check_CS(cs *cluster.ClusterState) {
 					cont.NetworkingConfig.EndpointsConfig["default_container_network"] = &network.EndpointSettings{
 						NetworkID: "default_container_network",
 						IPAMConfig: &network.EndpointIPAMConfig{
-							IPv4Address: "192.168.42." + host_address,
+							IPv4Address: msvc.nodeNameToIP[name],
 						},
 					}
 				}
@@ -95,10 +115,14 @@ func (msvc *MasterService) postClusterStateHandler(w http.ResponseWriter, r *htt
 	if err != nil {
 		msvc.masterLog.Logger.Error("Error reading YAML data:", err)
 	}
-	// fmt.Println(string(yamlData)) // for testing
 	yaml.Unmarshal(yamlData, &clusterState)
 
-	msvc.check_CS(&clusterState)
+	// fmt.Println(string(yamlData))
 
+	fmt.Println(clusterState)
+	for name := range clusterState.Nodes {
+		fmt.Println(name)
+	}
+	msvc.check_CS(&clusterState)
 	msvc.CS = &clusterState
 }
